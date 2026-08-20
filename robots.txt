@@ -1,0 +1,4 @@
+# 검색엔진 노출을 원하지 않아 전체를 차단합니다.
+# 색인을 허용하려면 아래 Disallow 를 지우고 index.html 의 robots 메타 태그도 함께 고치세요.
+User-agent: *
+Disallow: /
