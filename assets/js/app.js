@@ -351,7 +351,7 @@ function aboutSkill(){return `<section class="sec">
     ['PowerPoint','고급','공모전 발표자료와 IR 자료 제작. 도식·다이어그램 작성 포함'],
     ['Word · Excel · 한글','중급','기획 문서 작성, 데이터 정리, 수식을 활용한 집계'],
     ['Notion · Discord · SharePoint','중급','온라인 협업과 일정 관리, 문서 버전 관리'],
-    ['ChatGPT() · Discord · SharePoint','중급','온라인 협업과 일정 관리, 문서 버전 관리'],
+    ['ChatGPT(Codex) · Claude(ClaudeCode) · Gemini(Antigravity)','중급','기획 프로토타입 및 구현으로 사용, 문서 작성과 코드 리뷰 보조'],
     ['Figma','초급','와이어프레임 확인과 화면 설계 커뮤니케이션'],
     ['Photoshop · Illustrator','초급','아이디어 시각화와 발표자료용 그래픽 편집'],
     ['SPSS','기초','설문 데이터 기초 통계 분석']
