@@ -122,7 +122,13 @@ projectrg:{
     {t:'기여 경계',b:'LLM 응답 안정화와 벡터 DB 확장은 백엔드 담당이 주도한 영역이라 본인 성과로 표기하지 않았습니다.'}
   ],
   thumb:'rg-demo.jpg',
-  gallery:[], video:'rTw2xMInVjc',
+  galRatio:'16/9',
+  gallery:[
+    {f:'rg-p03',c:'문제 정의 — 구매 이력과 장르 태그만으로는 플레이 스타일을 알 수 없습니다. 같은 공포 장르라도 전술과 파괴, 협력과 경쟁은 전혀 다른 경험입니다. 태그가 아니라 사람의 성향을 기준으로 삼기로 한 출발점입니다'},
+    {f:'rg-p07',c:'성향 진단 엔진 — Nick Yee 동기 모델과 Bartle 유형학을 5축 가중치(strategic · cooperative · creative · competitive · exploratory)로 옮겼습니다. 1·2위 격차가 15점 이하이거나 1위가 65점 미만이면 보충 질문을 띄우는 규칙이 왼쪽 아래에 있습니다'},
+    {f:'rg-p09',c:'시각화와 커뮤니티 — 진단 결과를 이미지로 만들어 공유하고, 성향이 같은 사용자끼리 게시판을 씁니다. 게임 상세 화면은 IGDB 실시간 정보와 트레일러를 붙였습니다'}
+  ],
+  video:'rTw2xMInVjc',
   links:[{t:'발표자료',m:'PDF · 준비 중',off:true}]
 },
 
@@ -242,6 +248,38 @@ pirukia:{
 
 const ORDER=['bodybuilder','neontetris','projectrg','sickkick','contentops','pirukia'];
 
+/* ===== 지원 분야별 진입 주소 =====
+   화면에 선택 버튼은 두지 않습니다. 지원처에 따라 주소만 골라서 보냅니다.
+   order 는 앞에 세울 프로젝트만 적으면 되고, 나머지는 위 ORDER 순서로 뒤에 붙습니다.
+   방문자가 왼쪽 메뉴의 Home(/)을 누르면 base 로 돌아갑니다. */
+const TRACKS={
+  base:{
+    slogan:'즐겁고, 편리하게, 지속가능하도록',
+    intro:'오래가는 즐거움을 기획합니다. 재미보다 먼저 제약을 읽고, 판단의 근거를 남이 그대로 실행할 수 있는 문서로 옮깁니다.',
+    order:[]
+  },
+  hr:{
+    slogan:'사람이 움직이도록 기획합니다',
+    intro:'직무를 정의하고 요구 역량과 인증 체계를 설계했습니다. 사람이 알아서 움직이려면 설득보다 기준이 먼저 문서에 있어야 한다고 생각합니다.',
+    order:['contentops','bodybuilder','sickkick']
+  },
+  game:{
+    slogan:'즐거움을 구체적인 규칙으로 만듭니다',
+    intro:'표준을 그대로 쓸 것과 직접 정할 것의 경계를 나눕니다. 재미는 감이 아니라 수치와 규칙으로 남아야 다음 사람이 이어받을 수 있습니다.',
+    order:['neontetris','bodybuilder','pirukia']
+  },
+  service:{
+    slogan:'사용자가 편하게 쓰도록 설계합니다',
+    intro:'사용자의 행동을 먼저 정의하고 화면 단위 스펙과 예외 정책까지 문서에 남깁니다. 구현이 되돌려주는 정보로 명세를 다시 고칩니다.',
+    order:['projectrg','sickkick','bodybuilder']
+  },
+  biz:{
+    slogan:'사업이 지속되도록 설계합니다',
+    intro:'시장과 경쟁사보다 먼저 법령을 확인합니다. 무엇을 설계해도 되는지가 정해진 다음에야 기능을 그립니다.',
+    order:['sickkick','contentops','projectrg']
+  }
+};
+
 /* ===== Home 화면 =====
    첫 화면은 여기만 고치면 바뀝니다. */
 const HOME={
@@ -260,5 +298,5 @@ const HOME={
   layout:'split',
 
   eyebrow:'',    // 슬로건 위 작은 라벨 (예: 'PLANNER · KIM SI HOO'). 비우면 안 나옵니다
-  intro:'오래가는 즐거움을 기획하는 김시후입니다.'
+  intro:'오래가는 즐거움을 기획합니다. 재미보다 먼저 제약을 읽고, 판단의 근거를 남이 그대로 실행할 수 있는 문서로 옮깁니다.'
 };

@@ -12,11 +12,19 @@ function buildNav(el){el.innerHTML=NAV.map(n=>
 function syncNav(a){document.querySelectorAll('[data-nav]').forEach(x=>
  x.dataset.nav===a?x.setAttribute('aria-current','page'):x.removeAttribute('aria-current'))}
 
-let state={view:'home',slug:null,tab:'skill',filter:new Set()};
+let state={view:'home',track:'base',slug:null,tab:'skill',filter:new Set()};
+const TRACK_IDS=['hr','game','service','biz'];
+/* 트랙이 앞세우기로 한 프로젝트를 먼저 두고, 나머지는 기본 순서로 뒤에 붙인다 */
+function trackOrder(){
+  const t=(typeof TRACKS!=='undefined'&&TRACKS[state.track])||null;
+  if(!t||!t.order||!t.order.length)return ORDER;
+  return t.order.concat(ORDER.filter(k=>t.order.indexOf(k)<0));
+}
 function route(){
   const parts=(location.hash||'#/').slice(2).split('/').filter(Boolean);
   state.slug=null;
-  if(!parts.length){state.view='home';}
+  if(!parts.length){state.view='home';state.track='base';}
+  else if(TRACK_IDS.indexOf(parts[0])>=0){state.view='home';state.track=parts[0];}
   else if(parts[0]==='works'){
     if(parts[1]==='bodybuilder'&&parts[2]==='workshop')state.view='workshop';
     else if(parts[1]){state.view='detail';state.slug=parts[1];}
@@ -102,10 +110,13 @@ function homeFigure(){
 }
 function homeCopy(){
   const H=(typeof HOME!=='undefined')?HOME:{};
+  const T=(typeof TRACKS!=='undefined'&&TRACKS[state.track])||{};
+  const slogan=T.slogan||H.slogan||'';
+  const intro=T.intro||H.intro||'';
   return `<div class="homeline">
     ${H.eyebrow?`<span class="eyebrow" style="margin-bottom:13px">${H.eyebrow}</span>`:''}
-    <h1 class="d1">${H.slogan||''}</h1>
-    ${H.intro?`<p class="homesub">${H.intro}</p>`:''}
+    <h1 class="d1">${slogan}</h1>
+    ${intro?`<p class="homesub">${intro}</p>`:''}
   </div>`;
 }
 function viewHome(){
@@ -130,7 +141,7 @@ function cardHTML(k){const p=P[k];return `<a class="card" href="#/works/${p.slug
     <div class="when">${p.period}</div>
   </div></a>`}
 function viewWorks(){
-  const f=state.filter,list=ORDER.filter(k=>!f.size||P[k].cats.some(c=>f.has(c)));
+  const f=state.filter,ord=trackOrder(),list=ord.filter(k=>!f.size||P[k].cats.some(c=>f.has(c)));
   const cnt=k=>ORDER.filter(s=>P[s].cats.includes(k)).length;
   return `<section>
     ${sechead('work','Works',`${list.length}건`,1)}
@@ -194,7 +205,7 @@ function artifactBtn(l){
 }
 function viewDetail(){
   const p=P[state.slug];if(!p)return view404();
-  const i=ORDER.indexOf(state.slug),pv=ORDER[(i-1+ORDER.length)%ORDER.length],nx=ORDER[(i+1)%ORDER.length];
+  const ord=trackOrder(),i=ord.indexOf(state.slug),pv=ord[(i-1+ord.length)%ord.length],nx=ord[(i+1)%ord.length];
   return `<a class="crumb" href="#/works">${ico('work',15)} Works</a>
   ${docspec(p)}
   ${blk('01','problem','문제 정의',p.problem.map(t=>`<p style="color:var(--ink-2)">${t}</p>`).join(''))}
@@ -315,8 +326,8 @@ function aboutSummary(){return `<div class="summary">
     <div><dt>수상</dt><dd>${AWARDS.length}건 <span class="cap">창업 · 아이디어 공모전</span></dd></div>
     <div><dt>자격</dt><dd>ADsP · FAT 1급 · 컴퓨터활용능력 2급 · 정보처리기능사</dd></div>
     <div><dt>연구</dt><dd>LNCS 특별호 논문 제2저자 <span class="cap">2024</span></dd></div>
-    <div><dt>교육</dt><dd>삼성 청년 SW · AI 아카데미 <span class="cap">2026.01 – 06</span></dd></div>
-    <div><dt>경력</dt><dd>제조업 품질보증부 수입검사 2년 <span class="cap">산업기능요원 · 소집해제</span></dd></div>
+    <div><dt>교육</dt><dd>삼성 청년 SW · AI 아카데미 <span class="cap">2026.01 – 12 · 진행 중</span></dd></div>
+    <div><dt>경력</dt><dd>수입검사(IQC) 2년 — 검사 기준서 기반 판정 · 대책서 운영 <span class="cap">제조업 품질보증부 · 산업기능요원 소집해제</span></dd></div>
     <div><dt>연구실</dt><dd>마케팅컨설팅연구실 학부연구생 <span class="cap">2023.09 – 2025.02</span></dd></div>
   </dl>
 </div>`}
@@ -380,14 +391,14 @@ function aboutEdu(){return `<section class="sec">
   ],['m','st','q'])}
   <div class="sub">${ico('doc',16)}교육 이수</div>
   ${tbl([['기간','140px'],['과정','230px'],['내용','']],[
-    ['2026.01 – 2026.06','삼성 청년 SW·AI 아카데미<br><span class="cap">삼성전자 · 멀티캠퍼스 · 대한상공회의소</span>','Python 문법과 알고리즘 학습, AI 데이터 분석·모델링 실습, Django·Vue.js 기반 풀스택 웹 개발'],
+    ['2026.01 – 2026.12','삼성 청년 SW·AI 아카데미<br><span class="cap">삼성전자 · 멀티캠퍼스 · 대한상공회의소</span>','Python 문법과 알고리즘 학습, AI 데이터 분석·모델링 실습, Django·Vue.js 기반 풀스택 웹 개발'],
     ['2023.06 – 2023.10','Python 기반 사무행정 시티즌 빅데이터 사이언티스트(CBDS) 양성 과정<br><span class="cap">금오공과대학교 부설 평생교육원</span>','Python 데이터 수집·분석 훈련 및 시각화 실습, 회계 프로그램 실무. 과정 수료로 ADsP·FAT 1급 취득']
   ],['m','','q'])}
 </section>
 <section class="sec">
   ${sechead('work','경력','Experience')}
   ${tbl([['기간','140px'],['소속','170px'],['담당 업무','']],[
-    ['2020.06 – 2022.07','제조업 품질보증부<br><span class="cap">산업기능요원 · 소집해제</span>',
+    ['2020.06 – 2022.07','수입검사(IQC) 담당<br><span class="cap">제조업 품질보증부 · 산업기능요원 소집해제</span>',
      '<b>수입검사(IQC) 업무 수행</b><br>· 수입 제품 입고 시 품목별 검사 기준서를 바탕으로 샘플링 검사와 전수 검사 시행<br>· 불량 제품 판정 후 대책서 및 개선 대책 요구<br>· 검사 결과 보고서 작성 보조']
   ],['m','','q'])}
 </section>`}
