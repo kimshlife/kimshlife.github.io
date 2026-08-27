@@ -170,7 +170,7 @@ sickkick:{
 
 contentops:{
   slug:'contentops', docId:'DOC-2023-01', ver:'v1.0',
-  title:'콘텐츠 운영 컨설턴트', period:'2023.11 (2주)', cats:['biz','content'],
+  title:'콘텐츠 운영 컨설턴트', period:'2023.06 (2주)', cats:['biz','content'],
   what:'게임·웹툰 산업의 유저–운영 소통 문제를 해결하는 신직업 설계',
   role:'팀장으로 일정과 역할을 관리하고, 산업 보고서 분석으로 문제를 정의하고, 자격 제도와 기업 인증제까지 설계했습니다',
   team:'소규모 팀', originator:'본인',
