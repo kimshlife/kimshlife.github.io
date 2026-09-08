@@ -21,6 +21,7 @@ function trackOrder(){
   return t.order.concat(ORDER.filter(k=>t.order.indexOf(k)<0));
 }
 function route(){
+  const wasAbout=state.view==='about';
   const parts=(location.hash||'#/').slice(2).split('/').filter(Boolean);
   state.slug=null;
   if(!parts.length){state.view='home';state.track='base';}
@@ -32,7 +33,10 @@ function route(){
   } else if(parts[0]==='about'){state.view='about';state.tab=parts[1]||'skill';}
   else if(parts[0]==='contact')state.view='contact';
   else state.view='404';
-  render();window.scrollTo(0,0);
+  render();
+  if(wasAbout&&state.view==='about'){
+    const panel=$('about-panel');panel.focus({preventScroll:true});panel.scrollIntoView({block:'start'});
+  }else window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',route);
 
@@ -43,8 +47,8 @@ const IMG='assets/img/';
 const RESUME='';
 function catDot(k){const c=CAT[k];return `<span class="cd"><i style="background:${c.c}"></i>${c.n}</span>`}
 function tbl(head,rows,cls){return `<div class="scroll"><table class="tbl">
-  <tr>${head.map(h=>`<th${h[1]?` style="width:${h[1]}"`:''}>${h[0]}</th>`).join('')}</tr>
-  ${rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${(cls&&cls[i])||''}">${c}</td>`).join('')}</tr>`).join('')}
+  <thead><tr>${head.map(h=>`<th scope="col"${h[1]?` style="width:${h[1]}"`:''}>${h[0]}</th>`).join('')}</tr></thead>
+  <tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td data-label="${head[i][0]}" class="${(cls&&cls[i])||''}"><div>${c}</div></td>`).join('')}</tr>`).join('')}</tbody>
 </table></div>`}
 /* lv=1 이면 h1 으로 그립니다. 화면마다 h1 이 하나씩은 있어야 스크린리더가 제목을 읽습니다 */
 function sechead(icon,title,right,lv){const t=lv===1?'h1':'h2';
@@ -122,8 +126,20 @@ function homeCopy(){
 function viewHome(){
   const L=((typeof HOME!=='undefined'&&HOME.layout)||'stack');
   const fig=homeFigure(),copy=homeCopy();
-  return `<div class="homewrap home-${L}">${L==='text'?copy+fig:fig+copy}</div>`;
+  return `<div class="homewrap home-${L}">${L==='text'?copy+fig:fig+copy}</div>
+    <div class="home-actions"><a class="abtn primary" href="#/works">프로젝트 보기 ${ico('work',17)}</a><a class="abtn" href="#/contact">연락하기 ${ico('mail',17)}</a></div>
+    <section class="featured"><div class="sechead"><h2 class="d2">대표 프로젝트</h2><a href="#/works" class="cap">전체 보기 →</a></div>
+    <div class="cards">${['bodybuilder','projectrg'].map(cardHTML).join('')}</div></section>`;
 }
+
+const CARD_ROLES={
+  bodybuilder:'UGC 정책·명세 설계 · 캐릭터 상태 설계 · 프론트엔드',
+  neontetris:'게임 규칙 표준화 · 락 딜레이·회전 제한 설계',
+  projectrg:'5축 진단 체계 · 보충 질문 규칙 · 프론트엔드',
+  sickkick:'시장·규제 분석 · 수익 구조 · 사업 전략',
+  contentops:'팀 운영 · 산업 분석 · 자격·기업 인증제 설계',
+  pirukia:'9신 세계관 구조 · 교리 선택지 콘텐츠 설계'
+};
 
 /* ===== WORKS ===== */
 function cardMedia(p){
@@ -135,10 +151,10 @@ function cardHTML(k){const p=P[k];return `<a class="card" href="#/works/${p.slug
   ${cardMedia(p)}
   <div class="cardbody">
     <div class="top">${p.cats.map(catDot).join('')}</div>
-    <div class="ttl">${p.title}</div>
+    <h3 class="ttl">${p.title}</h3>
     <div class="what">${p.what}</div>
-    <div class="rolebox"><span class="eyebrow" style="margin-bottom:6px">My role</span><div class="txt">${p.role}</div></div>
-    <div class="when">${p.period}</div>
+    <div class="rolebox"><span class="eyebrow" style="margin-bottom:6px">핵심 기여</span><div class="txt">${CARD_ROLES[k]||p.role}</div></div>
+    <div class="when">${p.period}<span class="card-go">프로젝트 보기 ↗</span></div>
   </div></a>`}
 function viewWorks(){
   const f=state.filter,ord=trackOrder(),list=ord.filter(k=>!f.size||P[k].cats.some(c=>f.has(c)));
@@ -158,23 +174,25 @@ function viewWorks(){
 
 /* ===== 상세 ===== */
 function docspec(p){return `<div class="docspec">
-  <div class="meta">${p.docId} · ${p.ver} · ${p.period}</div>
+  <div class="meta">${p.period} · ${p.team}</div>
   <h1 class="d2">${p.title}</h1>
+  <p class="body-l project-intro">${p.what}</p>
   <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">${p.cats.map(catDot).join('')}</div>
-  <dl>
+  <p class="project-role">${p.role}</p>
+  <details class="project-spec"><summary>담당 범위와 프로젝트 정보</summary><dl>
     <dt class="eyebrow">기획 원안</dt><dd class="dim">${p.originator}</dd>
     <dt class="eyebrow">담당 범위</dt><dd><ul>${p.scope.map(s=>`<li>${s}</li>`).join('')}</ul></dd>
     <dt class="eyebrow">팀 구성</dt><dd class="dim">${p.team}</dd>
     <dt class="eyebrow">기술 환경</dt><dd class="dim">${p.stack}</dd>
     <dt class="eyebrow">산출물</dt><dd class="dim">${p.outputs}</dd>
-  </dl></div>`}
+  </dl><p class="cap spec-id">${p.docId} · ${p.ver}</p></details></div>`}
 function blk(no,icon,t,inner){return `<div class="block"><div class="blockhead">
-  <span class="no">${no}</span>${ico(icon,18)}<span class="h3">${t}</span></div>${inner}</div>`}
+  <span class="no">${no}</span>${ico(icon,18)}<h2 class="h3">${t}</h2></div>${inner}</div>`}
 function gallery(p){
   if(!p.gallery||!p.gallery.length)return '';
   const st=p.galRatio?` style="aspect-ratio:${p.galRatio}"`:'';
   return `<div class="gal">${p.gallery.map(g=>
-    `<figure><img src="${IMG}${g.f}.${g.e||'jpg'}" alt="${g.c}" loading="lazy"${st}><figcaption>${g.c}</figcaption></figure>`).join('')}</div>`;
+    `<figure><button type="button" class="gallery-open" aria-label="이미지 확대: ${g.c}"><img src="${IMG}${g.f}.${g.e||'jpg'}" alt="${g.c}" loading="lazy"${st}><span aria-hidden="true">확대 ↗</span></button><figcaption>${g.c}</figcaption></figure>`).join('')}</div>`;
 }
 const YT_ALLOW='accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share';
 function ytEmbeddable(){return location.protocol==='http:'||location.protocol==='https:'}
@@ -208,16 +226,17 @@ function viewDetail(){
   const ord=trackOrder(),i=ord.indexOf(state.slug),pv=ord[(i-1+ord.length)%ord.length],nx=ord[(i+1)%ord.length];
   return `<a class="crumb" href="#/works">${ico('work',15)} Works</a>
   ${docspec(p)}
+  ${p.thumb?`<figure class="project-cover"><img src="${IMG}${p.thumb}" alt="${p.title} 대표 화면" fetchpriority="high"></figure>`:''}
+  <div class="project-actions">${p.links.map(artifactBtn).join('')}</div>
+  <section class="project-highlights" aria-label="주요 수치와 근거"><h2 class="h3">주요 수치와 근거</h2><div class="metrics">${p.metrics.map(m=>
+    `<div class="metric"><div class="val">${m.v}</div><div class="lb">${m.l}</div><div class="src">${m.s}</div></div>`).join('')}</div></section>
   ${blk('01','problem','문제 정의',p.problem.map(t=>`<p style="color:var(--ink-2)">${t}</p>`).join(''))}
   ${blk('02','decide','역할과 의사결정',p.decisions.map(d=>`<div class="dec">
     <div class="h">${ico('spec',16)}<span>${d.h}</span></div><div class="b">${d.b}</div>
     ${d.link?`<p class="cap" style="margin:9px 0 0 25px"><a href="${d.link}">${d.linkT} →</a></p>`:''}</div>`).join(''))}
   ${p.notes.map(n=>`<div class="note inline-note"><b>${n.t}</b>${n.b}</div>`).join('')}
   ${blk('03','doc','산출물',`<p class="cap">${p.outputs}</p>${gallery(p)}${videoSlot(p)}`)}
-  ${blk('04','result','결과와 회고',`<div class="metrics">${p.metrics.map(m=>
-    `<div class="metric"><div class="val">${m.v}</div><div class="lb">${m.l}</div><div class="src">${m.s}</div></div>`).join('')}</div>
-    <p style="margin-top:22px;color:var(--ink-2)">${p.retro}</p>`)}
-  <div class="artifacts">${p.links.map(artifactBtn).join('')}</div>
+  ${blk('04','result','회고',`<p style="color:var(--ink-2)">${p.retro}</p>`)}
   <div class="pager"><a href="#/works/${pv}">← ${P[pv].title}</a><a href="#/works/${nx}">${P[nx].title} →</a></div>`;
 }
 
@@ -313,7 +332,7 @@ const ABOUT_TABS=[
   {id:'skill',t:'역량'},{id:'edu',t:'학력 · 경력'},{id:'award',t:'수상 · 자격'},{id:'etc',t:'그 외 활동'}
 ];
 function aboutTabs(cur){return `<div class="filters subtabs">${ABOUT_TABS.map(t=>
-  `<a class="chip" href="#/about${t.id==='skill'?'':'/'+t.id}" aria-pressed="${cur===t.id}">${t.t}</a>`).join('')}</div>`}
+  `<a class="chip" href="#/about${t.id==='skill'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
 
 /* 한눈에 보기 — 상세를 열지 않아도 판단이 서도록 위에 먼저 둡니다 */
 function aboutSummary(){return `<div class="summary">
@@ -339,8 +358,7 @@ function aboutProfile(){return `<section>
       <span class="eyebrow">About</span>
       <h1 class="d2" style="margin:10px 0 16px">김시후 · Kim Si Hoo</h1>
       <p class="body-l">오래가는 즐거움을 기획하는 기획자입니다.</p>
-      <p style="margin-top:14px;color:var(--ink-2)">기획에서의 제 원칙은 <mark>[즐거움, 편리함, 지속가능한]</mark>입니다. 단지 재미를 위해 일회성에 그치는 기획이 아니라, 오랫동안 사람들에게 즐거움을 제공하는 것을 목표로 기획을 세웁니다.  </p>
-      <p style="color:var(--ink-2)">이러한 3가지 원칙을 바탕으로 프로젝트를 진행해왔습니다.</p>
+      <p style="margin-top:14px;color:var(--ink-2)"><mark>즐거움 · 편리함 · 지속가능성</mark>을 기준으로 게임과 서비스, 사업을 기획합니다. 사용자의 경험을 규칙과 문서로 구체화하고 구현까지 연결합니다.</p>
     </div>
   </div>
 </section>`}
@@ -428,18 +446,18 @@ function aboutEtc(){return `<section class="sec">
 function viewAbout(){
   const tab=ABOUT_TABS.some(t=>t.id===state.tab)?state.tab:'skill';
   const panel=tab==='edu'?aboutEdu():tab==='award'?aboutAward():tab==='etc'?aboutEtc():aboutSkill();
-  return aboutProfile()+aboutSummary()+aboutTabs(tab)+panel;
+  return aboutProfile()+aboutTabs(tab)+`<div id="about-panel" tabindex="-1">${panel}</div><details class="about-more"><summary>학력·경력 한눈에 보기</summary>${aboutSummary()}</details>`;
 }
 
 /* ===== CONTACT / 404 ===== */
 function viewContact(){return `<section>
   ${sechead('mail','Contact','연락처',1)}
-  ${tbl([['구분','120px'],['내용','']],[
-    ['이메일','<button type="button" class="abtn" id="copymail" style="padding:7px 13px;font-size:14px">kimshlife@naver.com <span class="m">복사</span></button>'],
-    ['GitHub','<a href="https://github.com/kimshlife" target="_blank" rel="noopener">github.com/kimshlife</a>'],
-    ['이력서',RESUME?`<a href="${RESUME}" target="_blank" rel="noopener">이력서 보기</a>`
-      :'<span class="dim">현재 이력서 공개를 지원하지 않습니다. 이메일로 요청해 주세요.</span>']
-  ],['st',''])}
+  <p class="body-l">프로젝트와 기획 경험에 대해 궁금한 점이 있다면 연락해 주세요.</p>
+  <dl class="contact-list">
+    <div><dt>이메일</dt><dd><a class="contact-email" href="mailto:kimshlife@naver.com">kimshlife@naver.com</a><button type="button" class="abtn" id="copymail" aria-live="polite">이메일 복사</button></dd></div>
+    <div><dt>GitHub</dt><dd><a href="https://github.com/kimshlife" target="_blank" rel="noopener">github.com/kimshlife ↗</a></dd></div>
+    <div><dt>이력서</dt><dd>${RESUME?`<a href="${RESUME}" target="_blank" rel="noopener">이력서 보기</a>`:'이메일로 요청해 주시면 전달드리겠습니다.'}</dd></div>
+  </dl>
   <p class="cap" style="margin-top:16px">전화번호와 주소는 게시하지 않습니다. 이메일로 연락 주시면 회신드리겠습니다.</p>
 </section>`}
 function view404(){return `<section class="empty">
@@ -465,6 +483,24 @@ function render(){
     default:h=view404();syncNav('');
   }
   s.innerHTML=h;n.innerHTML=nt;
+  document.querySelector('.canvas').classList.toggle('has-notes',!!nt);
+  document.querySelector('.canvas').classList.toggle('is-home',state.view==='home');
+  s.querySelectorAll('.tri').forEach(grid=>{
+    const cells=[...grid.children],labels=cells.slice(0,3).map(el=>el.textContent);
+    grid.replaceChildren();
+    for(let i=3;i<cells.length;i+=3){
+      const row=document.createElement('div');row.className='tri-row';
+      cells.slice(i,i+3).forEach((cell,j)=>{
+        const label=document.createElement('strong');label.className='tri-label';label.textContent=labels[j];
+        cell.prepend(label);row.append(cell);
+      });grid.append(row);
+    }
+  });
+  s.querySelectorAll('.gal img').forEach(img=>{
+    if(img.closest('button'))return;
+    const button=document.createElement('button');button.type='button';button.className='gallery-open';
+    button.setAttribute('aria-label','이미지 확대: '+img.alt);img.replaceWith(button);button.append(img);
+  });
   moveFocus(s);
 }
 /* 이 사이트는 주소만 바뀌고 페이지는 다시 불러오지 않습니다.
@@ -476,7 +512,10 @@ function moveFocus(stage){
   t.setAttribute('tabindex','-1');
   t.focus({preventScroll:true});
 }
-document.addEventListener('click',e=>{
+let lightboxOpener=null;
+function closeLightbox(){ $('lb').close(); }
+$('lb').addEventListener('close',()=>{document.body.classList.remove('modal-open');lightboxOpener?.focus();});
+document.addEventListener('click',async e=>{
   const c=e.target.closest('[data-cat]');
   if(c){const v=c.dataset.cat;
     if(v==='all')state.filter.clear();
@@ -484,13 +523,12 @@ document.addEventListener('click',e=>{
     render();return;}
   const yt=e.target.closest('[data-yt]');
   if(yt){yt.outerHTML=ytFrame(yt.dataset.yt);return;}
-  const im=e.target.closest('.gal img');
-  if(im){$('lbi').src=im.src;$('lbi').alt=im.alt;$('lb').classList.add('on');return;}
-  if(e.target.id==='lb'||e.target.id==='lbx'){$('lb').classList.remove('on');return;}
+  const opener=e.target.closest('.gallery-open');
+  if(opener){const im=opener.querySelector('img');lightboxOpener=opener;$('lbi').src=im.src;$('lbi').alt=im.alt;$('lb').showModal();document.body.classList.add('modal-open');return;}
+  if(e.target.id==='lb'||e.target.id==='lbx'){closeLightbox();return;}
   const cm=e.target.closest('#copymail');
-  if(cm){navigator.clipboard?.writeText('kimshlife@naver.com');
-    cm.innerHTML='복사했습니다';
-    setTimeout(()=>{cm.innerHTML='kimshlife@naver.com <span class="m">복사</span>'},1600);}
+  if(cm){try{await navigator.clipboard.writeText('kimshlife@naver.com');cm.innerHTML='복사했습니다';}
+    catch{cm.innerHTML='복사할 수 없습니다. 이메일 주소를 선택해 주세요.';}
+    setTimeout(()=>{cm.textContent='이메일 복사'},2500);}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('lb').classList.remove('on')});
 route();
