@@ -3,6 +3,7 @@ const NAV=[
  {id:'home',label:'Home',k:'build'},
  {id:'about',label:'About',k:'idea'},
  {id:'works',label:'Works',k:'work'},
+ {id:'hobby',label:'Hobby',k:'game'},
  {id:'contact',label:'Contact',k:'mail'}
 ];
 const $=s=>document.getElementById(s);
@@ -31,6 +32,7 @@ function route(){
     else if(parts[1]){state.view='detail';state.slug=parts[1];}
     else state.view='works';
   } else if(parts[0]==='about'){state.view='about';state.tab=parts[1]||'skill';}
+  else if(parts[0]==='hobby')state.view='hobby';
   else if(parts[0]==='contact')state.view='contact';
   else state.view='404';
   render();
@@ -329,8 +331,7 @@ const CERTS=[
 ];
 
 const ABOUT_TABS=[
-  {id:'skill',t:'역량'},{id:'edu',t:'학력 · 경력'},{id:'award',t:'수상 · 자격'},{id:'etc',t:'그 외 활동'},
-  {id:'hobby',t:'취미'}
+  {id:'skill',t:'역량'},{id:'edu',t:'학력 · 경력'},{id:'award',t:'수상 · 자격'},{id:'etc',t:'그 외 활동'}
 ];
 function aboutTabs(cur){return `<div class="filters subtabs">${ABOUT_TABS.map(t=>
   `<a class="chip" href="#/about${t.id==='skill'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
@@ -427,25 +428,28 @@ function aboutEtc(){return `<section class="sec">
   ],['m','st','q'])}
 </section>`}
 
-/* 취미 — 코너를 늘릴 때는 sub 제목과 표를 같은 모양으로 아래에 덧붙이면 됩니다 */
-function aboutHobby(){return `<section class="sec">
-  ${sechead('game','취미','Hobby')}
-  <div class="sub">${ico('game',16)}게임</div>
-  ${tbl([['기간','130px'],['구분','118px'],['내용','']],[
-    ['유년기 – 현재','플레이 이력',
-     '26년간 플레이한 게임 70여 개를 분류·첫 플레이 시기·플레이 이유로 정리하고, 시기별로 무엇이 달라졌는지 확인했습니다.<br><span class="cap">호기심(유년) → 성취감(초등) → 사람과 심리(중등) → 서브컬처(고등) → 스토리(대학 이후)</span>'],
-    ['2020 – 2026','길드 운영',
-     '<span class="st">카운터사이드</span> 길드 「Time」 — 길드장(컨소시엄장) · 15~30명 · 승인제<br>규칙을 문서로 만들어 공지하고 모집 글을 직접 썼습니다. 가입 심사와 규정 위반자 처리, 콘텐츠 일정 공지, 운영진(부길드장·임원) 역할 분담을 맡았습니다.<br><span class="cap">필참은 협력전 아레나 하나로 좁히고 레이드는 선택으로 두었습니다. 7일 미접은 강퇴 기준을 두되, 장기 미접은 사유를 미리 알리면 예외로 두었습니다.</span>'],
-    ['2020 – 2026','라이브 서비스 관찰',
-     '같은 게임을 베타 테스트부터 서비스 종료까지 플레이하며, 운영 이슈로 나빠진 여론이 사과문과 개선책 발표, 생방송 소통으로 회복되는 과정을 유저 입장에서 지켜봤습니다.<br><span class="cap">이 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리한 분석 문서를 따로 작성했습니다</span>']
-  ],['m','st','q'])}
-  <p class="cap" style="margin-top:10px">직무 경력이 아니라 취미로 한 활동입니다. 플레이 이력 정리와 분석 문서, 길드 모집 글과 규칙 원문은 요청 시 제공합니다.</p>
+/* ===== HOBBY =====
+   카드를 늘릴 때는 아래 capgroup 한 덩어리를 같은 모양으로 복사해 붙이면 됩니다 */
+function viewHobby(){return `<section>
+  ${sechead('game','Hobby','취미',1)}
+  <p class="body-l">게임을 오래 해 왔습니다. 그중 한 게임은 6년을 붙어 있었고, 그 안에서 사람을 모으고 규칙을 만들었습니다.</p>
+  <div class="capgroup" style="margin-top:26px">
+    <div class="hd">${ico('game',18)}<h2 class="h3">길드 운영</h2></div>
+    <div class="lead">카운터사이드 길드 「Time」 · 2020 – 2026 · 길드장(컨소시엄장) · 15~30명 · 승인제</div>
+    <p>규칙을 문서로 만들어 공지하고 모집 글을 직접 썼습니다. 가입 심사와 규정 위반자 처리, 콘텐츠 일정 공지, 운영진(부길드장·임원) 역할 분담을 맡았고 서비스가 종료될 때까지 운영했습니다.</p>
+    <p class="cap">필참은 협력전 아레나 하나로 좁히고 레이드는 선택으로 두었습니다. 7일 미접은 강퇴 기준을 두되, 장기 미접은 사유를 미리 알리면 예외로 두었습니다.</p>
+  </div>
+  <div class="capgroup">
+    <div class="hd">${ico('idea',18)}<h2 class="h3">유저로 지켜본 라이브 서비스</h2></div>
+    <div class="lead">같은 게임 · 베타 테스트부터 서비스 종료까지</div>
+    <p>운영 이슈로 나빠진 여론이 사과문과 개선책 발표, 생방송 소통으로 돌아서는 과정을 유저 입장에서 지켜봤습니다. 이 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리한 분석 문서를 따로 썼습니다.</p>
+  </div>
+  <p class="cap">직무 경력이 아니라 취미로 한 활동입니다. 분석 문서와 길드 모집 글, 규칙 원문은 요청 시 제공합니다.</p>
 </section>`}
 
 function viewAbout(){
   const tab=ABOUT_TABS.some(t=>t.id===state.tab)?state.tab:'skill';
-  const panel=tab==='edu'?aboutEdu():tab==='award'?aboutAward():tab==='etc'?aboutEtc()
-    :tab==='hobby'?aboutHobby():aboutSkill();
+  const panel=tab==='edu'?aboutEdu():tab==='award'?aboutAward():tab==='etc'?aboutEtc():aboutSkill();
   return aboutProfile()+aboutTabs(tab)+`<div id="about-panel" tabindex="-1">${panel}</div>`;
 }
 
@@ -479,6 +483,7 @@ function render(){
       nt=`<div class="note"><b>소속</b>BodyBuilder의 기능입니다. 별도 프로젝트가 아닙니다.</div>
           <div class="note"><b>REMARK 03</b>지시와 다르게 구현한 행이 한 건 포함되어 있습니다.</div>
           <div class="note"><b>REMARK 04</b>상한 8을 채운 유저 맵이 수치 설계의 사후 검증입니다.</div>`;break;
+    case 'hobby':h=viewHobby();syncNav('hobby');break;
     case 'contact':h=viewContact();syncNav('contact');break;
     default:h=view404();syncNav('');
   }
