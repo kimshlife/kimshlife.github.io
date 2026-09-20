@@ -329,7 +329,8 @@ const CERTS=[
 ];
 
 const ABOUT_TABS=[
-  {id:'skill',t:'역량'},{id:'edu',t:'학력 · 경력'},{id:'award',t:'수상 · 자격'},{id:'etc',t:'그 외 활동'}
+  {id:'skill',t:'역량'},{id:'edu',t:'학력 · 경력'},{id:'award',t:'수상 · 자격'},{id:'etc',t:'그 외 활동'},
+  {id:'hobby',t:'취미'}
 ];
 function aboutTabs(cur){return `<div class="filters subtabs">${ABOUT_TABS.map(t=>
   `<a class="chip" href="#/about${t.id==='skill'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
@@ -426,9 +427,21 @@ function aboutEtc(){return `<section class="sec">
   ],['m','st','q'])}
 </section>`}
 
+/* 취미 — 코너를 늘릴 때는 sub 제목과 표를 같은 모양으로 아래에 덧붙이면 됩니다 */
+function aboutHobby(){return `<section class="sec">
+  ${sechead('game','취미','Hobby')}
+  <div class="sub">${ico('game',16)}게임</div>
+  ${tbl([['기간','140px'],['활동','215px'],['내용','']],[
+    ['2020 – 2026','<span class="st">카운터사이드</span> 길드 「Time」 운영<br><span class="cap">길드장(컨소시엄장) · 15~30명 · 승인제 · 서비스 종료까지</span>',
+     '길드 규칙을 문서로 만들어 공지하고 모집 글을 직접 작성했습니다. 가입 심사와 규정 위반자 처리, 길드 콘텐츠 일정 공지, 운영진(부길드장·임원) 역할 분담을 맡았습니다.<br><span class="cap">필참 범위는 협력전 아레나 하나로 좁히고 레이드는 선택으로 두었습니다. 7일 미접은 강퇴 기준을 두되, 장기 미접은 사유를 미리 알리면 예외로 두었습니다.</span>']
+  ],['m','','q'])}
+  <p class="cap" style="margin-top:10px">직무 경력이 아니라 취미로 한 활동입니다. 모집 글과 규칙 원문은 요청 시 제공합니다.</p>
+</section>`}
+
 function viewAbout(){
   const tab=ABOUT_TABS.some(t=>t.id===state.tab)?state.tab:'skill';
-  const panel=tab==='edu'?aboutEdu():tab==='award'?aboutAward():tab==='etc'?aboutEtc():aboutSkill();
+  const panel=tab==='edu'?aboutEdu():tab==='award'?aboutAward():tab==='etc'?aboutEtc()
+    :tab==='hobby'?aboutHobby():aboutSkill();
   return aboutProfile()+aboutTabs(tab)+`<div id="about-panel" tabindex="-1">${panel}</div>`;
 }
 
