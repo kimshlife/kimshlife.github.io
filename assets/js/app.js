@@ -334,23 +334,6 @@ const ABOUT_TABS=[
 function aboutTabs(cur){return `<div class="filters subtabs">${ABOUT_TABS.map(t=>
   `<a class="chip" href="#/about${t.id==='skill'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
 
-/* 한눈에 보기 — 상세를 열지 않아도 판단이 서도록 위에 먼저 둡니다 */
-function aboutSummary(){return `<div class="summary">
-  <span class="eyebrow">한눈에 보기</span>
-  <p class="body-l" style="margin:11px 0 20px">단순히 일회성에 그치지 않는, 시스템적으로 오래갈 수 있는 기획을 추구합니다.
-    창업 경진대회와 아이디어 공모전에서 ${AWARDS.length}건을 수상했고, 제안한 기획 중 하나는 한국고용정보원의 직업카드뉴스로 발행되었습니다.</p>
-  <dl class="sumgrid">
-    <div><dt>전공</dt><dd>경영학 학사 · 국립금오공과대학교 <span class="cap">2025.08 졸업</span></dd></div>
-    <div><dt>기획 경험 분야</dt><dd>게임 · IT서비스 · 사업</dd></div>
-    <div><dt>수상</dt><dd>${AWARDS.length}건 <span class="cap">창업 · 아이디어 공모전</span></dd></div>
-    <div><dt>자격</dt><dd>ADsP · FAT 1급 · 컴퓨터활용능력 2급 · 정보처리기능사</dd></div>
-    <div><dt>연구</dt><dd>LNCS 특별호 논문 제2저자 <span class="cap">2024</span></dd></div>
-    <div><dt>교육</dt><dd>삼성 청년 SW · AI 아카데미 <span class="cap">2026.01 – 12 · 진행 중</span></dd></div>
-    <div><dt>경력</dt><dd>수입검사(IQC) 2년 — 검사 기준서 기반 판정 · 대책서 운영 <span class="cap">제조업 품질보증부 · 산업기능요원 소집해제</span></dd></div>
-    <div><dt>연구실</dt><dd>마케팅컨설팅연구실 학부연구생 <span class="cap">2023.09 – 2025.02</span></dd></div>
-  </dl>
-</div>`}
-
 function aboutProfile(){return `<section>
   <div class="profile">
     <img src="${IMG}profile.jpg" alt="김시후 프로필 사진">
@@ -446,7 +429,7 @@ function aboutEtc(){return `<section class="sec">
 function viewAbout(){
   const tab=ABOUT_TABS.some(t=>t.id===state.tab)?state.tab:'skill';
   const panel=tab==='edu'?aboutEdu():tab==='award'?aboutAward():tab==='etc'?aboutEtc():aboutSkill();
-  return aboutProfile()+aboutTabs(tab)+`<div id="about-panel" tabindex="-1">${panel}</div><details class="about-more"><summary>학력·경력 한눈에 보기</summary>${aboutSummary()}</details>`;
+  return aboutProfile()+aboutTabs(tab)+`<div id="about-panel" tabindex="-1">${panel}</div>`;
 }
 
 /* ===== CONTACT / 404 ===== */

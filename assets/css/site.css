@@ -192,16 +192,8 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
   font-size:12px;line-height:1.5;text-align:center;background:rgba(20,36,61,.88);color:#fff}
 .vidph{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-3);background:var(--paper)}
 
-/* About — 한눈에 보기 · 서브탭 */
-.summary{background:var(--surface);border:var(--border);border-radius:var(--radius);padding:24px;margin-top:36px}
-.sumgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 30px;margin:0}
-.sumgrid>div{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:baseline;
-  padding:11px 0;border-top:1px solid var(--rule)}
-.sumgrid dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)}
-.sumgrid dd{margin:0;font-size:14px;line-height:1.6}
-.sumgrid .cap{display:inline;font-size:12px}
+/* About — 서브탭 */
 .subtabs{margin:36px 0 28px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
-@media (max-width:599px){.sumgrid{grid-template-columns:1fr}}
 .profile{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:start}
 .profile img{width:200px;height:250px;object-fit:cover;border-radius:var(--radius);border:var(--border)}
 .empty{background:var(--surface);border:var(--border);border-radius:var(--radius);padding:40px 24px;text-align:center}
@@ -287,7 +279,7 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
 .docspec .meta{font-family:var(--f-body);font-size:14px;margin-bottom:10px}
 .project-intro{margin-top:16px}
 .project-role{margin-top:20px;color:var(--ink-2)}
-.project-spec,.about-more{border-top:var(--border);border-bottom:var(--border);padding:16px 0;margin-top:24px}
+.project-spec{border-top:var(--border);border-bottom:var(--border);padding:16px 0;margin-top:24px}
 summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);min-height:28px}
 .spec-id{margin-top:18px}
 .project-cover{margin:28px 0 0;padding:12px;background:var(--surface);border:var(--border);border-radius:12px}
@@ -326,8 +318,6 @@ summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);min-he
 #about-panel{scroll-margin-top:90px}
 #about-panel>.sec:first-child{margin-top:32px}
 #about-panel:focus{outline:none}
-.about-more{margin-top:48px}
-.about-more .summary{margin-top:16px}
 .capgroup .lead,.capgroup li{font-size:15px}
 .tbl{font-size:15px}
 .tbl td{line-height:1.8}
@@ -384,7 +374,6 @@ summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);min-he
   .subtabs{display:grid;grid-template-columns:1fr 1fr;margin-top:24px}
   .subtabs .chip{justify-content:center;padding:8px}
   #about-panel{scroll-margin-top:20px}
-  .summary{padding:18px}
   .contact-list{padding:0 20px}
   .contact-list>div{grid-template-columns:1fr;gap:10px}
   .project-cover{padding:6px;margin-top:20px}
