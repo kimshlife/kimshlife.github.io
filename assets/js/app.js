@@ -431,20 +431,12 @@ function aboutEtc(){return `<section class="sec">
 /* ===== HOBBY =====
    화면에 나오는 숫자와 그래프는 data.js 의 GAMES 목록에서 계산합니다.
    목록을 고치면 여기 숫자도 같이 바뀌므로 따로 손댈 곳이 없습니다. */
-const HOBBY_TABS=[{id:'overview',t:'개요'},{id:'record',t:'플레이 기록'},{id:'docs',t:'문서'}];
+const HOBBY_TABS=[{id:'overview',t:'개요'},{id:'guild',t:'길드 운영'},{id:'record',t:'플레이 기록'},{id:'docs',t:'문서'}];
 function hobbyTabs(cur){return `<div class="filters subtabs">${HOBBY_TABS.map(t=>
   `<a class="chip" href="#/hobby/game${t.id==='overview'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
 const rColor=k=>(GAME_REASONS.find(r=>r.k===k)||{c:'#C0CCD8'}).c;
 const gCount=f=>GAMES.filter(f).length;
 const rPct=k=>Math.round(gCount(g=>g[3]===k)/GAMES.length*100);
-/* 아이콘 자리에 쓰는 두 글자 — 한글은 앞 두 자, 영문은 단어 첫 글자 두 개 */
-function gInitial(t){
-  if(/^[A-Za-z0-9]/.test(t)){
-    const w=t.match(/[A-Za-z0-9]+/g)||[t];
-    return (w.length>1?w[0][0]+w[1][0]:w[0].slice(0,2)).toUpperCase();
-  }
-  return t.replace(/[^가-힣A-Za-z0-9]/g,'').slice(0,2);
-}
 
 /* Hobby 첫 화면 — 영역 카드를 누르면 그 영역으로 들어갑니다 */
 function hobbyHome(){return `<section class="hobbyhero">
@@ -484,8 +476,9 @@ function hobbyOverview(){
   <div class="capgroup" style="margin-top:30px">
     <div class="hd">${ico('game',18)}<h2 class="h3">길드 운영</h2></div>
     <div class="lead">카운터사이드 길드 「Time」 · 2020 – 2026 · 길드장(컨소시엄장) · 15~30명 · 승인제</div>
-    <p>규칙을 문서로 만들어 공지하고 모집 글을 직접 썼습니다. 가입 심사와 규정 위반자 처리, 콘텐츠 일정 공지, 운영진(부길드장·임원) 역할 분담을 맡았고 서비스가 종료될 때까지 운영했습니다.</p>
-    <p class="cap">필참은 협력전 아레나 하나로 좁히고 레이드는 선택으로 두었습니다. 7일 미접은 강퇴 기준을 두되, 장기 미접은 사유를 미리 알리면 예외로 두었습니다.</p>
+    <p>규칙을 문서로 만들어 공지하고 모집 글을 직접 썼습니다. 가입 심사와 규정 위반자 처리, 콘텐츠 일정 공지, 운영진 역할 분담을 맡았고 서비스가 종료될 때까지 운영했습니다.</p>
+    <p class="cap" style="margin-bottom:12px">필참은 협력전 아레나 하나로 좁히고 레이드는 선택으로 두었습니다. 7일 미접은 강퇴 기준을 두되, 장기 미접은 사유를 미리 알리면 예외로 두었습니다.</p>
+    <p class="cap"><a href="#/hobby/game/guild">규칙을 그렇게 정한 이유와 실제 사건 →</a></p>
   </div>
   <div class="capgroup">
     <div class="hd">${ico('idea',18)}<h2 class="h3">유저로 지켜본 라이브 서비스</h2></div>
@@ -527,11 +520,10 @@ function gameList(){
     const rows=list.filter(g=>g[2]===s);
     if(!rows.length)return '';
     return `<div class="gamegroup"><div class="gh"><h3>${s}</h3><span class="cap">${rows.length}개</span></div>
-      <div class="gtiles">${rows.map(g=>`<figure class="gitem">
-        <span class="gtile" style="background:${rColor(g[3])}" aria-hidden="true">${gInitial(g[0])}</span>
-        <figcaption>${g[0]}<em>${g[1]}</em></figcaption></figure>`).join('')}</div></div>`;
+      <div class="gametags">${rows.map(g=>`<span class="gametag">
+        <i style="background:${rColor(g[3])}"></i>${g[0]}<em>${g[1]}</em></span>`).join('')}</div></div>`;
   }).join('')||'<p class="cap">선택한 조건에 맞는 게임이 없습니다.</p>'}
-  <p class="cap" style="margin-top:20px">타일 색은 그 게임을 한 이유를 뜻합니다. 글자는 게임 이름의 앞 두 글자입니다.</p>`;
+  <p class="cap" style="margin-top:20px">점 색은 그 게임을 한 이유를 뜻합니다.</p>`;
 }
 function hobbyRecord(){return `<div class="chartgrid">
     <div class="chartcard"><h3>시기별 플레이한 게임</h3>
@@ -541,6 +533,45 @@ function hobbyRecord(){return `<div class="chartgrid">
   </div>
   <div class="sub" style="margin-top:30px">${ico('game',16)}게임 목록</div>
   ${gameList()}`}
+/* 길드 운영 사례 — 프로젝트 상세와 같은 형식(문제 → 결정 → 사건 → 결과 → 회고) */
+function hobbyGuild(){
+  const dec=[
+    ['필참은 협력전 아레나 하나만','레이드는 시작한 지 얼마 안 된 사람이 따라가기 어려운 콘텐츠입니다. 전원에게 레이드를 요구하면 새로 들어온 사람이 남지 못합니다. 그래서 누구나 할 수 있는 협력전 아레나만 필수로 두고 레이드는 선택으로 뒀습니다. 아레나에서 나오는 아티팩트가 레이드를 도는 숙련자에게 도움이 되므로, 각자 할 수 있는 것을 해서 서로를 돕는 구조가 됩니다.'],
+    ['레이드는 일요일 이후에','평일에 시간을 내기 어려운 직장인과 학생이 있습니다. 필참인 아레나가 평일 일정과 부딪히지 않도록 레이드 시작을 주말 뒤로 미뤘습니다.'],
+    ['미접 기준은 7일','길드 시스템이 일주일 단위로 갱신되므로 기준을 같은 주기에 맞췄습니다. 보통은 3~5일이면 자르지만, 경조사처럼 미리 알 수 없는 일이 생길 수 있어 7일로 뒀습니다.'],
+    ['장기 미접은 미리 알리면 예외','훈련소 입소처럼 본인이 미리 아는 사정은 자리를 지켜 줬습니다. 처음부터 있던 조항이 아니라 운영하면서 추가한 규칙입니다.'],
+    ['가입은 승인제로','자유 가입으로 두면 규칙을 지키지 않는 사람이 들어옵니다. 커뮤니티 채널을 기반으로 모집하고, 다른 커뮤니티에서 문제가 된 이력이 있는지만 확인한 뒤 승인했습니다. 심사라고 할 만한 절차는 이것 하나였고 나머지는 바로 받았습니다.'],
+    ['모집 글은 공문처럼 쓰지 않기','게임은 즐기려고 하는 것이라 모집 글이 딱딱하면 오히려 반감을 삽니다. 게임 안에서 쓰는 말(컨소시엄, 사장님)과 밈을 섞어 썼습니다.']
+  ];
+  return `${blk('01','problem','왜 만들었고, 왜 규칙부터 썼나',
+    `<p style="color:var(--ink-2)">다른 길드에서 이유를 듣지 못한 채 강제 탈퇴를 당한 적이 있습니다. 기준 없이 운영되는 곳이 어떤지 겪고 나서, 직접 만든다면 규칙부터 세우겠다고 정했습니다.</p>
+     <p style="color:var(--ink-2)">2020년에 길드를 만들어 2명으로 시작했고 최대 30명(게임 상한)까지 운영했습니다. 규칙을 먼저 두고 시작했기 때문에 규칙이 없어서 생기는 문제는 겪지 않았습니다. 규칙이 없었다면 협력전과 레이드의 보상 배분에서 먼저 문제가 났을 것이라고 봅니다.</p>`)}
+  ${blk('02','decide','규칙을 그렇게 정한 이유',dec.map(d=>`<div class="dec">
+    <div class="h">${ico('spec',16)}<span>${d[0]}</span></div><div class="b">${d[1]}</div></div>`).join(''))}
+  ${blk('03','spec','운영 방식',tbl([['항목','120px'],['내용','']],[
+    ['모집','아카라이브 카운터사이드 채널에 인원 상황에 맞춰 모집 글을 올렸습니다. 규칙도 이 글에 함께 실었습니다.'],
+    ['공지','게임 안의 공지 기능과 채팅(하나톡)을 썼습니다.'],
+    ['운영진','최종 4명 — 길드 버프 · 아레나 지시 보조 · 멤버 관리 보조 · 레이드 관리와 진행을 각각 맡겼습니다.'],
+    ['본인 몫','운영진의 판단은 존중하되 합병 같은 중대사항의 최종 결정은 직접 했습니다. 책임질 사람은 있어야 한다고 봤습니다.']
+  ],['st','q']))}
+  ${blk('04','result','실제로 일어난 일',tbl([['상황','130px'],['대응','']],[
+    ['미접 강퇴','기준에 해당하면 예외 없이 처리했습니다. 하나톡에 사유를 먼저 올린 뒤 조치했고, 규칙대로 처리한 것이라 반발은 없었습니다.'],
+    ['길드원 간 분쟁','없었습니다. 커뮤니티 기반 모집과 가입 확인이 사전에 걸러 준 것으로 봅니다.'],
+    ['인원 이탈','게임사의 운영 이슈가 있을 때마다 사람이 빠졌습니다. 그때마다 모집 글을 다시 올려 충원했습니다.'],
+    ['분위기 관리','남은 사람들에게는 길드만큼은 서비스 종료까지 간다고 이야기하며 붙잡았습니다.'],
+    ['규칙 개정','장기 미접 예외 조항을 이 시기에 추가했습니다. 운영 이슈와 현생 사정이 겹치는 경우를 보고 고친 것입니다.']
+  ],['st','q']))}
+  ${blk('05','doc','남은 것',`<div class="metrics">
+    <div class="metric"><div class="val">6년</div><div class="lb">운영 기간</div><div class="src">2020 – 2026 · 서비스 종료까지</div></div>
+    <div class="metric"><div class="val">2 → 30명</div><div class="lb">인원</div><div class="src">30명은 게임이 정한 상한</div></div>
+    <div class="metric"><div class="val">4명</div><div class="lb">역할을 맡긴 운영진</div><div class="src">버프 · 아레나 · 멤버 · 레이드</div></div>
+  </div>
+  <p style="margin-top:22px;color:var(--ink-2)">서비스 종료 안내가 뜨자마자 공지로 인사를 남겼습니다. 그동안 고마웠다는 말과, 인연이 되면 다른 게임에서 다시 만나자는 말이었습니다.</p>`)}
+  ${blk('06','idea','회고',
+    `<p style="color:var(--ink-2)">잘한 결정은 두 가지입니다. 합병을 진행할 때 계속 이야기를 주고받으며 마무리한 것, 그리고 커뮤니티 채널을 기반으로 길드를 열어 어느 정도 검증된 사람을 받은 것입니다.</p>
+     <p style="color:var(--ink-2)">다시 한다면 지키는 운영에서 한 걸음 더 나가고 싶습니다. 길드원 대상 이벤트를 열거나 같은 채널의 다른 길드와 연합 대회를 해 보는 쪽입니다.</p>`)}
+  <div class="note inline-note"><b>기여 경계</b>취미로 한 활동입니다. 모집 글과 규칙 원문, 관리 화면 캡처는 요청 시 제공하며, 다른 길드원의 닉네임은 가린 상태로 드립니다.</div>`;
+}
 function hobbyDocs(){
   const docs=[
     {i:'doc',t:'게임 분석 문서',d:'한 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리했습니다. 운영 이슈로 나빠진 여론이 사과문과 소통으로 돌아선 과정을 함께 다룹니다.',m:'슬라이드 15쪽 · 요청 시 제공'},
@@ -554,7 +585,7 @@ function hobbyDocs(){
 function viewHobby(){
   if(state.hsec!=='game')return hobbyHome();
   const tab=HOBBY_TABS.some(t=>t.id===state.htab)?state.htab:'overview';
-  const panel=tab==='record'?hobbyRecord():tab==='docs'?hobbyDocs():hobbyOverview();
+  const panel=tab==='guild'?hobbyGuild():tab==='record'?hobbyRecord():tab==='docs'?hobbyDocs():hobbyOverview();
   return gameHero()+hobbyTabs(tab)+`<div id="hobby-panel">${panel}</div>
     <p class="cap" style="margin-top:26px">직무 경력이 아니라 취미로 한 활동입니다.</p>`;
 }

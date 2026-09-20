@@ -232,12 +232,11 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
 .gamegroup{margin-bottom:26px}
 .gamegroup .gh{display:flex;align-items:baseline;gap:10px;margin-bottom:13px}
 .gamegroup .gh h3{margin:0;font-size:15px;font-weight:600}
-.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:18px 12px}
-.gitem{margin:0;text-align:center;min-width:0}
-.gtile{display:flex;align-items:center;justify-content:center;aspect-ratio:1;border-radius:16px;color:#fff;
-  font-family:var(--f-display);font-weight:600;font-size:19px;letter-spacing:-.02em;box-shadow:0 2px 8px #14243D14}
-.gitem figcaption{margin-top:8px;font-size:12px;line-height:1.45;color:var(--ink-2);word-break:keep-all}
-.gitem em{display:block;font-style:normal;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);margin-top:3px}
+.gametags{display:flex;flex-wrap:wrap;gap:8px}
+.gametag{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:var(--border);
+  border-radius:var(--radius-pill);padding:6px 14px;font-size:13.5px;color:var(--ink-2)}
+.gametag i{width:8px;height:8px;border-radius:50%;flex:none}
+.gametag em{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
 .doclist{display:grid;gap:12px}
 .docrow{display:flex;gap:15px;align-items:flex-start;background:var(--surface);
   border:var(--border);border-radius:var(--radius);padding:20px}
@@ -248,8 +247,6 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
   .hobbyhero{padding:26px 20px}
   .hobbyhero .deco{display:none}
   .stackrow{grid-template-columns:38px 1fr 38px;gap:9px}
-  .gtiles{grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:16px 10px}
-  .gtile{border-radius:14px;font-size:17px}
   .areacard{padding:22px}
 }
 
