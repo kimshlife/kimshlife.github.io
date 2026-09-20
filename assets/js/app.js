@@ -13,7 +13,7 @@ function buildNav(el){el.innerHTML=NAV.map(n=>
 function syncNav(a){document.querySelectorAll('[data-nav]').forEach(x=>
  x.dataset.nav===a?x.setAttribute('aria-current','page'):x.removeAttribute('aria-current'))}
 
-let state={view:'home',track:'base',slug:null,tab:'skill',htab:'overview',gfilter:'',filter:new Set()};
+let state={view:'home',track:'base',slug:null,tab:'skill',hsec:'',htab:'overview',gfilter:'',filter:new Set()};
 const TRACK_IDS=['hr','game','service','biz'];
 /* 트랙이 앞세우기로 한 프로젝트를 먼저 두고, 나머지는 기본 순서로 뒤에 붙인다 */
 function trackOrder(){
@@ -32,7 +32,7 @@ function route(){
     else if(parts[1]){state.view='detail';state.slug=parts[1];}
     else state.view='works';
   } else if(parts[0]==='about'){state.view='about';state.tab=parts[1]||'skill';}
-  else if(parts[0]==='hobby'){state.view='hobby';state.htab=parts[1]||'overview';}
+  else if(parts[0]==='hobby'){state.view='hobby';state.hsec=parts[1]||'';state.htab=parts[2]||'overview';}
   else if(parts[0]==='contact')state.view='contact';
   else state.view='404';
   render();
@@ -433,24 +433,50 @@ function aboutEtc(){return `<section class="sec">
    목록을 고치면 여기 숫자도 같이 바뀌므로 따로 손댈 곳이 없습니다. */
 const HOBBY_TABS=[{id:'overview',t:'개요'},{id:'record',t:'플레이 기록'},{id:'docs',t:'문서'}];
 function hobbyTabs(cur){return `<div class="filters subtabs">${HOBBY_TABS.map(t=>
-  `<a class="chip" href="#/hobby${t.id==='overview'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
+  `<a class="chip" href="#/hobby/game${t.id==='overview'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
 const rColor=k=>(GAME_REASONS.find(r=>r.k===k)||{c:'#C0CCD8'}).c;
 const gCount=f=>GAMES.filter(f).length;
+const rPct=k=>Math.round(gCount(g=>g[3]===k)/GAMES.length*100);
+/* 아이콘 자리에 쓰는 두 글자 — 한글은 앞 두 자, 영문은 단어 첫 글자 두 개 */
+function gInitial(t){
+  if(/^[A-Za-z0-9]/.test(t)){
+    const w=t.match(/[A-Za-z0-9]+/g)||[t];
+    return (w.length>1?w[0][0]+w[1][0]:w[0].slice(0,2)).toUpperCase();
+  }
+  return t.replace(/[^가-힣A-Za-z0-9]/g,'').slice(0,2);
+}
 
-function hobbyHero(){return `<section class="hobbyhero">
-  <span class="eyebrow">HOBBY</span>
-  <h1 class="d1">오래 해 본 사람의 눈으로 게임을 봅니다</h1>
-  <p>유년기부터 ${GAMES.length}개를 플레이했고, 무엇을 왜 했는지 기록해 두었습니다.
-     그중 한 게임에서는 6년 동안 길드를 운영하며 규칙을 만들고 사람을 모았습니다.</p>
-  <span class="deco">${ico('game',128)}</span>
-</section>`}
+/* Hobby 첫 화면 — 영역 카드를 누르면 그 영역으로 들어갑니다 */
+function hobbyHome(){return `<section class="hobbyhero">
+    <span class="eyebrow">HOBBY</span>
+    <h1 class="d1">좋아서 오래 한 것들을 기록해 둡니다</h1>
+    <p>일로 한 것이 아니라 취미로 한 활동입니다. 오래 붙어 있었던 만큼 남은 기록을 영역별로 모았습니다.</p>
+    <span class="deco">${ico('game',128)}</span>
+  </section>
+  <div class="hobbyareas">
+    <a class="areacard" href="#/hobby/game">
+      ${ico('game',26)}
+      <h2 class="h3">Game</h2>
+      <p>유년기부터 기록한 게임 ${GAMES.length}개, 6년 동안의 길드 운영, 유저로 지켜본 라이브 서비스</p>
+      <span class="go">들어가기 →</span>
+    </a>
+  </div>`}
+
+function gameHero(){return `<a class="crumb" href="#/hobby">${ico('game',15)} Hobby</a>
+  <section class="hobbyhero">
+    <span class="eyebrow">HOBBY · GAME</span>
+    <h1 class="d1">오래 해 본 사람의 눈으로 게임을 봅니다</h1>
+    <p>유년기부터 ${GAMES.length}개를 플레이했고, 무엇을 왜 했는지 기록해 두었습니다.
+       그중 한 게임에서는 6년 동안 길드를 운영하며 규칙을 만들고 사람을 모았습니다.</p>
+    <span class="deco">${ico('game',128)}</span>
+  </section>`}
 
 function hobbyOverview(){
-  const now=gCount(g=>g[3]), nowStory=gCount(g=>g[3]&&g[4]==='스토리');
+  const rank=GAME_REASONS.map(r=>({k:r.k,n:gCount(g=>g[3]===r.k)})).sort((a,b)=>b.n-a.n);
   const cards=[
     {n:`${GAMES.length}개`,k:'기록한 게임',s:'유년기부터 26년간'},
-    {n:`${now}개`,k:'지금도 하는 게임',s:'2026.09 기준'},
-    {n:`${nowStory}개`,k:'그중 스토리 때문에',s:'예전에는 성취감이 가장 큰 이유였습니다'},
+    {n:`${gCount(g=>g[2]==='대학')}개`,k:'대학 이후 플레이',s:'플랫폼과 장르가 가장 넓어진 시기'},
+    {n:`${rPct(rank[0].k)}%`,k:`가장 큰 이유는 ${rank[0].k}`,s:`${rank[1].k} ${rPct(rank[1].k)}%로 그다음`},
     {n:'6년',k:'한 게임에서 길드 운영',s:'2020 – 2026 · 서비스 종료까지'}
   ];
   return `<div class="statcards">${cards.map(c=>`<div class="statcard">
@@ -473,7 +499,7 @@ function stageChart(){
   const max=Math.max(...GAME_STAGES.map(s=>gCount(g=>g[2]===s)));
   return GAME_STAGES.map(s=>{
     const n=gCount(g=>g[2]===s);
-    const segs=GAME_REASONS.map(r=>({c:r.c,k:r.k,n:gCount(g=>g[2]===s&&g[4]===r.k)})).filter(x=>x.n);
+    const segs=GAME_REASONS.map(r=>({c:r.c,k:r.k,n:gCount(g=>g[2]===s&&g[3]===r.k)})).filter(x=>x.n);
     return `<div class="stackrow"><span>${s}</span>
       <span class="bar" style="width:${Math.round(n/max*100)}%">${segs.map(x=>
         `<i style="flex:${x.n};background:${x.c}" title="${s} · ${x.k} ${x.n}개"></i>`).join('')}</span>
@@ -481,7 +507,7 @@ function stageChart(){
   }).join('');
 }
 function reasonDonut(){
-  const parts=GAME_REASONS.map(r=>({...r,n:gCount(g=>g[4]===r.k)})).filter(p=>p.n);
+  const parts=GAME_REASONS.map(r=>({...r,n:gCount(g=>g[3]===r.k)})).filter(p=>p.n);
   let at=0;const stops=parts.map(p=>{const from=at;at+=p.n/GAMES.length*100;
     return `${p.c} ${from.toFixed(1)}% ${at.toFixed(1)}%`}).join(',');
   return `<div class="donutwrap"><div class="donut" role="img"
@@ -489,22 +515,23 @@ function reasonDonut(){
       style="background:conic-gradient(${stops})"></div></div>
     <div class="legend">${parts.map(p=>`<span><i style="background:${p.c}"></i>${p.k}<b>${p.n}개 · ${Math.round(p.n/GAMES.length*100)}%</b></span>`).join('')}</div>`;
 }
-const GAME_FILTERS=[{v:'',t:'전체'},{v:'now',t:'지금 하는 것'}].concat(GAME_REASONS.map(r=>({v:r.k,t:r.k})));
+const GAME_FILTERS=[{v:'',t:'전체'}].concat(GAME_REASONS.map(r=>({v:r.k,t:r.k})));
 function gameList(){
   const f=state.gfilter||'';
-  const pick=g=>!f?true:f==='now'?!!g[3]:g[4]===f;
-  const list=GAMES.filter(pick);
-  return `<div class="filters" style="margin:18px 0 20px">${GAME_FILTERS.map(x=>
-    `<button type="button" class="chip" aria-pressed="${f===x.v}" data-gf="${x.v}">${x.t}
-      <span class="n">${x.v==='now'?gCount(g=>g[3]):x.v?gCount(g=>g[4]===x.v):GAMES.length}</span></button>`).join('')}</div>
+  const list=f?GAMES.filter(g=>g[3]===f):GAMES;
+  return `<div class="filters" style="margin:18px 0 22px">${GAME_FILTERS.map(x=>
+    `<button type="button" class="chip" aria-pressed="${f===x.v}" data-gf="${x.v}">${
+      x.v?`<i style="background:${rColor(x.v)}"></i>`:''}${x.t}
+      <span class="n">${x.v?gCount(g=>g[3]===x.v):GAMES.length}</span></button>`).join('')}</div>
   ${GAME_STAGES.map(s=>{
     const rows=list.filter(g=>g[2]===s);
     if(!rows.length)return '';
     return `<div class="gamegroup"><div class="gh"><h3>${s}</h3><span class="cap">${rows.length}개</span></div>
-      <div class="gametags">${rows.map(g=>`<span class="gametag${g[3]?' now':''}">
-        <i style="background:${rColor(g[4])}"></i>${g[0]}<em>${g[1]}</em></span>`).join('')}</div></div>`;
+      <div class="gtiles">${rows.map(g=>`<figure class="gitem">
+        <span class="gtile" style="background:${rColor(g[3])}" aria-hidden="true">${gInitial(g[0])}</span>
+        <figcaption>${g[0]}<em>${g[1]}</em></figcaption></figure>`).join('')}</div></div>`;
   }).join('')||'<p class="cap">선택한 조건에 맞는 게임이 없습니다.</p>'}
-  <p class="cap" style="margin-top:22px">테두리가 진한 것은 지금도 하는 게임입니다. 점 색은 플레이 이유를 뜻합니다.</p>`;
+  <p class="cap" style="margin-top:20px">타일 색은 그 게임을 한 이유를 뜻합니다. 글자는 게임 이름의 앞 두 글자입니다.</p>`;
 }
 function hobbyRecord(){return `<div class="chartgrid">
     <div class="chartcard"><h3>시기별 플레이한 게임</h3>
@@ -525,9 +552,10 @@ function hobbyDocs(){
     <span class="eyebrow">${d.m}</span></div></div>`).join('')}</div>`;
 }
 function viewHobby(){
+  if(state.hsec!=='game')return hobbyHome();
   const tab=HOBBY_TABS.some(t=>t.id===state.htab)?state.htab:'overview';
   const panel=tab==='record'?hobbyRecord():tab==='docs'?hobbyDocs():hobbyOverview();
-  return hobbyHero()+hobbyTabs(tab)+`<div id="hobby-panel">${panel}</div>
+  return gameHero()+hobbyTabs(tab)+`<div id="hobby-panel">${panel}</div>
     <p class="cap" style="margin-top:26px">직무 경력이 아니라 취미로 한 활동입니다.</p>`;
 }
 
