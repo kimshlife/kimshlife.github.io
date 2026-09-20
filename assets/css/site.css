@@ -248,6 +248,12 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
   border:var(--border);border-radius:var(--radius);padding:20px}
 .docrow .ic{color:var(--accent);margin-top:2px}
 .docrow h3{margin:0 0 5px;font-size:15.5px;font-weight:600}
+.pdfview{width:100%;height:78vh;min-height:420px;border:var(--border);border-radius:var(--radius);
+  background:var(--surface);display:block}
+@media (max-width:599px){.pdfview{height:62vh;min-height:320px}}
+a.docrow{text-decoration:none;color:inherit;transition:border-color 160ms,box-shadow 160ms}
+a.docrow:hover{border-color:var(--accent);box-shadow:0 8px 24px #14243D0C}
+.docrow .open{font-size:12.5px;font-weight:600;color:var(--accent);margin-left:4px;white-space:nowrap}
 @media (max-width:899px){.chartgrid{grid-template-columns:1fr}}
 @media (max-width:599px){
   .hobbyhero{padding:26px 20px}

@@ -13,7 +13,7 @@ function buildNav(el){el.innerHTML=NAV.map(n=>
 function syncNav(a){document.querySelectorAll('[data-nav]').forEach(x=>
  x.dataset.nav===a?x.setAttribute('aria-current','page'):x.removeAttribute('aria-current'))}
 
-let state={view:'home',track:'base',slug:null,tab:'skill',hsec:'',htab:'overview',gfilter:'',filter:new Set()};
+let state={view:'home',track:'base',slug:null,tab:'skill',hsec:'',htab:'overview',hdoc:'',gfilter:'',filter:new Set()};
 const TRACK_IDS=['hr','game','service','biz'];
 /* 트랙이 앞세우기로 한 프로젝트를 먼저 두고, 나머지는 기본 순서로 뒤에 붙인다 */
 function trackOrder(){
@@ -32,7 +32,7 @@ function route(){
     else if(parts[1]){state.view='detail';state.slug=parts[1];}
     else state.view='works';
   } else if(parts[0]==='about'){state.view='about';state.tab=parts[1]||'skill';}
-  else if(parts[0]==='hobby'){state.view='hobby';state.hsec=parts[1]||'';state.htab=parts[2]||'overview';}
+  else if(parts[0]==='hobby'){state.view='hobby';state.hsec=parts[1]||'';state.htab=parts[2]||'overview';state.hdoc=parts[3]||'';}
   else if(parts[0]==='contact')state.view='contact';
   else state.view='404';
   render();
@@ -534,16 +534,29 @@ function hobbyRecord(){return `<div class="chartgrid">
   </div>
   <div class="sub" style="margin-top:30px">${ico('game',16)}게임 목록</div>
   ${gameList()}`}
+/* 문서 목록 — href 가 있으면 사이트 안에서 바로 펼쳐 봅니다. 파일은 assets/docs/ 에 둡니다 */
+const HOBBY_DOCS=[
+  {id:'guild',i:'spec',t:'길드 운영 사례 정리',m:'PDF · 8쪽',href:'assets/docs/guild-ops-case.pdf',
+   d:'카운터사이드 길드 「Time」을 2020년부터 서비스 종료까지 운영한 기록입니다. 규칙을 그렇게 정한 이유, 다른 길드와의 합병 협의, 미접 처리와 인원 이탈 대응을 사건별로 정리했습니다. 공지한 규칙 원문과 모집 글, 합병 협의 기록을 함께 실었습니다.'},
+  {id:'analysis',i:'doc',t:'게임 분석 문서',m:'PDF · 6쪽',href:'assets/docs/game-analysis.pdf',
+   d:'한 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리했습니다. 운영 이슈로 나빠진 여론이 사과문과 소통으로 돌아선 과정을 운영 관점에서 함께 다룹니다.'},
+  {i:'content',t:'플레이 기록 원본',m:'요청 시 제공',
+   d:'게임 목록을 플랫폼·첫 플레이 시기·플레이 이유로 정리한 표입니다. 이 화면의 그래프가 이 표에서 나옵니다.'}
+];
+function docViewer(d){return `<a class="crumb" href="#/hobby/game/docs">${ico('doc',15)} 문서</a>
+  <div class="sechead">${ico(d.i,20)}<h2 class="d2">${d.t}</h2>
+    <a class="cap" href="${d.href}" target="_blank" rel="noopener">새 탭에서 열기 ↗</a></div>
+  <iframe class="pdfview" src="${d.href}#view=FitH" title="${d.t}" loading="lazy"></iframe>
+  <p class="cap" style="margin-top:10px">문서가 보이지 않으면 위의 ‘새 탭에서 열기’를 눌러 주세요. ${d.m}</p>`}
 function hobbyDocs(){
-  const docs=[
-    {i:'spec',t:'길드 운영 사례 정리',d:'카운터사이드 길드 「Time」을 2020년부터 서비스 종료까지 운영한 기록입니다. 규칙을 그렇게 정한 이유, 다른 길드와의 합병 협의, 미접 처리와 인원 이탈 대응을 사건별로 정리했습니다.',m:'문서 · 요청 시 제공'},
-    {i:'doc',t:'게임 분석 문서',d:'한 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리했습니다. 운영 이슈로 나빠진 여론이 사과문과 소통으로 돌아선 과정을 함께 다룹니다.',m:'슬라이드 15쪽 · 요청 시 제공'},
-    {i:'content',t:'길드 규칙과 모집 글',d:'길드원에게 공지한 규칙과 직접 작성한 모집 글입니다. 필참 범위, 강퇴 기준, 장기 미접 예외 절차가 들어 있습니다.',m:'요청 시 제공'},
-    {i:'content',t:'플레이 기록 원본',d:`게임 ${GAMES.length}개를 플랫폼·첫 플레이 시기·플레이 이유로 정리한 표입니다. 이 화면의 그래프가 이 표에서 나옵니다.`,m:'요청 시 제공'}
-  ];
-  return `<div class="doclist">${docs.map(d=>`<div class="docrow">${ico(d.i,20)}
-    <div><h3>${d.t}</h3><p class="cap" style="margin-bottom:6px">${d.d}</p>
-    <span class="eyebrow">${d.m}</span></div></div>`).join('')}</div>`;
+  const cur=HOBBY_DOCS.find(d=>d.id&&d.id===state.hdoc&&d.href);
+  if(cur)return docViewer(cur);
+  return `<div class="doclist">${HOBBY_DOCS.map(d=>{
+    const inner=`${ico(d.i,20)}<div><h3>${d.t}${d.href?' <span class="open">바로 보기 →</span>':''}</h3>
+      <p class="cap" style="margin-bottom:6px">${d.d}</p><span class="eyebrow">${d.m}</span></div>`;
+    return d.href?`<a class="docrow" href="#/hobby/game/docs/${d.id}">${inner}</a>`
+                 :`<div class="docrow">${inner}</div>`;
+  }).join('')}</div>`;
 }
 function viewHobby(){
   if(state.hsec!=='game')return hobbyHome();
