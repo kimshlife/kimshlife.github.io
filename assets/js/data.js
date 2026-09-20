@@ -383,6 +383,6 @@ const GAMES=[
   ["히트", "Mobile", "고등", "캐릭터"],
   ["Among US", "PC/Mobile", "대학", "전략 플레이"],
   ["Apex 레전드", "PC", "대학", "액션 플레이"],
-  ["트릭컬 리바이브", "Mobile", "대학", "캐릭터"],
+  ["트릭컬 리바이브", "Mobile", "대학", "스토리"],
   ["Hololive Dreams", "Mobile", "대학", "캐릭터"]
 ];
