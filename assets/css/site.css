@@ -192,6 +192,56 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
   font-size:12px;line-height:1.5;text-align:center;background:rgba(20,36,61,.88);color:#fff}
 .vidph{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-3);background:var(--paper)}
 
+/* Hobby — 히어로 · 통계 · 그래프 · 게임 목록 */
+.hobbyhero{background:var(--brand-navy);color:#fff;border-radius:var(--radius);
+  padding:38px 34px;position:relative;overflow:hidden}
+.hobbyhero .eyebrow{color:var(--gold)}
+.hobbyhero .d1{color:#fff;margin:13px 0 15px;font-size:clamp(23px,3vw,34px);max-width:17em}
+.hobbyhero p{color:#C7D2E0;max-width:42em;margin:0;font-size:15.5px;line-height:1.8}
+.hobbyhero .deco{position:absolute;right:26px;top:50%;transform:translateY(-50%);opacity:.1;line-height:0}
+.hobbyhero .deco .ic{stroke-width:1.1}
+.statcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,168px),1fr));gap:14px}
+.statcard{background:var(--surface);border:var(--border);border-radius:var(--radius);padding:18px}
+.statcard .k{font-size:13px;color:var(--ink-3)}
+.statcard .n{font-family:var(--f-mono);font-weight:500;font-size:26px;line-height:1.3;margin:5px 0 5px}
+.statcard .s{font-size:12.5px;color:var(--ink-3);line-height:1.55}
+.chartgrid{display:grid;grid-template-columns:1.25fr .85fr;gap:16px}
+.chartcard{background:var(--surface);border:var(--border);border-radius:var(--radius);padding:22px}
+.chartcard h3{margin:0;font-size:16px;font-weight:600}
+.chartcard .lead{color:var(--ink-2);font-size:13px;margin:5px 0 20px}
+.stackrow{display:grid;grid-template-columns:42px 1fr 42px;gap:12px;align-items:center;margin-bottom:13px;font-size:13.5px}
+.stackrow:last-child{margin-bottom:0}
+.stackrow .bar{display:flex;height:16px;border-radius:3px;overflow:hidden;background:var(--paper)}
+.stackrow .bar i{display:block}
+.stackrow .num{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);text-align:right}
+.donutwrap{display:flex;justify-content:center;padding:2px 0 20px}
+.donut{width:164px;height:164px;border-radius:50%;position:relative}
+.donut::after{content:"";position:absolute;inset:27%;background:var(--surface);border-radius:50%}
+.legend{display:grid;gap:9px}
+.legend span{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-2)}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.legend b{margin-left:auto;font-family:var(--f-mono);font-weight:500;font-size:12px;color:var(--ink-3)}
+.gamegroup{margin-bottom:22px}
+.gamegroup .gh{display:flex;align-items:baseline;gap:10px;margin-bottom:11px}
+.gamegroup .gh h3{margin:0;font-size:15px;font-weight:600}
+.gametags{display:flex;flex-wrap:wrap;gap:8px}
+.gametag{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:var(--border);
+  border-radius:var(--radius-pill);padding:6px 14px;font-size:13.5px;color:var(--ink-2)}
+.gametag i{width:8px;height:8px;border-radius:50%;flex:none}
+.gametag em{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.gametag.now{border-color:var(--accent);color:var(--ink);font-weight:600}
+.doclist{display:grid;gap:12px}
+.docrow{display:flex;gap:15px;align-items:flex-start;background:var(--surface);
+  border:var(--border);border-radius:var(--radius);padding:20px}
+.docrow .ic{color:var(--accent);margin-top:2px}
+.docrow h3{margin:0 0 5px;font-size:15.5px;font-weight:600}
+@media (max-width:899px){.chartgrid{grid-template-columns:1fr}}
+@media (max-width:599px){
+  .hobbyhero{padding:26px 20px}
+  .hobbyhero .deco{display:none}
+  .stackrow{grid-template-columns:38px 1fr 38px;gap:9px}
+}
+
 /* About — 서브탭 */
 .subtabs{margin:36px 0 28px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
 .profile{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:start}

@@ -13,7 +13,7 @@ function buildNav(el){el.innerHTML=NAV.map(n=>
 function syncNav(a){document.querySelectorAll('[data-nav]').forEach(x=>
  x.dataset.nav===a?x.setAttribute('aria-current','page'):x.removeAttribute('aria-current'))}
 
-let state={view:'home',track:'base',slug:null,tab:'skill',filter:new Set()};
+let state={view:'home',track:'base',slug:null,tab:'skill',htab:'overview',gfilter:'',filter:new Set()};
 const TRACK_IDS=['hr','game','service','biz'];
 /* 트랙이 앞세우기로 한 프로젝트를 먼저 두고, 나머지는 기본 순서로 뒤에 붙인다 */
 function trackOrder(){
@@ -32,7 +32,7 @@ function route(){
     else if(parts[1]){state.view='detail';state.slug=parts[1];}
     else state.view='works';
   } else if(parts[0]==='about'){state.view='about';state.tab=parts[1]||'skill';}
-  else if(parts[0]==='hobby')state.view='hobby';
+  else if(parts[0]==='hobby'){state.view='hobby';state.htab=parts[1]||'overview';}
   else if(parts[0]==='contact')state.view='contact';
   else state.view='404';
   render();
@@ -304,11 +304,11 @@ ${blk('03','spec','명세 → 지시 → 구현',
 
 ${blk('04','result','실사용 검증',
 `<div class="metrics">
-  <div class="metric"><div class="val">8P · 1G</div><div class="lb">상한을 채운 유저 맵</div><div class="src">폴리곤 8개 = 설정한 상한값</div></div>
-  <div class="metric"><div class="val">4건 이상</div><div class="lb">공개된 유저 맵</div><div class="src">각 4–7회 플레이 · 2026.08.13 기준</div></div>
-  <div class="metric"><div class="val">2건</div><div class="lb">본인 제작 맵</div><div class="src">공개 1 · 비공개 1</div></div>
+  <div class="metric"><div class="val">8P · 1G</div><div class="lb">상한을 채운 맵</div><div class="src">폴리곤 8개 = 설정한 상한값</div></div>
+  <div class="metric"><div class="val">4건</div><div class="lb">공개된 유저 맵</div><div class="src">본인 2건 · 팀원 2건</div></div>
+  <div class="metric"><div class="val">4–7회</div><div class="lb">맵당 플레이 횟수</div><div class="src">2026.08.13 기준</div></div>
 </div>
-<p style="margin-top:22px;color:var(--ink-2)">공식 맵 실측에서 상한을 8로 올려 잡았는데, 실제로 8개를 꽉 채워 만든 유저 맵이 공개되어 플레이되고 있습니다. <mark>실측으로 정한 수치가 실사용으로 검증된 것</mark>입니다.</p>
+<p style="margin-top:22px;color:var(--ink-2)">공식 맵 실측에서 상한을 8로 올려 잡았는데, 실제로 8개를 꽉 채운 맵이 만들어져 공개되었습니다. 다만 공개된 맵은 본인과 팀원이 만든 것이라 <mark>외부 사용자가 상한까지 썼다고 말할 수는 없습니다</mark>. 에디터에서 상한까지 쓰는 데 문제가 없다는 것까지 확인한 단계입니다.</p>
 <p style="color:var(--ink-2)">가장 크게 남은 것은 무효화 조건의 누락을 스스로 발견한 일입니다. 명세를 쓸 때는 지형 편집만 생각했는데, 구현하면서 드래그로 옮기는 경로가 빠져 있다는 걸 알았습니다. 문서는 한 번 쓰고 끝나는 것이 아니라 구현이 되돌려주는 정보로 고쳐 쓰는 것이라는 걸 이 지점에서 확인했습니다.</p>`)}
 <div class="artifacts"><a class="abtn" href="#/works/bodybuilder">${ico('work',16)}BodyBuilder로 돌아가기</a></div>`}
 
@@ -429,11 +429,33 @@ function aboutEtc(){return `<section class="sec">
 </section>`}
 
 /* ===== HOBBY =====
-   카드를 늘릴 때는 아래 capgroup 한 덩어리를 같은 모양으로 복사해 붙이면 됩니다 */
-function viewHobby(){return `<section>
-  ${sechead('game','Hobby','취미',1)}
-  <p class="body-l">게임을 오래 해 왔습니다. 그중 한 게임은 6년을 붙어 있었고, 그 안에서 사람을 모으고 규칙을 만들었습니다.</p>
-  <div class="capgroup" style="margin-top:26px">
+   화면에 나오는 숫자와 그래프는 data.js 의 GAMES 목록에서 계산합니다.
+   목록을 고치면 여기 숫자도 같이 바뀌므로 따로 손댈 곳이 없습니다. */
+const HOBBY_TABS=[{id:'overview',t:'개요'},{id:'record',t:'플레이 기록'},{id:'docs',t:'문서'}];
+function hobbyTabs(cur){return `<div class="filters subtabs">${HOBBY_TABS.map(t=>
+  `<a class="chip" href="#/hobby${t.id==='overview'?'':'/'+t.id}"${cur===t.id?' aria-current="page"':''}>${t.t}</a>`).join('')}</div>`}
+const rColor=k=>(GAME_REASONS.find(r=>r.k===k)||{c:'#C0CCD8'}).c;
+const gCount=f=>GAMES.filter(f).length;
+
+function hobbyHero(){return `<section class="hobbyhero">
+  <span class="eyebrow">HOBBY</span>
+  <h1 class="d1">오래 해 본 사람의 눈으로 게임을 봅니다</h1>
+  <p>유년기부터 ${GAMES.length}개를 플레이했고, 무엇을 왜 했는지 기록해 두었습니다.
+     그중 한 게임에서는 6년 동안 길드를 운영하며 규칙을 만들고 사람을 모았습니다.</p>
+  <span class="deco">${ico('game',128)}</span>
+</section>`}
+
+function hobbyOverview(){
+  const now=gCount(g=>g[3]), nowStory=gCount(g=>g[3]&&g[4]==='스토리');
+  const cards=[
+    {n:`${GAMES.length}개`,k:'기록한 게임',s:'유년기부터 26년간'},
+    {n:`${now}개`,k:'지금도 하는 게임',s:'2026.09 기준'},
+    {n:`${nowStory}개`,k:'그중 스토리 때문에',s:'예전에는 성취감이 가장 큰 이유였습니다'},
+    {n:'6년',k:'한 게임에서 길드 운영',s:'2020 – 2026 · 서비스 종료까지'}
+  ];
+  return `<div class="statcards">${cards.map(c=>`<div class="statcard">
+    <div class="k">${c.k}</div><div class="n">${c.n}</div><div class="s">${c.s}</div></div>`).join('')}</div>
+  <div class="capgroup" style="margin-top:30px">
     <div class="hd">${ico('game',18)}<h2 class="h3">길드 운영</h2></div>
     <div class="lead">카운터사이드 길드 「Time」 · 2020 – 2026 · 길드장(컨소시엄장) · 15~30명 · 승인제</div>
     <p>규칙을 문서로 만들어 공지하고 모집 글을 직접 썼습니다. 가입 심사와 규정 위반자 처리, 콘텐츠 일정 공지, 운영진(부길드장·임원) 역할 분담을 맡았고 서비스가 종료될 때까지 운영했습니다.</p>
@@ -443,9 +465,71 @@ function viewHobby(){return `<section>
     <div class="hd">${ico('idea',18)}<h2 class="h3">유저로 지켜본 라이브 서비스</h2></div>
     <div class="lead">같은 게임 · 베타 테스트부터 서비스 종료까지</div>
     <p>운영 이슈로 나빠진 여론이 사과문과 개선책 발표, 생방송 소통으로 돌아서는 과정을 유저 입장에서 지켜봤습니다. 이 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리한 분석 문서를 따로 썼습니다.</p>
+  </div>`;
+}
+
+/* 시기별 막대와 이유 도넛 — 둘 다 GAMES 를 세어서 그립니다 */
+function stageChart(){
+  const max=Math.max(...GAME_STAGES.map(s=>gCount(g=>g[2]===s)));
+  return GAME_STAGES.map(s=>{
+    const n=gCount(g=>g[2]===s);
+    const segs=GAME_REASONS.map(r=>({c:r.c,k:r.k,n:gCount(g=>g[2]===s&&g[4]===r.k)})).filter(x=>x.n);
+    return `<div class="stackrow"><span>${s}</span>
+      <span class="bar" style="width:${Math.round(n/max*100)}%">${segs.map(x=>
+        `<i style="flex:${x.n};background:${x.c}" title="${s} · ${x.k} ${x.n}개"></i>`).join('')}</span>
+      <span class="num">${n}개</span></div>`;
+  }).join('');
+}
+function reasonDonut(){
+  const parts=GAME_REASONS.map(r=>({...r,n:gCount(g=>g[4]===r.k)})).filter(p=>p.n);
+  let at=0;const stops=parts.map(p=>{const from=at;at+=p.n/GAMES.length*100;
+    return `${p.c} ${from.toFixed(1)}% ${at.toFixed(1)}%`}).join(',');
+  return `<div class="donutwrap"><div class="donut" role="img"
+      aria-label="플레이 이유 비율 — ${parts.map(p=>`${p.k} ${p.n}개`).join(', ')}"
+      style="background:conic-gradient(${stops})"></div></div>
+    <div class="legend">${parts.map(p=>`<span><i style="background:${p.c}"></i>${p.k}<b>${p.n}개 · ${Math.round(p.n/GAMES.length*100)}%</b></span>`).join('')}</div>`;
+}
+const GAME_FILTERS=[{v:'',t:'전체'},{v:'now',t:'지금 하는 것'}].concat(GAME_REASONS.map(r=>({v:r.k,t:r.k})));
+function gameList(){
+  const f=state.gfilter||'';
+  const pick=g=>!f?true:f==='now'?!!g[3]:g[4]===f;
+  const list=GAMES.filter(pick);
+  return `<div class="filters" style="margin:18px 0 20px">${GAME_FILTERS.map(x=>
+    `<button type="button" class="chip" aria-pressed="${f===x.v}" data-gf="${x.v}">${x.t}
+      <span class="n">${x.v==='now'?gCount(g=>g[3]):x.v?gCount(g=>g[4]===x.v):GAMES.length}</span></button>`).join('')}</div>
+  ${GAME_STAGES.map(s=>{
+    const rows=list.filter(g=>g[2]===s);
+    if(!rows.length)return '';
+    return `<div class="gamegroup"><div class="gh"><h3>${s}</h3><span class="cap">${rows.length}개</span></div>
+      <div class="gametags">${rows.map(g=>`<span class="gametag${g[3]?' now':''}">
+        <i style="background:${rColor(g[4])}"></i>${g[0]}<em>${g[1]}</em></span>`).join('')}</div></div>`;
+  }).join('')||'<p class="cap">선택한 조건에 맞는 게임이 없습니다.</p>'}
+  <p class="cap" style="margin-top:22px">테두리가 진한 것은 지금도 하는 게임입니다. 점 색은 플레이 이유를 뜻합니다.</p>`;
+}
+function hobbyRecord(){return `<div class="chartgrid">
+    <div class="chartcard"><h3>시기별 플레이한 게임</h3>
+      <p class="lead">막대 안의 색은 그 시기에 게임을 고른 이유입니다.</p>${stageChart()}</div>
+    <div class="chartcard"><h3>플레이 이유 비율</h3>
+      <p class="lead">${GAMES.length}개 전체 기준입니다.</p>${reasonDonut()}</div>
   </div>
-  <p class="cap">직무 경력이 아니라 취미로 한 활동입니다. 분석 문서와 길드 모집 글, 규칙 원문은 요청 시 제공합니다.</p>
-</section>`}
+  <div class="sub" style="margin-top:30px">${ico('game',16)}게임 목록</div>
+  ${gameList()}`}
+function hobbyDocs(){
+  const docs=[
+    {i:'doc',t:'게임 분석 문서',d:'한 게임이 5년 넘게 서비스된 이유를 PEST와 소비자행동 이론으로 정리했습니다. 운영 이슈로 나빠진 여론이 사과문과 소통으로 돌아선 과정을 함께 다룹니다.',m:'슬라이드 15쪽 · 요청 시 제공'},
+    {i:'spec',t:'길드 규칙과 모집 글',d:'길드원에게 공지한 규칙과 직접 작성한 모집 글입니다. 필참 범위, 강퇴 기준, 장기 미접 예외 절차가 들어 있습니다.',m:'요청 시 제공'},
+    {i:'content',t:'플레이 기록 원본',d:`게임 ${GAMES.length}개를 플랫폼·첫 플레이 시기·플레이 이유로 정리한 표입니다. 이 화면의 그래프가 이 표에서 나옵니다.`,m:'요청 시 제공'}
+  ];
+  return `<div class="doclist">${docs.map(d=>`<div class="docrow">${ico(d.i,20)}
+    <div><h3>${d.t}</h3><p class="cap" style="margin-bottom:6px">${d.d}</p>
+    <span class="eyebrow">${d.m}</span></div></div>`).join('')}</div>`;
+}
+function viewHobby(){
+  const tab=HOBBY_TABS.some(t=>t.id===state.htab)?state.htab:'overview';
+  const panel=tab==='record'?hobbyRecord():tab==='docs'?hobbyDocs():hobbyOverview();
+  return hobbyHero()+hobbyTabs(tab)+`<div id="hobby-panel">${panel}</div>
+    <p class="cap" style="margin-top:26px">직무 경력이 아니라 취미로 한 활동입니다.</p>`;
+}
 
 function viewAbout(){
   const tab=ABOUT_TABS.some(t=>t.id===state.tab)?state.tab:'skill';
@@ -482,7 +566,7 @@ function render(){
     case 'workshop':h=viewWorkshop();syncNav('works');
       nt=`<div class="note"><b>소속</b>BodyBuilder의 기능입니다. 별도 프로젝트가 아닙니다.</div>
           <div class="note"><b>REMARK 03</b>지시와 다르게 구현한 행이 한 건 포함되어 있습니다.</div>
-          <div class="note"><b>REMARK 04</b>상한 8을 채운 유저 맵이 수치 설계의 사후 검증입니다.</div>`;break;
+          <div class="note"><b>REMARK 04</b>상한 8까지 실제로 쓰이는지는 본인과 팀원이 만든 맵으로 확인했습니다. 외부 사용자에 의한 검증은 아닙니다.</div>`;break;
     case 'hobby':h=viewHobby();syncNav('hobby');break;
     case 'contact':h=viewContact();syncNav('contact');break;
     default:h=view404();syncNav('');
@@ -521,6 +605,8 @@ let lightboxOpener=null;
 function closeLightbox(){ $('lb').close(); }
 $('lb').addEventListener('close',()=>{document.body.classList.remove('modal-open');lightboxOpener?.focus();});
 document.addEventListener('click',async e=>{
+  const gf=e.target.closest('[data-gf]');
+  if(gf){state.gfilter=gf.dataset.gf;render();return;}
   const c=e.target.closest('[data-cat]');
   if(c){const v=c.dataset.cat;
     if(v==='all')state.filter.clear();
