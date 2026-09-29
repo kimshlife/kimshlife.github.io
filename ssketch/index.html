@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#15100d">
+  <meta name="description" content="SSketch — 함께 그리고 함께 플레이하는 4인 온라인 그림 파티 게임. 배포 홈페이지 보관본.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SSketch — Draw Together, Play Together</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:title" content="SSketch — Draw Together, Play Together">
+  <meta property="og:description" content="함께 그리고, 빼앗고, 평가하는 4인 온라인 그림 파티 게임.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kimshlife.github.io/ssketch/">
+  <meta property="og:image" content="https://kimshlife.github.io/ssketch/assets/screenshots/gameplay-drawing.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 보관본 안내 띠 — 상단 메뉴가 fixed 라서 화면 아래에 고정합니다 */
+    .archive-bar{
+      position:fixed;z-index:150;left:0;right:0;bottom:0;
+      display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 18px;
+      padding:10px 16px;
+      background:rgba(12,9,7,.92);backdrop-filter:blur(10px);
+      color:rgba(255,255,255,.82);font-size:13px;text-align:center;
+    }
+    .archive-bar a{color:#ffd48b;font-weight:800;white-space:nowrap}
+    .archive-bar a:hover{color:#fff}
+    footer{padding-bottom:84px}
+  </style>
+</head>
+<body>
+<!-- 보관본 안내 — 원래 배포 주소(ssketch.ddns.net)는 테스트 배포 종료와 함께 내려갑니다 -->
+<div class="archive-bar">
+  <span>2026년 9월 테스트 배포 때 운영한 홈페이지의 보관본입니다. 배포가 끝나 게임 다운로드는 제공하지 않습니다.</span>
+  <a href="../#/works/ssketch">← 포트폴리오에서 프로젝트 보기</a>
+</div>
+
+<header class="site-header">
+  <nav class="nav" aria-label="주요 메뉴">
+    <a class="brand" href="#top"><img src="assets/images/current-logo-day.png" alt="SSketch"></a>
+
+    <div class="nav-links" id="nav-links">
+      <a href="#game">게임 소개</a>
+      <a href="#screenshots">스크린샷</a>
+      <a href="#download">다운로드</a>
+    </div>
+
+    <div class="nav-actions">
+      <a class="btn btn-primary" data-download href="#download">
+        ↓ <span data-download-label>게임 다운로드</span>
+      </a>
+      <button class="menu-btn" id="menu-btn" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-split" aria-hidden="true">
+      <div class="hero-side hero-day"></div>
+      <div class="hero-side hero-night"></div>
+    </div>
+
+    <div class="phase-label left">
+      <span>낮에는</span>
+      <strong>그리고 ☀</strong>
+    </div>
+    <div class="phase-label right">
+      <span>밤에는</span>
+      <strong>훔치고! ☾</strong>
+    </div>
+
+    <div class="hero-panel">
+      <div class="hero-logo-card">
+        <img src="assets/images/current-logo-day.png" alt="SSketch — Draw Together, Play Together">
+      </div>
+      <h1>함께 그리고,<br>함께 플레이하세요.</h1>
+      <p class="lead">
+        낮에는 화가, 밤에는 도둑.<br>
+        네 명이 함께 그리고, 빼앗고, 평가하는 3인칭 온라인 파티 게임.
+      </p>
+      <div class="hero-meta" aria-label="게임 정보">
+        <span>4 PLAYERS</span>
+        <span>ONLINE</span>
+        <span>WINDOWS</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#game">게임 소개 보기</a>
+        <a class="btn btn-paper" href="#screenshots">스크린샷 보기</a>
+      </div>
+      <div class="hero-note">Draw Together, Play Together.</div>
+    </div>
+  </section>
+
+  <div class="paper">
+    <section class="section" id="game">
+      <div class="container">
+        <p class="section-kicker">HOW TO PLAY</p>
+        <h2 class="section-title">하루가 곧 게임의 규칙.</h2>
+        <p class="section-copy">
+          같은 주제로 그림을 완성하고, 정체가 가려진 밤에는 작품을 차지하세요.
+          아침의 익명 평가가 끝날 때 그림을 가진 사람이 점수를 얻습니다.
+        </p>
+
+        <div class="loop-grid">
+          <article class="loop-card">
+            <div class="loop-image day">
+              <span class="phase-chip">DAY · DRAW</span>
+            </div>
+            <div class="loop-body">
+              <span class="loop-number">01</span>
+              <h3>낮 — 함께 그린다</h3>
+              <p>모두가 같은 주제를 받고 각자의 이젤에 그림을 완성합니다. 붓과 색상, 지우개와 되돌리기로 개성을 담아 보세요.</p>
+            </div>
+          </article>
+
+          <article class="loop-card">
+            <div class="loop-image night">
+              <span class="phase-chip">NIGHT · STEAL</span>
+            </div>
+            <div class="loop-body">
+              <span class="loop-number">02</span>
+              <h3>밤 — 빼앗고 지킨다</h3>
+              <p>정체가 가려진 밤, 아이템으로 상대를 방해하고 작품을 자기 집까지 옮기세요. 운반 중에는 느려지니 도주 경로가 중요합니다.</p>
+            </div>
+          </article>
+
+          <article class="loop-card">
+            <div class="loop-image morning">
+              <span class="phase-chip">MORNING · RATE</span>
+            </div>
+            <div class="loop-body">
+              <span class="loop-number">03</span>
+              <h3>아침 — 익명으로 평가한다</h3>
+              <p>작가를 모른 채 작품에 0~5점과 한 줄 평을 남깁니다. 평가는 그림에 쌓이고, 점수는 현재 소유자에게 돌아갑니다.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="loop-arrow" aria-hidden="true">
+          <span>DRAW</span><b>→</b><span>STEAL</span><b>→</b><span>RATE</span>
+        </div>
+
+        <div class="finale-note">
+          최종 점수가 같다면 결투로 승자를 가립니다. <b>잘 그리는 것만으로는 끝나지 않습니다.</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <p class="section-kicker">KEY FEATURES</p>
+        <h2 class="section-title">SSketch의 핵심</h2>
+        <p class="section-copy">창작과 액션, 심리전이 한 라운드 안에서 자연스럽게 이어집니다.</p>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="icon">👥</div>
+            <h3>4인 온라인 플레이</h3>
+            <p>방을 만들거나 6자리 코드로 참가해 친구들과 세 라운드를 함께 플레이합니다.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">✏️</div>
+            <h3>네트워크 드로잉</h3>
+            <p>붓과 색상, 지우개, 되돌리기를 사용해 직접 만든 그림이 게임 오브젝트가 됩니다.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">🥷</div>
+            <h3>그림 도둑 액션</h3>
+            <p>근접·원거리·범위형 아이템으로 상대를 견제하며 작품의 소유권을 뒤집습니다.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">⭐</div>
+            <h3>익명 평가와 결투</h3>
+            <p>서로의 작품을 평가해 점수를 쌓고, 최종 동점자가 나오면 마지막 결투가 시작됩니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="section paper" id="screenshots">
+    <div class="container">
+      <p class="section-kicker">SCREENSHOTS</p>
+      <h2 class="section-title">게임 스크린샷</h2>
+      <p class="section-copy">
+        실제 인게임에서 직접 확인한 드로잉, 아이템 사용, 그림 도둑질, 작품 평가 화면입니다. 클릭하면 크게 볼 수 있습니다.
+      </p>
+      <div class="screenshot-grid" id="screenshot-grid"></div>
+    </div>
+  </section>
+
+  <section class="section download" id="download">
+    <div class="container download-inner">
+      <div class="download-copy download-copy-with-icon">
+        <img class="game-icon" src="assets/images/icon.png" alt="SSketch 게임 아이콘">
+        <div>
+          <p class="section-kicker" style="text-align:left;color:#ffd48b">PLAY SSKETCH</p>
+          <h2>이제, 그림을 훔치러 갈 시간입니다.</h2>
+          <p>배포 당시에는 이 자리에서 Windows용 SSketch(ZIP · 약 377MB)를 내려받을 수 있었습니다.</p>
+          <div class="download-notice" id="download-notice" hidden>
+            테스트 배포가 끝나 지금은 다운로드를 제공하지 않습니다.
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-primary" data-download href="#download">↓ <span data-download-label>게임 다운로드</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <img class="footer-logo" src="assets/images/current-logo-day.png" alt="SSketch">
+    <span>© 2026 SSketch.</span>
+    <nav class="footer-links" aria-label="하단 메뉴">
+      <a href="terms.html">이용약관</a>
+      <a href="privacy.html">개인정보처리방침</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="스크린샷 크게 보기">
+  <button class="lightbox-close" type="button" data-close-lightbox aria-label="닫기">×</button>
+  <div class="lightbox-inner">
+    <img class="lightbox-img" id="lightbox-img" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
