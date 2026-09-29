@@ -135,6 +135,7 @@ function viewHome(){
 }
 
 const CARD_ROLES={
+  ssketch:'요구사항 명세·진척 관리 · 설정 창 기획·구현 · 게임 규칙 코드',
   bodybuilder:'UGC 정책·명세 설계 · 캐릭터 상태 설계 · 프론트엔드',
   neontetris:'게임 규칙 표준화 · 락 딜레이·회전 제한 설계',
   projectrg:'5축 진단 체계 · 보충 질문 규칙 · 프론트엔드',
