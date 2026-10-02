@@ -369,6 +369,8 @@ summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);min-he
 .dec .h{font-size:18px}
 .block{margin-top:56px}
 .metrics{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+/* 4개일 때 3+1로 하나만 남지 않게 2×2 */
+.metrics:has(> .metric:nth-child(4):last-child){grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 .metric .lb{font-size:14px}
 .metric .val{font-size:20px;overflow-wrap:anywhere}
 .gallery-open{display:block;position:relative;width:100%;padding:0;text-align:left}
