@@ -13,20 +13,15 @@ function buildNav(el){el.innerHTML=NAV.map(n=>
 function syncNav(a){document.querySelectorAll('[data-nav]').forEach(x=>
  x.dataset.nav===a?x.setAttribute('aria-current','page'):x.removeAttribute('aria-current'))}
 
-let state={view:'home',track:'base',slug:null,tab:'skill',hsec:'',htab:'overview',hdoc:'',gfilter:'',filter:new Set()};
-const TRACK_IDS=['hr','game','service','biz'];
-/* 트랙이 앞세우기로 한 프로젝트를 먼저 두고, 나머지는 기본 순서로 뒤에 붙인다 */
-function trackOrder(){
-  const t=(typeof TRACKS!=='undefined'&&TRACKS[state.track])||null;
-  if(!t||!t.order||!t.order.length)return ORDER;
-  return t.order.concat(ORDER.filter(k=>t.order.indexOf(k)<0));
-}
+let state={view:'select',slug:null,tab:'skill',hsec:'',htab:'overview',hdoc:'',gfilter:'',filter:new Set()};
+/* 예전 기획 첫 화면 주소(#/planning, #/game 등 지원 분야별 주소)는 기획 설명서로 보냅니다 */
+const OLD_PLANNING=['planning','hr','game','service','biz'];
 function route(){
   const wasAbout=state.view==='about';
   const parts=(location.hash||'#/').slice(2).split('/').filter(Boolean);
   state.slug=null;
-  if(!parts.length){state.view='home';state.track='base';}
-  else if(TRACK_IDS.indexOf(parts[0])>=0){state.view='home';state.track=parts[0];}
+  if(!parts.length){state.view='select';}                       // 첫 화면 — 표지(직군 선택)
+  else if(OLD_PLANNING.indexOf(parts[0])>=0){location.replace('planning/');return;}
   else if(parts[0]==='works'){
     if(parts[1]==='bodybuilder'&&parts[2]==='workshop')state.view='workshop';
     else if(parts[1]){state.view='detail';state.slug=parts[1];}
@@ -57,82 +52,42 @@ function sechead(icon,title,right,lv){const t=lv===1?'h1':'h2';
   return `<div class="sechead">${ico(icon,20)}<${t} class="d2">${title}</${t}>
   ${right?`<span class="cap">${right}</span>`:''}</div>`}
 
-/* ===== HOME ===== */
-function heroSVG(){return `<svg viewBox="0 0 640 330" role="img" aria-label="흩어진 생각이 검증 가능한 규칙을 거쳐 결과물이 되는 과정">
-<defs><style>
-.b{fill:#FFFFFF;stroke:#DDE5EC;stroke-width:1}
-.l{stroke:#C0CCD8;stroke-width:1;fill:none}
-.t{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;fill:#8494A8}
-.s{font-family:'Pretendard Variable',sans-serif;font-size:11px;fill:#4A5C74}
-</style></defs>
-<rect width="640" height="330" fill="#F4F7F9"/>
-<g opacity=".45">${Array.from({length:13},(_,i)=>`<line class="l" x1="${28+i*49}" y1="24" x2="${28+i*49}" y2="306" opacity=".3"/>`).join('')}</g>
-
-<g><rect class="b" x="28" y="96" width="150" height="140" rx="8"/>
-<text class="t" x="46" y="122">SCATTERED</text>
-<path class="l" d="M48 146c18-12 32 9 50-3s28 10 46-2" stroke="#A6B6C6"/>
-<path class="l" d="M48 168c26 7 38-10 56 2s34-5 48 5" stroke="#A6B6C6"/>
-<path class="l" d="M48 190c14-9 36 7 54-2s32 7 50 0" stroke="#A6B6C6"/>
-<circle cx="60" cy="212" r="3" fill="#C0CCD8"/><circle cx="86" cy="216" r="2.4" fill="#C0CCD8"/><circle cx="110" cy="210" r="3" fill="#C0CCD8"/>
-<text class="s" x="46" y="230">흩어진 생각</text></g>
-
-<path class="l" d="M186 166h42" stroke="#0F6C82"/><path d="M223 161l6 5-6 5" stroke="#0F6C82" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-
-<g><rect class="b" x="236" y="76" width="168" height="180" rx="8"/>
-<text class="t" x="256" y="102">SPEC</text>
-${[0,1,2,3,4].map(i=>`<rect x="256" y="${116+i*24}" width="11" height="11" rx="2" fill="none" stroke="#0F6C82" stroke-width="1.2"/>
-<path d="M258.6 ${121.5+i*24}l2.2 2.3 4.2-4.4" stroke="#0F6C82" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-<rect x="276" y="${119+i*24}" width="${108-i*13}" height="5" rx="2.5" fill="#DDE5EC"/>`).join('')}
-<text class="s" x="256" y="244">검증할 수 있는 규칙</text></g>
-
-<path class="l" d="M412 166h42" stroke="#0F6C82"/><path d="M449 161l6 5-6 5" stroke="#0F6C82" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-
-<g><rect class="b" x="462" y="96" width="150" height="140" rx="8"/>
-<text class="t" x="480" y="122">BUILT</text>
-<rect x="480" y="136" width="114" height="52" rx="5" fill="#E0F0F3"/>
-<circle cx="502" cy="162" r="9.5" fill="#0F6C82" opacity=".9"/>
-<rect x="521" y="154" width="62" height="5" rx="2.5" fill="#0F6C82" opacity=".45"/>
-<rect x="521" y="166" width="40" height="5" rx="2.5" fill="#0F6C82" opacity=".26"/>
-<rect x="480" y="197" width="54" height="5" rx="2.5" fill="#DDE5EC"/>
-<rect x="540" y="197" width="54" height="5" rx="2.5" fill="#DDE5EC"/>
-<text class="s" x="480" y="230">다른 사람의 손에서 나온 결과</text></g>
-</svg>`}
-
-/* 그림 주소가 잘못돼도 Home 이 깨지지 않도록, 기본 도식으로 되돌립니다. */
-function heroFallback(el){const w=el.closest('.homefig');if(w)w.outerHTML='<div class="homefig">'+heroSVG()+'</div>';}
-/* Home 그림 — HOME.img 가 비어 있으면 기본 도식(heroSVG)으로 되돌아갑니다.
-   파일명만 쓰면 assets/img/ 를, http(s)·data· assets/ 로 시작하면 그 주소를 그대로 씁니다. */
-function homeFigure(){
-  const s=(typeof HOME!=='undefined'&&HOME.img)||'';
-  if(!s)return `<div class="homefig">${heroSVG()}</div>`;
-  const abs=s.startsWith('http')||s.startsWith('//')||s.startsWith('data:')||s.startsWith('assets/');
-  const url=abs?s:IMG+s;
-  const w=HOME.width?` style="max-width:${HOME.width}"`:'';
-  return `<figure class="homefig"${w}>
-    <img class="${HOME.frame?'framed':''}" src="${url}" alt="${HOME.alt||''}" decoding="async"
-      onerror="heroFallback(this)">
-    ${HOME.cap?`<figcaption class="cap homecap">${HOME.cap}</figcaption>`:''}
-  </figure>`;
+/* ===== SELECT — 첫 화면, 직군 선택 =====
+   내용은 data.js 의 SELECT 에서 고칩니다. 왼쪽 메뉴 없이 카탈로그 한 장으로 그립니다. */
+function selectCard(m){
+  if(m.soon)return `<div class="model soon" aria-label="준비 중인 직군">
+    <div class="model-top"><span>MODEL ${m.no}</span><span>SOON</span></div>
+    <div class="soon-body">TO BE<br>CONTINUED…</div></div>`;
+  return `<a class="model" href="${m.href}">
+    <div class="model-top"><span>MODEL ${m.no}</span><span>KSH-${m.code}</span></div>
+    <div class="model-ico">${ico(m.icon,40)}</div>
+    <h2 class="model-name">${m.name}</h2>
+    <div class="model-en">${m.en}</div>
+    <figure class="model-fig"><img src="${m.img}" alt="${m.alt||''}" loading="lazy"></figure>
+    <dl class="model-spec">${m.spec.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+    <span class="model-go">설명서 열기 →</span></a>`;
 }
-function homeCopy(){
-  const H=(typeof HOME!=='undefined')?HOME:{};
-  const T=(typeof TRACKS!=='undefined'&&TRACKS[state.track])||{};
-  const slogan=T.slogan||H.slogan||'';
-  const intro=T.intro||H.intro||'';
-  return `<div class="homeline">
-    ${H.eyebrow?`<span class="eyebrow" style="margin-bottom:13px">${H.eyebrow}</span>`:''}
-    <h1 class="d1">${slogan}</h1>
-    ${intro?`<p class="homesub">${intro}</p>`:''}
-  </div>`;
-}
-function viewHome(){
-  const L=((typeof HOME!=='undefined'&&HOME.layout)||'stack');
-  const fig=homeFigure(),copy=homeCopy();
-  return `<div class="homewrap home-${L}">${L==='text'?copy+fig:fig+copy}</div>
-    <div class="home-actions"><a class="abtn primary" href="#/works">프로젝트 보기 ${ico('work',17)}</a><a class="abtn" href="#/contact">연락하기 ${ico('mail',17)}</a></div>
-    <section class="featured"><div class="sechead"><h2 class="d2">대표 프로젝트</h2><a href="#/works" class="cap">전체 보기 →</a></div>
-    <div class="cards">${['bodybuilder','projectrg'].map(cardHTML).join('')}</div></section>`;
-}
+function viewSelect(){const S=SELECT;return `<div class="catalog">
+  <div class="cat-strip"><span>PORTFOLIO — USER MANUAL</span><span>2026 EDITION</span></div>
+  <section class="cat-hero">
+    <div class="cat-copy">
+      ${S.eyebrow?`<span class="eyebrow cat-eyebrow">${S.eyebrow}</span>`:''}
+      <h1 class="d1">${S.slogan}</h1>
+      <p class="homesub">${S.intro}</p>
+    </div>
+    <img class="cat-mark" src="${S.img}" alt="김시후 로고 — 기획을 쓰는 펜과 그 뒤로 이어지는 흐름">
+  </section>
+  <section class="spec-sheet" aria-labelledby="spec-h">
+    <div class="spec-h"><h2 id="spec-h">SPEC SHEET</h2><span>김시후 · KIM SI HOO</span></div>
+    <table>${S.sheet.map(([k,v,d])=>`<tr><th scope="row">${k}</th><td>${v}${d?`<small>${d}</small>`:''}</td></tr>`).join('')}</table>
+    <div class="spec-foot"><a href="#/about/edu">자세한 이력 →</a></div>
+  </section>
+  <section class="cat-models" aria-labelledby="cat-sel">
+    <div class="cat-sel"><h2 id="cat-sel">MODEL SELECT</h2><span>직군을 고르면 해당 설명서가 열립니다</span></div>
+    <div class="models">${S.models.map(selectCard).join('')}</div>
+  </section>
+  <div class="cat-foot"><span>© 2026 김시후</span><a href="https://github.com/kimshlife" target="_blank" rel="noopener">github.com/kimshlife ↗</a></div>
+</div>`}
 
 const CARD_ROLES={
   ssketch:'요구사항 명세·진척 관리 · 설정 창 기획·구현 · 게임 규칙 코드',
@@ -150,17 +105,22 @@ function cardMedia(p){
   /* 이미지가 아직 없는 프로젝트 — 문서 규격을 그대로 자리표시자로 씁니다 */
   return `<div class="cardph"><span class="phid">${p.docId}</span><span class="phv">${p.ver}</span></div>`;
 }
+/* 어느 직군 설명서에 실렸는지 — data.js 의 MANUAL_TAGS */
+function manualBadges(k){const t=(typeof MANUAL_TAGS!=='undefined'&&MANUAL_TAGS[k])||[];
+  return t.length?`<span class="mbadges">${t.map(([n])=>`<span class="mbadge">${n} 설명서</span>`).join('')}</span>`:''}
+function manualLinks(k){const t=(typeof MANUAL_TAGS!=='undefined'&&MANUAL_TAGS[k])||[];
+  return t.length?`<p class="manual-links"><span>이 프로젝트가 실린 설명서</span>${t.map(([n,h])=>`<a href="${h}">${n==='QA'?'MODEL 02 · 게임 분석·QA':'MODEL 01 · 기획'} →</a>`).join('')}</p>`:''}
 function cardHTML(k){const p=P[k];return `<a class="card" href="#/works/${p.slug}">
   ${cardMedia(p)}
   <div class="cardbody">
-    <div class="top">${p.cats.map(catDot).join('')}</div>
+    <div class="top">${p.cats.map(catDot).join('')}${manualBadges(k)}</div>
     <h3 class="ttl">${p.title}</h3>
     <div class="what">${p.what}</div>
     <div class="rolebox"><span class="eyebrow" style="margin-bottom:6px">핵심 기여</span><div class="txt">${CARD_ROLES[k]||p.role}</div></div>
     <div class="when">${p.period}<span class="card-go">프로젝트 보기 ↗</span></div>
   </div></a>`}
 function viewWorks(){
-  const f=state.filter,ord=trackOrder(),list=ord.filter(k=>!f.size||P[k].cats.some(c=>f.has(c)));
+  const f=state.filter,ord=ORDER,list=ord.filter(k=>!f.size||P[k].cats.some(c=>f.has(c)));
   const cnt=k=>ORDER.filter(s=>P[s].cats.includes(k)).length;
   return `<section>
     ${sechead('work','Works',`${list.length}건`,1)}
@@ -226,11 +186,12 @@ function artifactBtn(l){
 }
 function viewDetail(){
   const p=P[state.slug];if(!p)return view404();
-  const ord=trackOrder(),i=ord.indexOf(state.slug),pv=ord[(i-1+ord.length)%ord.length],nx=ord[(i+1)%ord.length];
+  const ord=ORDER,i=ord.indexOf(state.slug),pv=ord[(i-1+ord.length)%ord.length],nx=ord[(i+1)%ord.length];
   return `<a class="crumb" href="#/works">${ico('work',15)} Works</a>
   ${docspec(p)}
   ${p.thumb?`<figure class="project-cover"><img src="${IMG}${p.thumb}" alt="${p.title} 대표 화면" fetchpriority="high"></figure>`:''}
   <div class="project-actions">${p.links.map(artifactBtn).join('')}</div>
+  ${manualLinks(state.slug)}
   <section class="project-highlights" aria-label="주요 수치와 근거"><h2 class="h3">주요 수치와 근거</h2><div class="metrics">${p.metrics.map(m=>
     `<div class="metric"><div class="val">${m.v}</div><div class="lb">${m.l}</div><div class="src">${m.s}</div></div>`).join('')}</div></section>
   ${blk('01','problem','문제 정의',p.problem.map(t=>`<p style="color:var(--ink-2)">${t}</p>`).join(''))}
@@ -344,8 +305,8 @@ function aboutProfile(){return `<section>
     <div>
       <span class="eyebrow">About</span>
       <h1 class="d2" style="margin:10px 0 16px">김시후 · Kim Si Hoo</h1>
-      <p class="body-l">오래가는 즐거움을 기획하는 기획자입니다.</p>
-      <p style="margin-top:14px;color:var(--ink-2)"><mark>즐거움 · 편리함 · 지속가능성</mark>을 기준으로 게임과 서비스, 사업을 기획합니다. 사용자의 경험을 규칙과 문서로 구체화하고 구현까지 연결합니다.</p>
+      <p class="body-l">업종에 상관없이 이해관계자 모두가 오랫동안 만족할 수 있는 결과를 위해 움직입니다.</p>
+      <p style="margin-top:14px;color:var(--ink-2)">그 방식이 기획이든 구현이든 분야를 가리지 않고 합니다.</p>
     </div>
   </div>
 </section>`}
@@ -577,7 +538,7 @@ function viewAbout(){
 /* ===== CONTACT / 404 ===== */
 function viewContact(){return `<section>
   ${sechead('mail','Contact','연락처',1)}
-  <p class="body-l">프로젝트와 기획 경험에 대해 궁금한 점이 있다면 연락해 주세요.</p>
+  <p class="body-l">프로젝트와 경험에 대해 궁금한 점이 있다면 연락해 주세요.</p>
   <dl class="contact-list">
     <div><dt>이메일</dt><dd><a class="contact-email" href="mailto:kimshlife@naver.com">kimshlife@naver.com</a><button type="button" class="abtn" id="copymail" aria-live="polite">이메일 복사</button></dd></div>
     <div><dt>GitHub</dt><dd><a href="https://github.com/kimshlife" target="_blank" rel="noopener">github.com/kimshlife ↗</a></dd></div>
@@ -595,7 +556,7 @@ function view404(){return `<section class="empty">
 function render(){
   const s=$('stage'),n=$('notes');let h='',nt='';
   switch(state.view){
-    case 'home':h=viewHome();syncNav('home');break;
+    case 'select':h=viewSelect();syncNav('home');break;
     case 'about':h=viewAbout();syncNav('about');break;
     case 'works':h=viewWorks();syncNav('works');break;
     case 'detail':h=viewDetail();syncNav('works');
@@ -610,7 +571,7 @@ function render(){
   }
   s.innerHTML=h;n.innerHTML=nt;
   document.querySelector('.canvas').classList.toggle('has-notes',!!nt);
-  document.querySelector('.canvas').classList.toggle('is-home',state.view==='home');
+  document.body.classList.toggle('is-select',state.view==='select');
   s.querySelectorAll('.tri').forEach(grid=>{
     const cells=[...grid.children],labels=cells.slice(0,3).map(el=>el.textContent);
     grid.replaceChildren();

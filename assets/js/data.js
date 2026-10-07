@@ -313,57 +313,45 @@ pirukia:{
 
 const ORDER=['ssketch','bodybuilder','neontetris','projectrg','sickkick','contentops','pirukia'];
 
-/* ===== 지원 분야별 진입 주소 =====
-   화면에 선택 버튼은 두지 않습니다. 지원처에 따라 주소만 골라서 보냅니다.
-   order 는 앞에 세울 프로젝트만 적으면 되고, 나머지는 위 ORDER 순서로 뒤에 붙습니다.
-   방문자가 왼쪽 메뉴의 Home(/)을 누르면 base 로 돌아갑니다. */
-const TRACKS={
-  base:{
-    slogan:'즐겁고, 편리하게, 지속가능하도록',
-    intro:'오래가는 즐거움을 기획합니다. 재미보다 먼저 제약을 읽고, 판단의 근거를 남이 그대로 실행할 수 있는 문서로 옮깁니다.',
-    order:[]
-  },
-  hr:{
-    slogan:'사람이 움직이도록 기획합니다',
-    intro:'직무를 정의하고 요구 역량과 인증 체계를 설계했습니다. 사람이 알아서 움직이려면 설득보다 기준이 먼저 문서에 있어야 한다고 생각합니다.',
-    order:['contentops','bodybuilder','sickkick']
-  },
-  game:{
-    slogan:'즐거움을 구체적인 규칙으로 만듭니다',
-    intro:'표준을 그대로 쓸 것과 직접 정할 것의 경계를 나눕니다. 재미는 감이 아니라 수치와 규칙으로 남아야 다음 사람이 이어받을 수 있습니다.',
-    order:['ssketch','neontetris','bodybuilder']
-  },
-  service:{
-    slogan:'사용자가 편하게 쓰도록 설계합니다',
-    intro:'사용자의 행동을 먼저 정의하고 화면 단위 스펙과 예외 정책까지 문서에 남깁니다. 구현이 되돌려주는 정보로 명세를 다시 고칩니다.',
-    order:['projectrg','sickkick','bodybuilder']
-  },
-  biz:{
-    slogan:'사업이 지속되도록 설계합니다',
-    intro:'시장과 경쟁사보다 먼저 법령을 확인합니다. 무엇을 설계해도 되는지가 정해진 다음에야 기능을 그립니다.',
-    order:['sickkick','contentops','projectrg']
-  }
+/* ===== 첫 화면 — 직군 선택 (SELECT) =====
+   사용 설명서 카탈로그처럼 직군을 '모델'로 나눠 보여 줍니다. 여기만 고치면 첫 화면이 바뀝니다.
+   models 의 href 는 각 직군 설명서(페이지)의 주소, img 는 사각 틀에 들어갈 그림입니다.
+   soon:true 인 모델은 '준비 중' 카드로 그립니다. */
+const SELECT={
+  // eyebrow:'김시후 · 서비스를 기획하고 분석합니다',
+  slogan:'즐겁고, 편리하게, 지속가능하도록',
+  intro:'안녕하세요 김시후입니다. 업종에 상관없이 이해관계자 모두가 오랫동안 만족할 수 있는 결과를 위해 움직입니다. 그 방식이 기획이든 구현이든 분야를 가리지 않고 합니다. ',
+  img:'assets/brand/mark-full-color.svg',   // 오른쪽 그림 (로고)
+  /* 간단 이력 — 사양표(SPEC SHEET). 한 줄 = [항목, 내용, 기간(작게)] */
+  sheet:[
+    ['학력','국립금오공과대학교 경영학과 학사','2018.03 – 2025.08'],
+    ['경력','제조업 품질보증부 · 수입검사(IQC) 2년 2개월','2020.06 – 2022.07'],
+    ['교육','삼성 청년 SW·AI 아카데미 15기','2026.01 – 2026.12 수료 예정'],
+    ['연구','마케팅컨설팅연구실 학부연구생 · LNCS 특별호 게재 (제2저자)','2023.09 – 2025.02'],
+    ['수상 · 자격','수상 9건 (특화 프로젝트 우수상 외) · 자격 4종 (ADsP 외)','']
+  ],
+  models:[
+    {no:'01',code:'PL',icon:'spec',name:'기획',en:'Game · Service Planning',href:'planning/',
+     img:'assets/img/ss-flow.jpg',alt:'SSketch 한 판의 흐름 — 낮에 그리고, 밤에 훔치고, 아침에 평가하는 루프',
+     spec:[['주요 기능','규칙·수치 설계 · 요구사항 명세 · 화면 기획'],['대표 사례','SSketch · 창작마당 · ProjectRG · NeonTetris'],['수록','사례 4개 · 그 밖의 기획 3개']]},
+    {no:'02',code:'QA',icon:'search',name:'게임 분석 · QA',en:'Game Analysis · QA',href:'qa/',
+     img:'qa/img/bb-slope.jpg',alt:'BodyBuilder — 팔 관절이 만든 경사면 위를 걷는 캐릭터',
+     spec:[['주요 기능','피드백 분류 · 재현 조건 정의 · 레퍼런스 분석'],['대표 사례','SSketch · BodyBuilder · PEAK · 카운터사이드'],['수록','사례 4개 · 포트폴리오 PDF 7쪽']]},
+    {no:'03',soon:true}
+  ]
 };
 
-/* ===== Home 화면 =====
-   첫 화면은 여기만 고치면 바뀝니다. */
-const HOME={
-  slogan:'즐겁고, 편리하게, 지속가능하도록',   // 첫 화면 큰 제목
-  /* 그림 — assets/img/ 에 넣은 파일명(예: 'hero.jpg') 또는 https:// 로 시작하는 주소.
-     비워 두면 지금의 도식(SVG)이 그대로 나옵니다. */
-  img:'assets/brand/mark-full-color.svg',
-  alt:'김시후 로고 — 기획을 쓰는 펜과 그 뒤로 이어지는 흐름',
-  cap:'',        // 그림 바로 아래 작은 설명 한 줄 (선택)
-  width:'400px', // 그림 최대 너비. 비우면 640px
-  frame:false,   // 그림에 테두리 상자를 두를지. 사진을 넣을 때는 true 를 권합니다
-
-  /* 배치 — 'stack' 그림 위 · 글 아래, 가운데 정렬 (지금 모습)
-            'split' 그림 왼쪽 · 글 오른쪽 (1024px 이상 화면에서만, 좁아지면 자동으로 stack)
-            'text'  글 위 · 그림 아래 */
-  layout:'split',
-
-  eyebrow:'김시후 · 게임과 서비스를 기획합니다',
-  intro:'오래가는 즐거움을 기획합니다. 재미보다 먼저 제약을 읽고, 판단의 근거를 남이 그대로 실행할 수 있는 문서로 옮깁니다.'
+/* ===== 직군 설명서 배지 =====
+   Works 카드와 프로젝트 상세에 '어느 설명서에 실렸는지'를 표시합니다.
+   [설명서 이름, 주소] — 주소의 #뒤는 설명서 안의 사례 위치입니다. */
+const MANUAL_TAGS={
+  ssketch:[['기획','planning/#ssketch'],['QA','qa/#ssketch']],
+  bodybuilder:[['기획','planning/#workshop'],['QA','qa/#bodybuilder']],
+  projectrg:[['기획','planning/#projectrg']],
+  neontetris:[['기획','planning/#neontetris']],
+  sickkick:[['기획','planning/#more']],
+  contentops:[['기획','planning/#more']],
+  pirukia:[['기획','planning/#more']]
 };
 
 /* ===== 취미 · 게임 기록 =====

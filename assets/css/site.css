@@ -453,3 +453,88 @@ summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);min-he
   .pager{flex-direction:column}
   .lb{padding:60px 14px 24px}
 }
+
+/* ===== SELECT — 첫 화면(표지), 사용 설명서 카탈로그 =====
+   왼쪽 메뉴는 그대로 두고, 본문 폭만 카탈로그에 맞게 넓힙니다 */
+a.rail-id,.topbar a.nm{color:inherit;text-decoration:none}
+body.is-select .canvas{max-width:1080px!important}
+.catalog{padding:0}
+.cat-strip{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;
+  color:var(--ink-3);padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.cat-hero{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:48px 0 44px}
+.cat-copy{flex:1;max-width:40em}
+.cat-copy .cat-eyebrow{font-family:var(--f-body);font-size:15px;color:var(--accent);letter-spacing:0;line-height:1.6;text-transform:none;margin-bottom:14px}
+.cat-copy .d1{font-size:clamp(30px,3.4vw,46px);line-height:1.3;letter-spacing:-.045em;margin-bottom:18px}
+.cat-copy .homesub{font-size:17px;margin:0}
+.cat-mark{width:220px;flex:none}
+.cat-models{border:1.5px solid var(--ink);border-radius:14px;padding:22px 24px 26px;background:var(--surface)}
+.cat-sel{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.cat-sel h2{font-family:var(--f-mono);font-weight:500;font-size:13px;letter-spacing:.16em;margin:0}
+.cat-sel span{font-size:13px;color:var(--ink-3)}
+.models{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.model{display:flex;flex-direction:column;align-items:center;text-align:center;border:1.5px solid var(--rule-strong);border-radius:28px;
+  padding:18px 22px 22px;color:var(--ink);text-decoration:none;background:var(--surface);
+  transition:border-color 140ms linear,transform 140ms ease,box-shadow 140ms ease}
+a.model:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 26px rgba(20,36,61,.08)}
+.model-top{align-self:stretch;display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3)}
+.model-ico{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;margin:18px 0 14px;
+  background:var(--accent-weak);color:var(--accent);border:1.5px solid var(--accent)}
+.model-ico svg{stroke-width:1.4}
+.model-name{font-family:var(--f-display);font-weight:700;font-size:22px;margin:0}
+.model-en{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-3);margin-top:4px}
+.model-fig{margin:18px 0 0;align-self:stretch;aspect-ratio:16/9;border:1.5px solid var(--rule-strong);border-radius:6px;overflow:hidden;background:var(--paper)}
+.model-fig img{width:100%;height:100%;object-fit:cover}
+.model-spec{align-self:stretch;margin:16px 0 0;text-align:left;font-size:13.5px}
+.model-spec div{display:grid;grid-template-columns:68px 1fr;gap:10px;padding:7px 0;border-top:1px dashed var(--rule)}
+.model-spec dt{font-weight:600;color:var(--ink-3)}
+.model-spec dd{margin:0;color:var(--ink)}
+.model-go{margin-top:auto;padding-top:16px;align-self:stretch;font-weight:600;font-size:14.5px;color:var(--accent)}
+.model.soon{border-style:dashed;background:var(--paper)}
+.soon-body{flex:1;display:grid;place-items:center;font-family:var(--f-mono);font-weight:500;font-size:22px;letter-spacing:.08em;color:var(--ink-3);
+  line-height:1.6;min-height:220px}
+.cat-foot{display:flex;justify-content:space-between;gap:12px;margin-top:24px;font-size:12.5px;color:var(--ink-3)}
+.cat-foot a{color:var(--ink-3)}
+@media (max-width:899px){
+  .cat-mark{width:180px}
+  .models{grid-template-columns:1fr 1fr}
+  .model.soon{grid-column:1 / -1}.soon-body{min-height:120px}
+}
+@media (max-width:599px){
+  .cat-hero{flex-direction:column-reverse;align-items:flex-start;gap:20px;padding:30px 0 32px}
+  .cat-mark{width:120px}
+  .cat-copy .d1{font-size:28px}
+  .cat-copy .homesub{font-size:15.5px}
+  .cat-models{padding:16px 14px 18px;border-radius:12px}
+  .models{grid-template-columns:1fr}
+  .model{border-radius:22px}
+}
+@media (prefers-reduced-motion:reduce){a.model:hover{transform:none}}
+
+
+/* 표지 — 간단 이력 사양표(SPEC SHEET) */
+.spec-sheet{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:20px 26px 16px;margin-bottom:28px}
+.spec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:2px}
+.spec-h h2{font-family:var(--f-mono);font-weight:500;font-size:13px;letter-spacing:.16em;margin:0}
+.spec-h span{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+.spec-sheet table{width:100%;border-collapse:collapse;font-size:15px}
+.spec-sheet th{width:116px;text-align:left;font-weight:600;color:var(--ink-3);font-size:14px;padding:11px 0;vertical-align:top}
+.spec-sheet td{padding:11px 0;border-bottom:1px dashed var(--rule);color:var(--ink)}
+.spec-sheet tr:last-child td,.spec-sheet tr:last-child th{border-bottom:none}
+.spec-sheet tr:not(:last-child) th{border-bottom:1px dashed var(--rule)}
+.spec-sheet td small{color:var(--ink-3);font-size:13px;margin-left:10px;white-space:nowrap}
+.spec-foot{text-align:right;padding-top:8px;border-top:1px solid var(--rule)}
+.spec-foot a{font-size:14px;color:var(--ink-3);text-decoration:none}
+.spec-foot a:hover{color:var(--accent)}
+@media (max-width:599px){
+  .spec-sheet{padding:16px 16px 12px;border-radius:12px}
+  .spec-sheet th{width:auto;display:block;padding:10px 0 0;border:none!important}
+  .spec-sheet td{display:block;padding:2px 0 10px}
+  .spec-sheet td small{display:block;margin:2px 0 0;white-space:normal}
+}
+
+/* Works — 직군 설명서 배지와 상세의 설명서 연결 */
+.mbadges{display:inline-flex;gap:6px;margin-left:auto}
+.mbadge{font-size:11.5px;font-weight:600;color:var(--accent);background:var(--accent-weak);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.manual-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:14px 0 0;font-size:14px}
+.manual-links span{color:var(--ink-3);font-size:13px}
+.manual-links a{font-weight:600;text-decoration:none;color:var(--accent);background:var(--accent-weak);padding:6px 12px;border-radius:999px}
