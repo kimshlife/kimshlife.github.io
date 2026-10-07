@@ -13,7 +13,7 @@ function buildNav(el){el.innerHTML=NAV.map(n=>
 function syncNav(a){document.querySelectorAll('[data-nav]').forEach(x=>
  x.dataset.nav===a?x.setAttribute('aria-current','page'):x.removeAttribute('aria-current'))}
 
-let state={view:'select',slug:null,tab:'skill',hsec:'',htab:'overview',hdoc:'',gfilter:'',filter:new Set()};
+let state={view:'select',cat:'all',slug:null,tab:'skill',hsec:'',htab:'overview',hdoc:'',gfilter:''};
 /* 예전 기획 첫 화면 주소(#/planning, #/game 등 지원 분야별 주소)는 기획 설명서로 보냅니다 */
 const OLD_PLANNING=['planning','hr','game','service','biz'];
 function route(){
@@ -119,15 +119,17 @@ function cardHTML(k){const p=P[k];return `<a class="card" href="#/works/${p.slug
     <div class="rolebox"><span class="eyebrow" style="margin-bottom:6px">핵심 기여</span><div class="txt">${CARD_ROLES[k]||p.role}</div></div>
     <div class="when">${p.period}<span class="card-go">프로젝트 보기 ↗</span></div>
   </div></a>`}
+/* 분류는 한 번에 하나만 고릅니다(라디오). 고른 칩만 Tab 으로 들어오고, 그룹 안에서는 화살표로 옮깁니다 */
+function radioChip(k,label){const on=state.cat===k;
+  return `<button type="button" class="chip" role="radio" aria-checked="${on}" tabindex="${on?0:-1}" data-cat="${k}">${label}</button>`}
 function viewWorks(){
-  const f=state.filter,ord=ORDER,list=ord.filter(k=>!f.size||P[k].cats.some(c=>f.has(c)));
+  const c=state.cat,list=c==='all'?ORDER:ORDER.filter(k=>P[k].cats.includes(c));
   const cnt=k=>ORDER.filter(s=>P[s].cats.includes(k)).length;
   return `<section>
     ${sechead('work','Works',`${list.length}건`,1)}
-    <div class="filters">
-      <button type="button" class="chip" aria-pressed="${!f.size}" data-cat="all">전체 <span class="n">${ORDER.length}</span></button>
-      ${Object.keys(CAT).map(k=>`<button type="button" class="chip" aria-pressed="${f.has(k)}" data-cat="${k}">
-        <i style="background:${CAT[k].c}"></i>${CAT[k].n} <span class="n">${cnt(k)}</span></button>`).join('')}
+    <div class="filters" role="radiogroup" aria-label="분류">
+      ${radioChip('all',`전체 <span class="n">${ORDER.length}</span>`)}
+      ${Object.keys(CAT).map(k=>radioChip(k,`<i style="background:${CAT[k].c}"></i>${CAT[k].n} <span class="n">${cnt(k)}</span>`)).join('')}
     </div>
     ${list.length?`<div class="cards">${list.map(cardHTML).join('')}</div>`
       :`<div class="empty"><p class="cap" style="margin-bottom:18px">선택한 조건에 맞는 프로젝트가 없습니다.</p>
@@ -317,9 +319,11 @@ function aboutSkill(){return `<section class="sec">
     ['service','서비스 기획','사용자의 행동을 먼저 정의하고, 예외까지 문서로 남깁니다.',
      ['요구사항 정의·명세 작성','화면 설계 · IA','진단·추천 로직 설계','예외 정책 정의','작업지시서 작성','범위 산정과 단계 분리']],
     ['biz','사업 기획','규제와 시장을 먼저 확인하고 그 결과를 설계에 반영합니다.',
-     ['시장·경쟁사 분석','내외부환경 분석(PEST · VRIO 프레임워크)','수익 구조 설계','IR 자료 작성 및 발표','제도·인센티브 설계']]
+     ['시장·경쟁사 분석','내외부환경 분석(PEST · VRIO 프레임워크)','수익 구조 설계','IR 자료 작성 및 발표','제도·인센티브 설계']],
+    ['search','게임 분석 · QA','느낌을 재현 조건과 근거로 바꾸고, 다시 확인할 수 있게 남깁니다.',
+     ['플레이 피드백 분류·우선순위','재현 조건 정의','회귀 테스트 설계','레퍼런스 게임 분석','이용자 관찰','버그 제보 양식 설계']]
   ].map(([k,t,l,items])=>`<div class="capgroup">
-    <div class="hd">${ico(CAT[k].i,18)}<h4>${t}</h4></div>
+    <div class="hd">${ico(CAT[k]?CAT[k].i:k,18)}<h4>${t}</h4></div>
     <div class="lead">${l}</div>
     <ul>${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}
 
@@ -335,13 +339,13 @@ function aboutSkill(){return `<section class="sec">
   ],['st','m','q'])}
 
   <div class="sub">${ico('code',16)}기술 이해도</div>
-  ${tbl([['영역','160px'],['수준','70px'],['내용','']],[
-    ['Front-end','중급','Vue.js · React · TypeScript 컴포넌트 아키텍처, 상태 관리, 비동기 통신. 실제 서비스 화면 구현 경험'],
-    ['Node.js · JavaScript','중급','웹 기반 로컬 대전 게임 구현'],
-    ['Python','중급','기본 문법과 2차원 배열 제어 로직 작성. DFS·BFS·완전탐색·Greedy 등 탐색 알고리즘의 기본 이해'],
-    ['데이터 분석','중급','pandas·numpy로 기초 분석 후 Matplotlib으로 시각화. 회귀분석과 통계적 방법론 학습'],
-    ['Back-end','기초','Django 기반 MTV 구조 이해와 RESTful API 설계 실습'],
-    ['머신러닝','기초','데이터 전처리와 회귀 분석 학습. 이미지 기반 질의응답(VQA) 모델 개발 프로세스를 데이터 가공부터 추론까지 경험']
+  ${/* 프론트·백엔드 같은 '영역'이 아니라 언어·기술 기준으로 묶습니다. 같은 언어의 라이브러리는 한 줄에 둡니다 */''}
+  ${tbl([['기술','190px'],['수준','70px'],['내용','']],[
+    ['JavaScript · TypeScript<br><span class="cap">React · Vue.js · Node.js</span>','중급','React·Vue.js로 컴포넌트 구조, 상태 관리, 비동기 통신을 다루며 서비스 화면 구현 (BodyBuilder · ProjectRG). Node.js 기반 웹 대전 게임 구현 (NeonTetrisWars)'],
+    ['Python<br><span class="cap">pandas · numpy · Matplotlib</span>','중급','기본 문법과 2차원 배열 제어 로직 작성, DFS·BFS·완전탐색·Greedy 등 탐색 알고리즘의 기본 이해. pandas·numpy로 기초 분석 후 Matplotlib으로 시각화, 회귀분석과 통계적 방법론 학습'],
+    ['Django<br><span class="cap">Python 웹 프레임워크</span>','기초','MTV 구조 이해와 RESTful API 설계 실습'],
+    ['Unity<br><span class="cap">Unity 6 · URP</span>','기초','SSketch에서 설정 창·방 화면·그림 도구 UI 구현, 에디터에서는 보이지 않던 빌드 전용 결함의 원인 추적'],
+    ['머신러닝<br><span class="cap">Python</span>','기초','데이터 전처리와 회귀 분석 학습. 이미지 기반 질의응답(VQA) 모델 개발 프로세스를 데이터 가공부터 추론까지 경험']
   ],['st','m','q'])}
 </section>`}
 function aboutEdu(){return `<section class="sec">
@@ -606,10 +610,7 @@ document.addEventListener('click',async e=>{
   const gf=e.target.closest('[data-gf]');
   if(gf){state.gfilter=gf.dataset.gf;render();return;}
   const c=e.target.closest('[data-cat]');
-  if(c){const v=c.dataset.cat;
-    if(v==='all')state.filter.clear();
-    else state.filter.has(v)?state.filter.delete(v):state.filter.add(v);
-    render();return;}
+  if(c){selectCat(c.dataset.cat);return;}
   const yt=e.target.closest('[data-yt]');
   if(yt){yt.outerHTML=ytFrame(yt.dataset.yt);return;}
   const opener=e.target.closest('.gallery-open');
@@ -619,5 +620,19 @@ document.addEventListener('click',async e=>{
   if(cm){try{await navigator.clipboard.writeText('kimshlife@naver.com');cm.innerHTML='복사했습니다';}
     catch{cm.innerHTML='복사할 수 없습니다. 이메일 주소를 선택해 주세요.';}
     setTimeout(()=>{cm.textContent='이메일 복사'},2500);}
+});
+/* Works 분류 — 고른 뒤에도 초점을 고른 칩에 둡니다 */
+function selectCat(v){
+  state.cat=v;render();
+  const on=document.querySelector('[role="radio"][aria-checked="true"]');if(on)on.focus();
+}
+document.addEventListener('keydown',e=>{
+  const r=e.target.closest('[role="radio"]');if(!r)return;
+  const keys={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1};
+  if(!(e.key in keys)&&e.key!=='Home'&&e.key!=='End')return;
+  e.preventDefault();
+  const all=[...r.parentElement.querySelectorAll('[role="radio"]')],i=all.indexOf(r);
+  const n=e.key==='Home'?0:e.key==='End'?all.length-1:(i+keys[e.key]+all.length)%all.length;
+  selectCat(all[n].dataset.cat);
 });
 route();

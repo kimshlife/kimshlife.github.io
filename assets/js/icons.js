@@ -29,8 +29,8 @@ const IC={
 const ico=(k,s)=>`<svg class="ic" viewBox="0 0 24 24" width="${s||17}" height="${s||17}" aria-hidden="true"><path d="${IC[k]}"/></svg>`;
 
 const CAT={
-  game:{n:'게임 기획',c:'#0F6C82',i:'game'},
-  service:{n:'서비스 기획',c:'#2F7FA0',i:'service'},
-  biz:{n:'사업 기획',c:'#14243D',i:'biz'},
-  content:{n:'콘텐츠 기획',c:'#6B8FA3',i:'content'}
+  game:{n:'게임',c:'#2C4CC0',i:'game'},
+  service:{n:'서비스',c:'#7A8FE0',i:'service'},
+  biz:{n:'사업',c:'#14243D',i:'biz'},
+  content:{n:'콘텐츠',c:'#9AA9BA',i:'content'}
 };

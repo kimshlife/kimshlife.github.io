@@ -51,23 +51,7 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
 .main{margin-left:var(--rail);padding:60px 48px 96px}
 .wrap{max-width:var(--measure)}
 
-/* HOME */
-.homewrap{min-height:calc(100vh - 156px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.homefig{width:100%;max-width:640px;margin:0 0 44px}
-.homefig svg{width:100%;height:auto;display:block}
-.homefig img{width:100%;height:auto}
-.homefig img.framed{border-radius:var(--radius);border:var(--border);background:var(--surface)}
-.homecap{margin-top:10px}
-.home-text .homefig{margin:44px 0 0}
-.homeline{max-width:22em}
-.homeline .d1{margin-bottom:18px}
-.homesub{color:var(--ink-2);font-size:16px;line-height:1.8}
-@media (min-width:1024px){
-  .homewrap.home-split{flex-direction:row;align-items:center;gap:44px;text-align:left}
-  .home-split .homefig{flex:1 1 44%;margin:0;max-width:none}
-  .home-split .homeline{flex:1 1 56%;max-width:24em}
-  .home-split .homecap{text-align:left}
-}
+.homesub{color:var(--ink-2);font-size:16px;line-height:1.8}   /* 표지 소개 문단 */
 
 /* 카드 */
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -97,7 +81,7 @@ svg.ic{stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;strok
   padding:7px 15px;font-size:13.5px;color:var(--ink-2);background:var(--surface);
   transition:border-color 120ms linear,color 120ms linear,background 120ms linear;text-decoration:none}
 .chip i{width:7px;height:7px;border-radius:50%;flex:none}
-.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip[aria-pressed="true"],.chip[aria-checked="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .chip .n{font-family:var(--f-mono);font-size:11px;opacity:.65}
 
 /* 섹션 */
@@ -288,7 +272,6 @@ a.docrow:hover{border-color:var(--accent);box-shadow:0 8px 24px #14243D0C}
   .topbar .navlink[aria-current="page"]{background:transparent;border-bottom-color:var(--accent)}
   .main{margin-left:0;padding:36px 28px 96px}
   .metrics{grid-template-columns:1fr 1fr}
-  .homewrap{min-height:auto;padding:24px 0 0}
 }
 @media (max-width:599px){
   .d1{font-size:27px}.d2{font-size:21px}.h3{font-size:17px}.body-l{font-size:16px}
@@ -315,19 +298,10 @@ a.docrow:hover{border-color:var(--accent);box-shadow:0 8px 24px #14243D0C}
 .canvas{display:block;width:100%;max-width:1000px;margin-inline:auto}
 .wrap{max-width:none;min-width:0}
 .canvas:not(.has-notes) .notes{display:none}
-.homewrap{min-height:0;padding:40px 0 20px;gap:40px}
-.homewrap.home-split{flex-direction:row-reverse;text-align:left;align-items:center}
-.home-split .homeline{flex:1.5;max-width:37em}
-.home-split .homefig{flex:1;max-width:280px!important;margin:0}
-.homeline .d1{font-size:clamp(30px,3.4vw,48px);line-height:1.35;letter-spacing:-.045em}
-.homeline .eyebrow{font-family:var(--f-body);font-size:14px;color:var(--accent);letter-spacing:0;line-height:1.6}
 .homesub{max-width:32em;font-size:17px;line-height:1.85}
-.home-actions{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 64px}
 .abtn{min-height:44px;justify-content:center;font-size:15px}
 .abtn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .abtn.primary:hover{background:var(--brand-navy)}
-.featured{padding-top:30px;border-top:3px solid var(--gold)}
-.featured .sechead{border:0;padding:0;margin-bottom:24px}
 .sechead .cap{flex:none}
 .cards{gap:24px;align-items:stretch}
 .card{transition:box-shadow 160ms,border-color 160ms}
@@ -408,17 +382,10 @@ summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--accent);min-he
 @media(max-width:1299px){.canvas.has-notes{max-width:800px}}
 @media(max-width:1023px){
   .main{padding:32px 28px 80px}
-  .homewrap{padding-top:20px}
-  .home-split .homefig{max-width:220px!important}
-  .homeline .d1{font-size:36px}
 }
 @media(max-width:699px){
   .cards{grid-template-columns:1fr}
-  .homewrap.home-split{display:block;position:relative;padding-top:12px}
-  .home-split .homefig{max-width:96px!important;margin:0 0 20px}
-  .homeline .d1{font-size:32px}
   .homesub{font-size:16px}
-  .home-actions{margin:8px 0 40px}
   .scroll{overflow:visible;background:var(--surface)}
   .scroll .tbl{min-width:0;width:100%}
   .tbl,.tbl tbody,.tbl tr,.tbl td{display:block}
