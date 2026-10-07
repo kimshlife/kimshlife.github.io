@@ -89,10 +89,10 @@
         <tr><th><a href="#reference">PEAK 설정 구성<small>레퍼런스 분석</small></a></th>
           <td>참고안 항목표 해석</td><td>SSketch에 없는 항목 식별</td><td class="no"></td><td>채택·변환·제외 판단</td><td>프로토타입·레드라인</td><td>빌드 결함 3건 추적</td></tr>
         <tr><th><a href="#counterside">카운터사이드<small>이용자 관찰</small></a></th>
-          <td>길드 6년 · 최대 30명</td><td>레이드 참여 격차</td><td class="no"></td><td>아레나→아티팩트 기여 구조</td><td>아레나 필수·레이드 선택</td><td class="plan">준비 조건 안내 검증 (계획)</td></tr>
+          <td>길드 6년 · 최대 30명</td><td>성능 격차 · 길드 공동 목표 부족</td><td class="no"></td><td>애착 캐릭터 ≠ 사용 캐릭터</td><td class="plan">순환 상성 · 대항전 (아이디어)</td><td class="no"></td></tr>
       </table>
     </div>
-    <div class="legend"><span><i></i>수행</span><span><i class="p"></i>계획</span><span><i class="n"></i>해당 없음</span></div>
+    <div class="legend"><span><i></i>수행</span><span><i class="p"></i>아이디어</span><span><i class="n"></i>해당 없음</span></div>
   </div>
 </section>
 
@@ -287,7 +287,7 @@
             <tr><td>빈 배열 · mapWidth 0 은 예외 없이 빈 배열</td><td class="ok">통과</td></tr>
             <tr><td>부유는 타임라인에 들어가지 않는다</td><td class="ok">통과</td></tr>
           </table>
-          <p class="src">직접 작성한 테스트 파일 · 2026.10.06 프로젝트 최종 커밋 기준으로 다시 실행해 14/14 통과 (Vitest)</p>
+          <p class="src">본인이 작성한 테스트 파일(일부 AI 코딩 도구 활용) · 2026.10.06 프로젝트 최종 커밋 기준으로 다시 실행해 14/14 통과 (Vitest)</p>
         </div></div>
         <p class="src">기여 경계 — 게임의 핵심 규칙은 팀 합의 사항입니다. 캐릭터 원화는 컨셉을 정의해 생성형 AI로 제작했습니다.</p>
         <p style="margin-top:8px"><a href="../#/works/bodybuilder">BodyBuilder 프로젝트 전체 보기 →</a></p>
@@ -306,7 +306,7 @@
       <figure><a href="../assets/img/ss-assign.jpg" target="_blank" rel="noopener"><img src="../assets/img/ss-assign.jpg" alt="설정 창 4탭 항목 배정 시트" loading="lazy"></a><figcaption>① 항목 선별 — 4탭 배정 시트</figcaption></figure>
       <figure><a href="../assets/img/ss-proto.jpg" target="_blank" rel="noopener"><img src="../assets/img/ss-proto.jpg" alt="설정 창 HTML 프로토타입" loading="lazy"></a><figcaption>② HTML 프로토타입</figcaption></figure>
       <figure><a href="../assets/img/ss-redline.jpg" target="_blank" rel="noopener"><img src="../assets/img/ss-redline.jpg" alt="설정 창 레드라인 가이드" loading="lazy"></a><figcaption>③ 레드라인</figcaption></figure>
-      <figure><a href="../assets/img/ss-settings.jpg" target="_blank" rel="noopener"><img src="../assets/img/ss-settings.jpg" alt="Unity로 구현한 실제 설정 창" loading="lazy"></a><figcaption>④ 직접 구현한 설정 창</figcaption></figure>
+      <figure><a href="../assets/img/ss-settings.jpg" target="_blank" rel="noopener"><img src="../assets/img/ss-settings.jpg" alt="Unity로 구현한 실제 설정 창" loading="lazy"></a><figcaption>④ AI 도구로 구현한 설정 창</figcaption></figure>
     </div>
     <div class="cols3" style="margin-top:24px">
       <div><h4>그대로 가져옴</h4><dl>
@@ -327,7 +327,7 @@
       <li><b>문제</b><p>참고안은 1인칭 등반 게임 전제 — 그대로 옮기면 SSketch에 없는 기능의 설정이 생김</p></li>
       <li><b>관찰</b><p>참고안 항목표를 한 줄씩 SSketch의 조작(그리기 · 들고 옮기기 · 밤의 추적)에 대응</p></li>
       <li><b>판단</b><p>골격은 채택, 항목은 대응물로 변환하거나 이유를 적고 제외</p></li>
-      <li><b>행동</b><p>항목별 착수 차수 → HTML 프로토타입 → 레드라인 → 설정 시스템 직접 구현</p></li>
+      <li><b>행동</b><p>항목별 착수 차수 → HTML 프로토타입 → 레드라인 → 설정 시스템을 AI 도구로 구현하고 실제 동작을 확인하며 수정</p></li>
       <li><b>검증</b><p>빌드에서만 나던 결함 3건의 원인 추적 — 에디터에서는 재현되지 않음</p></li>
     </ol>
     <div class="key">같은 기능이라도 게임의 핵심 경험과 맞지 않으면 가져오지 않습니다.</div>
@@ -374,58 +374,69 @@
 </article>
 
 <!-- ───────── CounterSide ───────── -->
+<!-- 자기소개서 3번(2026.10.07 수정본)과 같은 내용: 장점 → 단점 두 가지 → 개선 아이디어 -->
 <article class="case" id="counterside">
   <div class="wrap">
     <div class="tags"><span class="tag">GAME ANALYSIS</span><span class="tag">PLAYER OBSERVATION</span></div>
-    <h2>카운터사이드 <span class="q">· 같은 콘텐츠, 다른 경험</span></h2>
-    <p class="msg">길드를 6년 운영하며 신규·복귀·숙련 이용자가 같은 콘텐츠를 다르게 겪는 것을 봤습니다.</p>
+    <h2>카운터사이드 <span class="q">· 애착이 선택으로 이어지지 않는 지점</span></h2>
+    <p class="msg">스토리로 쌓은 캐릭터 애착이, 성능 격차 때문에 다양한 캐릭터를 쓰는 재미로 이어지지 않았습니다.</p>
     <div class="case-grid" style="grid-template-columns:1fr 1fr">
       <div>
-        <h3 style="font-size:16px;margin-bottom:10px;color:var(--accent)">장점 1 — 지속 플레이</h3>
-        <ol class="chain"><li>캐릭터에 관심</li><li>외전에서 고유 스토리 탐색</li><li>배경 · 관계 이해</li><li>다음 이야기 기대</li><li>지속 플레이</li></ol>
-        <p class="cap">세계관을 한 번에 풀지 않고 나눠 두면, 다음 업데이트를 기다릴 이유가 생깁니다.</p>
-        <h3 style="font-size:16px;margin:22px 0 8px;color:var(--accent)">장점 2 — 협력전</h3>
-        <p class="muted" style="font-size:15px">누구나 할 수 있는 아레나 → 아티팩트 → 레이드 숙련자에게 도움.<br>성장도가 낮은 이용자도 공동 목표에 기여할 수 있는 구조입니다.</p>
+        <h3 style="font-size:16px;margin-bottom:10px;color:var(--accent)">장점 — 수집의 의미를 만드는 스토리</h3>
+        <ol class="chain"><li>짜임새 있는 스토리 · 세계관</li><li>캐릭터 디자인 · 모션에 반영</li><li>외전에서 배경 · 관계를 알아감</li><li>캐릭터에 대한 애착</li><li>획득 만족 + 다음 이야기 기대</li><li>장기 플레이의 동기</li></ol>
+        <p class="note" style="margin-top:18px"><b>아쉬운 지점</b> — 애착을 가진 캐릭터와 실제로 쓰는 캐릭터가 달라집니다. 스토리로 쌓은 애착이 다양한 캐릭터를 활용하는 재미로 충분히 이어지지 않았습니다.</p>
       </div>
       <div class="stack">
-        <div><b>문제</b>레이드는 성장도에 따라 실제 참여 난도가 크게 달라짐 — 전원에게 요구하면 신규 이용자가 버티지 못함</div>
-        <div><b>실제 운영</b>아레나 필수 / 레이드 선택 (일요일 이후)</div>
-        <div class="hi"><b>개선 제안</b><strong>레이드 진입 전, ‘권장 준비 조건 ↔ 현재 상태’ 비교 안내</strong></div>
-        <div class="plan"><b>검증 계획</b>안내만으로 준비 조건을 이해하는가? 어느 단계에서 진입을 포기하는가?</div>
+        <div><b>단점 ① 캐릭터 성능 격차</b>선택이 특정 캐릭터에 집중 → 다양한 캐릭터를 수집하고 활용하는 재미가 줄어듦</div>
+        <div><b>단점 ② 길드의 공동 목표</b>순위와 보상 외에 함께 성장·협력할 목표가 부족 → 활동을 이어갈 동기가 약함</div>
+        <div class="plan"><b>개선 아이디어</b>
+          <p style="margin:4px 0 8px"><strong>캐릭터</strong> — 사용률·승률·조합으로 선택 집중의 원인 분석 → 덜 쓰이는 캐릭터의 기믹으로 주력 캐릭터에 대응 → 그 대응에도 맞설 수 있는 ‘꼬리잡기’ 순환 상성</p>
+          <p style="margin:0"><strong>길드</strong> — 능력치를 통일하고 조합·배치로 겨루는 컨소시엄 대항전 → 함께 전략을 세우고 성취를 공유할 이유</p>
+        </div>
       </div>
     </div>
     <ol class="steps">
-      <li><b>문제</b><p>같은 레이드라도 성장도에 따라 참여 부담이 전혀 다름</p></li>
-      <li><b>관찰</b><p>2020–2026 길드 「Time」 운영 · 2명 → 최대 30명 · 신규·복귀·숙련 이용자</p></li>
-      <li><b>판단</b><p>아레나의 아티팩트가 숙련자에게 돌아가는 구조라, 각자 할 수 있는 것만 해도 서로 이득</p></li>
-      <li><b>행동</b><p>길드 규칙: 아레나 필수 · 레이드 선택. 게임에는 진입 전 준비 조건 비교 안내를 제안</p></li>
-      <li><b>검증</b><p>운영 규칙은 6년간 중재가 필요한 분쟁 없이 유지. 제안은 이해도·포기 지점 관찰로 검증할 계획</p></li>
+      <li><b>문제</b><p>캐릭터 성능 격차로 선택이 특정 캐릭터에 집중되고, 길드는 순위·보상 외의 공동 목표가 부족함</p></li>
+      <li><b>관찰</b><p>2020–2026 길드 「Time」 운영 · 2명 → 최대 30명 · 서비스 종료까지 장기 플레이</p></li>
+      <li><b>판단</b><p>스토리로 쌓은 애착이 다양한 캐릭터를 쓰는 재미로 이어지지 않음 — 애착 캐릭터와 실제 사용 캐릭터가 달라짐</p></li>
+      <li><b>행동</b><p>길드장으로 참여 규칙을 정해 운영. 활동을 유지하는 것과 새 공동 목표를 만드는 것은 별개의 과제였음</p></li>
+      <li><b>검증</b><p>확인할 지표 — 캐릭터 사용률 · 승률 · 조합 분포</p></li>
     </ol>
     <details class="more">
-      <summary>상세 분석 보기 <span>· 스토리 분석 · 길드 규칙과 이유 · 원본 문서</span></summary>
+      <summary>상세 분석 보기 <span>· 장점 · 아쉬웠던 점 · 개선 아이디어 · 원본 문서</span></summary>
       <div class="more-body">
         <div class="d-step"><h4><small>01</small>무엇이 사람을 붙잡았나</h4><div>
           <ul>
-            <li><b>메인 / 외전 분리</b> — 메인 스토리는 세계관을, 외전은 캐릭터 고유의 이야기를 맡아 애착을 만듦</li>
-            <li><b>장기적 빌드업</b> — 세계관을 한 번에 풀지 않고 나눠 두어 다음 업데이트를 기다릴 이유를 만듦</li>
-            <li><b>몰입 강화</b> — 에피소드별 맞춤 음원과 연출</li>
+            <li><b>짜임새 있는 스토리와 세계관</b> — 메인 스토리는 세계관을, 외전은 캐릭터 고유의 이야기를 맡아 인물의 배경과 관계를 알아가게 함</li>
+            <li><b>캐릭터 표현</b> — 출시 전후 피드백을 반영한 일러스트 리워크, Live2D 연출과 전용 스킬 컷인·음성으로 설정을 시각적으로 뒷받침</li>
+            <li><b>몰입</b> — 에피소드별 맞춤 음원과 연출</li>
           </ul>
-          <p class="muted" style="margin-top:8px">캐릭터 비주얼은 들어오게 만들고, 스토리는 남게 만듭니다. 이 게임에서 재방문을 만든 쪽은 후자였다고 봅니다.</p>
+          <p class="muted" style="margin-top:8px">저에게는 캐릭터를 얻는 만족과 다음 이야기에 대한 기대가 장기 플레이의 동기가 됐습니다.</p>
         </div></div>
-        <div class="d-step"><h4><small>02</small>참여 격차를 운영으로 다룸</h4><div>
+        <div class="d-step"><h4><small>02</small>아쉬웠던 점</h4><div>
+          <ul>
+            <li><b>캐릭터 성능 격차</b> — 선택이 특정 캐릭터에 집중되면서, 다양한 캐릭터를 수집하고 활용하는 수집형 게임의 재미가 줄었습니다.</li>
+            <li><b>길드의 공동 목표</b> — 순위와 보상 외에 함께 성장하거나 협력할 목표가 부족해, 길드 활동을 이어갈 동기가 아쉬웠습니다.</li>
+          </ul>
+        </div></div>
+        <div class="d-step"><h4><small>03</small>개선 아이디어</h4><div>
+          <table class="t">
+            <tr><th>대상</th><th>순서</th></tr>
+            <tr><td><b>캐릭터</b></td><td>① 자주 쓰이는 캐릭터의 사용률·승률·조합으로 선택이 집중되는 원인 분석<br>② 덜 쓰이는 캐릭터의 기믹으로 주력 캐릭터에 대응할 수 있게 밸런스 조정<br>③ 그 대응 조합에도 다른 조합으로 맞설 수 있는 ‘꼬리잡기’ 순환 상성 — 상대를 읽고 전략을 짜는 재미</td></tr>
+            <tr><td><b>길드</b></td><td>캐릭터 능력치를 통일하고 조합과 배치로 겨루는 컨소시엄 대항전 — 길드원이 함께 전략을 세우고 성취를 공유할 이유</td></tr>
+          </table>
+          <p class="src">플레이어로서 낸 아이디어입니다. 이 게임의 개발이나 운영에 참여한 것은 아닙니다.</p>
+        </div></div>
+        <div class="d-step"><h4><small>04</small>길드 운영 규칙</h4><div>
           <table class="t">
             <tr><th>규칙</th><th>이유</th></tr>
             <tr><td>필참은 협력전 아레나 하나, 레이드는 선택</td><td>레이드는 시작한 지 얼마 안 된 사람이 따라가기 어려움. 아레나의 아티팩트가 레이드 숙련자에게 도움이 되는 구조</td></tr>
-            <tr><td>레이드는 일요일 이후</td><td>필참인 아레나가 평일 일정과 부딪히지 않게</td></tr>
             <tr><td>미접 기준 7일</td><td>길드 시스템의 주간 갱신 주기와 경조사 같은 사정을 함께 고려</td></tr>
             <tr><td>장기 미접은 미리 알리면 예외</td><td>운영 중 추가 — 게임사 이슈로 쉬는 사람과 현실 사정이 겹치는 것을 보고 고침</td></tr>
           </table>
+          <p class="src">6년 동안 중재가 필요한 분쟁 없이 운영했습니다.</p>
         </div></div>
-        <div class="d-step"><h4><small>03</small>개선 제안과 검증 방법</h4><div>
-          <p>레이드 진입 화면에서 <b>권장 준비 조건과 현재 상태를 나란히</b> 보여 주고, 전투 성과 외의 기여 방법도 함께 안내하는 방안입니다.</p>
-          <p class="muted">안내가 많아지면 화면이 복잡해질 수 있으므로, 신규 이용자가 안내만으로 조건을 이해하는지와 어느 단계에서 진입을 포기하는지를 관찰해 효과를 확인해야 한다고 봅니다.</p>
-        </div></div>
-        <div class="d-step"><h4><small>04</small>원본 문서</h4><div>
+        <div class="d-step"><h4><small>05</small>원본 문서</h4><div>
           <div class="docs">
             <a href="../assets/docs/game-analysis.pdf" target="_blank" rel="noopener"><img src="img/doc-game-analysis.jpg" alt="게임 분석 문서 표지 — 한 게임이 5년을 버틴 이유" loading="lazy">게임 분석 · 6쪽 (PDF)</a>
             <a href="../assets/docs/guild-ops-case.pdf" target="_blank" rel="noopener"><img src="img/doc-guild-ops-case.jpg" alt="게임 커뮤니티 운영 사례 문서 표지" loading="lazy">길드 운영 사례 · 8쪽 (PDF)</a>

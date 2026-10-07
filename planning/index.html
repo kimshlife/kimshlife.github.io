@@ -83,13 +83,13 @@
         <caption style="position:absolute;left:-9999px">사례별로 각 기획 단계에서 한 일</caption>
         <thead><tr><th class="fh">기획 흐름</th><th class="st"><i>01</i>제약 확인</th><th class="st"><i>02</i>핵심 경험 정의</th><th class="st"><i>03</i>규칙·수치 결정</th><th class="st"><i>04</i>명세·문서화</th><th class="st"><i>05</i>구현 연결</th><th class="st"><i>06</i>검증·수정</th></tr></thead>
         <tr><th><a href="#ssketch">SSketch<small>규칙·명세 관리</small></a></th>
-          <td>기획서·패킷 명세·코드가 따로 움직임</td><td>그림이 끝까지 자원으로 남는 루프</td><td>운반 감속 10→30% · 기절 누적 게이지</td><td>요구사항 250건 · 12개 대분류</td><td>설정 창·규칙 코드 직접 구현</td><td>코드 기준 진척 재판정 · 테스트 96개</td></tr>
+          <td>기획서·패킷 명세·코드가 따로 움직임</td><td>그림이 끝까지 자원으로 남는 루프</td><td>운반 감속 10→30% · 기절 누적 게이지</td><td>요구사항 250건 · 12개 대분류</td><td>설정 창·규칙 코드 AI 도구로 구현</td><td>코드 기준 진척 재판정 · 테스트 96개</td></tr>
         <tr><th><a href="#workshop">BodyBuilder 창작마당<small>UGC 정책 설계</small></a></th>
-          <td>깰 수 없는 맵 · 본 게임 회귀 위험</td><td>창작 자유도보다 품질 보증과 격리</td><td>공식 맵 실측으로 상한 도출</td><td>구현명세서 v1–v9 · FE/BE 지시서</td><td>프론트엔드 직접 구현</td><td>무효화 누락 발견·보완</td></tr>
+          <td>깰 수 없는 맵 · 본 게임 회귀 위험</td><td>창작 자유도보다 품질 보증과 격리</td><td>공식 맵 실측으로 상한 도출</td><td>구현명세서 v1–v9 · FE/BE 지시서</td><td>프론트엔드 구현 (일부 AI 도구)</td><td>무효화 누락 발견·보완</td></tr>
         <tr><th><a href="#projectrg">ProjectRG<small>진단 규칙 설계</small></a></th>
-          <td>장르·구매 이력으로는 성향 구분 불가</td><td>실패 없는 게임 선택</td><td>5축 가중치 · 보충 질문 발동 기준</td><td>3유형 × 기본 12 + 보충 3문항</td><td>Vue 3 프론트엔드 구현</td><td class="no"></td></tr>
+          <td>장르·구매 이력으로는 성향 구분 불가</td><td>실패 없는 게임 선택</td><td>5축 가중치 · 보충 질문 발동 기준</td><td>3유형 × 기본 12 + 보충 3문항</td><td>Vue 3 프론트엔드 구현 (일부 AI 도구)</td><td class="no"></td></tr>
         <tr><th><a href="#neontetris">NeonTetrisWars<small>표준과 직접 설계의 경계</small></a></th>
-          <td>둔한 조작 · 불완전한 규칙</td><td>끊기지 않는 대전 몰입</td><td>회전 제한 15회 · 락 딜레이 게이지</td><td>업데이트 로그로 규칙 변경 기록</td><td>구현 (2인)</td><td class="no"></td></tr>
+          <td>둔한 조작 · 불완전한 규칙</td><td>끊기지 않는 대전 몰입</td><td>회전 제한 15회 · 락 딜레이 게이지</td><td>업데이트 로그로 규칙 변경 기록</td><td>구현 (2인 · 일부 AI 도구)</td><td class="no"></td></tr>
       </table>
     </div>
     <div class="legend"><span><i></i>수행</span><span><i class="n"></i>해당 기록 없음</span></div>
@@ -115,7 +115,7 @@
       <div>
         <div class="stats">
           <div><b>250건 · 62%</b><span>요구사항 명세와 진행률</span><small>12개 대분류 · 코드 기준 재점검</small></div>
-          <div><b>96 / 96</b><span>EditMode 테스트 통과</span><small>직접 작성한 테스트 클래스 6종</small></div>
+          <div><b>96 / 96</b><span>EditMode 테스트 통과</span><small>AI 도구로 작성한 테스트 클래스 6종</small></div>
           <div><b>10% → 30%</b><span>운반 감속률</span><small>느려진 것을 알아챌 수 있게</small></div>
         </div>
         <p class="note">그림 파티 게임은 대부분 한 사람이 그리고 나머지가 맞히는 구조라, 맞히고 나면 그림의 역할이 끝납니다. SSketch는 낮에 그린 그림을 밤에 훔치고 아침에 익명으로 평가해, 그림이 끝까지 게임의 자원으로 남습니다.</p>
@@ -150,7 +150,7 @@
           </table>
         </div></div>
         <div class="d-step"><h4><small>03</small>소유권을 원장 하나로</h4><div>
-          <p>씬 오브젝트 참조로 흩어져 있던 소유권을 정수 ID 기반 원장으로 옮기고, 창작자 · 운반자 · 마지막 확보 집 · 상태를 기록했습니다. 모든 상태 변경이 Commit 한 곳만 지나가게 해서, 서버 동기화를 붙일 때 그 지점 하나만 연결하면 되게 했습니다.</p>
+          <p>씬 오브젝트 참조로 흩어져 있던 소유권을 정수 ID 기반 원장으로 옮기고, 창작자 · 운반자 · 마지막 확보 집 · 상태를 기록했습니다. 모든 상태 변경이 Commit 한 곳만 지나가게 해서, 서버 동기화를 붙일 때 그 지점 하나만 연결하면 되게 했습니다. 이 구조는 AI 코딩 도구로 구현했습니다.</p>
         </div></div>
         <div class="d-step"><h4><small>04</small>규칙에서 끌어낸 외주 사양</h4><div>
           <p>밤에는 익명화가 핵심이므로 같은 복장과 복면으로 실루엣을 통일하고 표정은 만들지 않기로 했습니다. 이 사양으로 제안서를 직접 작성해 외부 작업자와 캐릭터 7종의 커미션 계약을 진행하고, Unity 6 · URP 셰이더와 팔레트 UV 색 지정 규칙을 담은 전달 규격을 정리했습니다.</p>
@@ -255,7 +255,7 @@
       <li><b>제약</b><p>진단이 길면 이탈하고, 짧으면 경계선 사용자의 정확도가 떨어짐</p></li>
       <li><b>결정</b><p>선행 연구(Nick Yee · Bartle)를 5축으로 번역, 결과가 애매할 때만 보충 3문항</p></li>
       <li><b>문서</b><p>3유형 × 기본 12문항 진단 체계와 보충 질문 발동 기준</p></li>
-      <li><b>결과</b><p>진단 → 결과 이미지 공유 → 성향별 게시판으로 이어지는 서비스 화면과 프론트엔드 구현</p></li>
+      <li><b>결과</b><p>진단 → 결과 이미지 공유 → 성향별 게시판으로 이어지는 서비스 화면과 프론트엔드 구현 (일부 AI 코딩 도구 활용)</p></li>
     </ol>
     <div class="key">임의의 분류가 아니라 검증된 연구를 서비스 구조로 옮깁니다.</div>
     <details class="more">

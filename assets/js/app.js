@@ -278,7 +278,7 @@ ${blk('04','result','실사용 검증',
 
 /* ===== ABOUT (전부 최신순) ===== */
 const AWARDS=[
- ['2026.10','SSAFY 15기 특화 프로젝트','SSketch — 4인 멀티플레이 파티 게임','우수상 (반 3등)','기획 · PM · 클라이언트·서버 개발','삼성 청년 SW·AI 아카데미'],
+ ['2026.10','SSAFY 15기 특화 프로젝트','SSketch — 4인 멀티플레이 파티 게임','우수상 (반 3등)','기획 · PM · AI 도구 활용 구현','삼성 청년 SW·AI 아카데미'],
  ['2024.12','교내 학생 예비창업자 모의 IR DAY','플로라봇 — AI 반려 식물로봇','금상','발표자료 제작 · 사업 방향 보조','국립금오공과대학교 LINC 3.0 사업단'],
  ['2024.05','제15회 중소기업 바로알리기 IDEA 공모전','에세이 「내 길을 찾는 과정」','입선','단독 집필','중소기업중앙회'],
  ['2023.11','K7U-Belt 창업경진대회','SICK KICK — 소아청소년 케어 플랫폼','장려상','사업 방향·전략 전담 · 발표','국립한밭대학교'],
@@ -341,10 +341,10 @@ function aboutSkill(){return `<section class="sec">
   <div class="sub">${ico('code',16)}기술 이해도</div>
   ${/* 프론트·백엔드 같은 '영역'이 아니라 언어·기술 기준으로 묶습니다. 같은 언어의 라이브러리는 한 줄에 둡니다 */''}
   ${tbl([['기술','190px'],['수준','70px'],['내용','']],[
-    ['JavaScript · TypeScript<br><span class="cap">React · Vue.js · Node.js</span>','중급','React·Vue.js로 컴포넌트 구조, 상태 관리, 비동기 통신을 다루며 서비스 화면 구현 (BodyBuilder · ProjectRG). Node.js 기반 웹 대전 게임 구현 (NeonTetrisWars)'],
+    ['JavaScript · TypeScript<br><span class="cap">React · Vue.js · Node.js</span>','중급','React·Vue.js로 컴포넌트 구조, 상태 관리, 비동기 통신을 다루며 서비스 화면 구현 (BodyBuilder · ProjectRG). Node.js 기반 웹 대전 게임 구현 (NeonTetrisWars). 구현 일부는 AI 코딩 도구 활용'],
     ['Python<br><span class="cap">pandas · numpy · Matplotlib</span>','중급','기본 문법과 2차원 배열 제어 로직 작성, DFS·BFS·완전탐색·Greedy 등 탐색 알고리즘의 기본 이해. pandas·numpy로 기초 분석 후 Matplotlib으로 시각화, 회귀분석과 통계적 방법론 학습'],
     ['Django<br><span class="cap">Python 웹 프레임워크</span>','기초','MTV 구조 이해와 RESTful API 설계 실습'],
-    ['Unity<br><span class="cap">Unity 6 · URP</span>','기초','SSketch에서 설정 창·방 화면·그림 도구 UI 구현, 에디터에서는 보이지 않던 빌드 전용 결함의 원인 추적'],
+    ['Unity<br><span class="cap">Unity 6 · URP</span>','기초','SSketch에서 AI 코딩 도구로 설정 창·방 화면·그림 도구 UI 구현, 에디터에서는 보이지 않던 빌드 전용 결함의 원인 추적'],
     ['머신러닝<br><span class="cap">Python</span>','기초','데이터 전처리와 회귀 분석 학습. 이미지 기반 질의응답(VQA) 모델 개발 프로세스를 데이터 가공부터 추론까지 경험']
   ],['st','m','q'])}
 </section>`}
