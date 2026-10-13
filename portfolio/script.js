@@ -27,11 +27,12 @@
     print: 'M7 8V3h10v5M7 17H3V8h18v9h-4M7 14h10v7H7zM17 11h.01',
     close: 'M6 6l12 12M18 6L6 18'
   };
-  document.querySelectorAll('[data-icon]').forEach(element => {
+  const renderIcons = root => root.querySelectorAll('[data-icon]').forEach(element => {
     const path = paths[element.dataset.icon];
     if (!path) return;
     element.innerHTML = `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${path}"></path></svg>`;
   });
+  renderIcons(document);
 
   const progress = document.querySelector('.reading-progress span');
   const links = [...document.querySelectorAll('.site-header nav a')];
@@ -40,8 +41,7 @@
     const readingLine = document.querySelector('.site-header').getBoundingClientRect().height + 70;
     let active = null;
     sections.forEach(section => {
-      const region = section.closest('.background-grid') || section;
-      const bounds = region.getBoundingClientRect();
+      const bounds = section.getBoundingClientRect();
       if (bounds.top <= readingLine && bounds.bottom > readingLine) active = section.id;
     });
     links.forEach(link => {
@@ -67,23 +67,77 @@
   const dialog = document.getElementById('image-dialog');
   const dialogImage = document.getElementById('dialog-image');
   const caption = document.getElementById('image-dialog-caption');
-  let previousOverflow = '';
-  const closeDialog = () => dialog.close();
-  document.querySelectorAll('[data-zoom]').forEach(button => {
+  const projectDialog = document.getElementById('project-dialog');
+  const projectTitle = document.getElementById('project-dialog-title');
+  const projectBody = document.getElementById('project-dialog-body');
+  const savedOverflow = document.body.style.overflow;
+  const syncScrollLock = () => {
+    document.body.style.overflow = dialog.open || projectDialog.open ? 'hidden' : savedOverflow;
+  };
+  const escape = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
+  const additionalProjects = {
+    florabot: {
+      title: '플로라봇', period: '2024', team: '연구실 창업 프로젝트',
+      what: 'AI·센서 기반 감성 교감 반려 식물로봇',
+      scope: ['아이디어 구체화 및 구현 참여', '시장 분석·BM 설정 보조', '발표자료 제작·사업 방향 보조'],
+      metrics: [{ v: '금상', l: '교내 모의 IR DAY', s: '2024.12' }, { v: '선정', l: '기술사업화 지원사업', s: '경북구미강소특구 우수창업자 지원사업' }]
+    },
+    solarbeam: {
+      title: 'SolarBeam', period: '2023.06 – 2024.02', team: '교내 창업동아리 · 팀장·총무',
+      what: '태양광 킥보드 거치소 시제품 프로젝트',
+      scope: ['선행 특허·제품 조사', '팀원 역할 배분 및 일정 점검', '지원금·영수증·보고서 관리'],
+      metrics: [{ v: '창의 아이디어상', l: '창업동아리 시제품 제작 경진대회', s: '2023.12' }]
+    }
+  };
+  const attachImageActions = root => root.querySelectorAll('[data-zoom]').forEach(button => {
     button.addEventListener('click', () => {
       dialogImage.src = button.dataset.zoom;
       dialogImage.alt = button.querySelector('img').alt;
       caption.textContent = button.dataset.caption;
-      previousOverflow = document.body.style.overflow;
       dialog.showModal();
-      document.body.style.overflow = 'hidden';
+      syncScrollLock();
     });
   });
+  const openProject = key => {
+    const project = P[key] || additionalProjects[key];
+    if (!project) return;
+    projectTitle.textContent = project.title;
+    const template = document.getElementById(`detail-${key}`);
+    const metadata = `<p class="detail-intro">${escape(project.what)}</p><dl class="detail-meta"><div><dt>기간</dt><dd>${escape(project.period)}</dd></div><div><dt>참여</dt><dd>${escape(project.team)}</dd></div>${project.stack ? `<div><dt>사용 기술</dt><dd>${escape(project.stack)}</dd></div>` : ''}</dl>`;
+    const scope = `<section class="detail-section"><h3>담당 업무</h3><ul>${project.scope.map(item => `<li>${escape(item)}</li>`).join('')}</ul></section>`;
+    const metrics = `<section class="detail-section"><h3>산출물·결과</h3><div class="detail-metrics">${(project.metrics || []).map(metric => `<div><strong>${escape(metric.v)}</strong><p>${escape(metric.l)}</p><small>${escape(metric.s)}</small></div>`).join('')}</div></section>`;
+    const decisions = project.decisions ? `<section class="detail-section"><h3>설계·진행 기록</h3>${project.decisions.map(item => `<div class="detail-decision"><h4>${escape(item.h)}</h4><p>${escape(item.b)}</p></div>`).join('')}</section>` : '';
+    const gallery = project.gallery?.length ? `<section class="detail-section"><h3>작업 자료</h3><div class="detail-gallery">${project.gallery.slice(0, 3).map(item => `<figure><button class="zoom-image" type="button" data-zoom="../assets/img/${escape(item.f)}.${escape(item.e || 'jpg')}" data-caption="${escape(item.c)}"><img src="../assets/img/${escape(item.f)}.${escape(item.e || 'jpg')}" alt="${escape(item.c)}" loading="lazy"><span class="zoom-hint">원본 확대 ↗</span></button><figcaption>${escape(item.c)}</figcaption></figure>`).join('')}</div></section>` : '';
+    const record = P[key] ? `<a class="detail-record text-link" href="../#/works/${escape(key)}" target="_blank" rel="noopener">전체 프로젝트 기록 ↗</a>` : '';
+    projectBody.innerHTML = metadata + (template ? template.innerHTML : scope + metrics + decisions + gallery) + record;
+    renderIcons(projectBody);
+    attachImageActions(projectBody);
+    projectDialog.showModal();
+    projectBody.scrollTop = 0;
+    syncScrollLock();
+  };
+  document.querySelectorAll('.project-trigger').forEach(button => {
+    button.addEventListener('click', () => openProject(button.dataset.project));
+    button.closest('.project-row').addEventListener('click', event => {
+      if (!event.target.closest('button, a') && !window.getSelection().toString()) {
+        button.focus({ preventScroll: true });
+        openProject(button.dataset.project);
+      }
+    });
+  });
+  document.getElementById('close-project').addEventListener('click', () => projectDialog.close());
+  projectDialog.addEventListener('click', event => {
+    const bounds = projectDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) projectDialog.close();
+  });
+  projectDialog.addEventListener('close', syncScrollLock);
+  const closeDialog = () => dialog.close();
+  attachImageActions(document);
   document.getElementById('close-dialog').addEventListener('click', closeDialog);
   dialog.addEventListener('click', event => {
     const bounds = dialog.getBoundingClientRect();
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeDialog();
   });
-  dialog.addEventListener('close', () => { document.body.style.overflow = previousOverflow; });
+  dialog.addEventListener('close', syncScrollLock);
   document.getElementById('print-page').addEventListener('click', () => window.print());
 })();
