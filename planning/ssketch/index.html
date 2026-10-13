@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSketch · 기획 — 김시후 포트폴리오</title><meta name="description" content="창작자·운반자·집 주인을 구분하고, 요구사항의 완료 여부는 실제 코드와 대조해 관리했습니다.">
+<meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#f3f0e8">
+<meta property="og:type" content="website"><meta property="og:title" content="SSketch · 기획 — 김시후 포트폴리오">
+<meta property="og:description" content="창작자·운반자·집 주인을 구분하고, 요구사항의 완료 여부는 실제 코드와 대조해 관리했습니다."><meta property="og:url" content="https://kimshlife.github.io/planning/ssketch/">
+<meta property="og:image" content="https://kimshlife.github.io/assets/img/og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://kimshlife.github.io/planning/ssketch/"><link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml"><link rel="alternate icon" href="/favicon.ico">
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="/assets/css/editorial.css?v=20261010b"><script defer src="/assets/js/editorial.js?v=20261010b"></script>
+</head><body class="editorial-site">
+<div class="ed-page"><a class="ed-skip" href="#content">본문으로 이동</a>
+    <header class="ed-header">
+      <a class="ed-wordmark" href="/" aria-label="김시후 포트폴리오 홈"><strong>Kim<br>Sihoo</strong><span>PORTFOLIO</span></a>
+      <nav class="ed-role-nav" aria-label="직군별 포트폴리오">
+        <a href="/planning/" aria-current="page">기획</a><a href="/qa/">게임 분석·QA</a>
+      </nav>
+      <nav class="ed-secondary-nav" aria-label="프로필과 연락"><a href="/#/works">프로젝트 기록</a><a href="#contact">연락</a></nav>
+    </header><main class="ed-main" id="content"><a class="ed-back" href="/planning/">← 사례 목록</a>
+    <article><header class="ed-case-head"><div><span class="ed-kicker">PLANNING / CASE STUDY</span><p class="ed-project"><b>SSketch</b><span>규칙·명세·진행 기준 설계</span></p><h1><span>그림의 주인과</span> <span>개발의 완료 기준을 정하다.</span></h1><p class="ed-case-lead">창작자·운반자·집 주인을 구분하고, 요구사항의 완료 여부는 실제 코드와 대조해 관리했습니다.</p>
+    <div class="ed-case-meta"><span>2026.08–09</span><span>6인 팀 / 4인 멀티플레이</span></div></div></header>
+    <div class="ed-story-grid"><div><section class="ed-story-section"><span>01</span><h2>그림의 주인을 세 역할로 나눴습니다.</h2><p>그린 사람, 현재 들고 있는 사람, 마지막으로 확보한 집의 주인을 분리했습니다. 그림의 점수는 집 주인에게 갑니다. 흩어진 소유권은 정수 ID 원장에 모으고, 상태 변경은 한 지점을 거치도록 구성해 서버 동기화의 연결 기준을 만들었습니다.</p></section><section class="ed-story-section"><span>02</span><h2>추격이 성립하도록 운반 감속률을 바꿨습니다.</h2><p>그림을 든 사람이 느려져야 추격이 성립합니다. 10%로는 느려진 것을 알아채기 어려워 30%로 조정했습니다. 기절도 한 방 판정에서 누적 게이지로 바꾸고, 깨어난 뒤에는 50부터 다시 시작하도록 정했습니다.</p></section><section class="ed-story-section"><span>03</span><h2>진행률은 실제 동작한 코드로 다시 셌습니다.</h2><p>요구사항 250건을 12개 대분류로 나누고 담당·우선순위를 붙였습니다. 8월 31일부터 9월 26일까지 실제 개발 코드를 확인하며 완료·부분·미착수를 재판정했습니다. 유명무실한 항목은 제외해 분모를 고쳤고, 충돌하는 문서와 미확정 수치는 별도로 모았습니다.</p></section></div><aside class="ed-evidence" aria-label="근거와 상세 기록" data-ed-evidence><div class="ed-evidence-tabs" role="tablist" aria-label="근거 내용 선택" hidden><button type="button" role="tab" id="evidence-tab-0" aria-controls="evidence-panel-0" aria-selected="true">근거 자료</button><button type="button" role="tab" id="evidence-tab-1" aria-controls="evidence-panel-1" aria-selected="false">판단 기록</button><button type="button" role="tab" id="evidence-tab-2" aria-controls="evidence-panel-2" aria-selected="false">진행·기여</button></div><div class="ed-proof-panel" id="evidence-panel-0" role="tabpanel" aria-labelledby="evidence-tab-0"><figure class="ed-proof-image"><a href="/assets/img/ss-owner.jpg" target="_blank" rel="noopener noreferrer" aria-label="그림 소유권 설계 도식 원본 확대"><img src="/assets/img/ss-owner.jpg" alt="그림 소유권 설계 도식" loading="lazy"></a><figcaption class="ed-caption">그림 소유권 설계 도식 · 이미지 선택 시 원본 보기</figcaption></figure><section class="ed-proof-text"><h3>코드 기준 진행 기록</h3><p>요구사항 250건 · 12개 대분류 / 2026.09.26 진행률 62%</p><figure class="ed-proof-image"><a href="/assets/img/ss-req.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/img/ss-req.jpg" alt="대분류·담당·우선순위별 요구사항 진행률 요약 시트" loading="lazy"></a><figcaption class="ed-caption">요구사항 요약 시트 · 원본 보기 ↗</figcaption></figure></section><p class="ed-caption">소유권 도식 / 요구사항 기록 (2026.09.26)</p></div><div class="ed-proof-panel" id="evidence-panel-1" role="tabpanel" aria-labelledby="evidence-tab-1"><section class="ed-proof-text"><h3>결정과 근거 기록</h3><div class="ed-record-row"><b>소유권</b><p>창작자 / 운반자 / 집 주인 분리. 점수는 집 주인에게.</p></div><div class="ed-record-row"><b>감속률</b><p>10% → 30%. 플레이어가 운반 페널티를 알아챌 수 있도록.</p></div><div class="ed-record-row"><b>완료 기준</b><p>문서의 체크 표시를 실제 코드와 대조해 재판정.</p></div><p class="ed-caption">소유권 도식 / 요구사항 기록 (2026.09.26)</p></section></div><div class="ed-proof-panel" id="evidence-panel-2" role="tabpanel" aria-labelledby="evidence-tab-2"><section class="ed-proof-text"><h3>진행·검증 범위</h3><div class="ed-record-row"><b>규칙 설계·AI 도구를 활용한 구현</b><p>2026.09.26 코드 기준 진행률 62%. 담당 규칙의 EditMode 테스트는 기록상 96/96 통과이며, 테스트 클래스 6종은 AI 도구를 활용해 작성했습니다.</p></div><div class="ed-record-row"><b>본인 기여와 경계</b><p>규칙·요구사항·설정 프로토타입·레드라인·외주 전달 규격을 담당했습니다. 연막탄·섬광탄 구현, 전문가 리뷰 자료, 최종 영상·발표는 팀원 작업입니다.</p></div></section></div></aside></div>
+    <section class="ed-scope"><h2>진행 결과와 본인 기여</h2><div class="ed-scope-grid"><div><b>규칙 설계·AI 도구를 활용한 구현</b><p>2026.09.26 코드 기준 진행률 62%. 담당 규칙의 EditMode 테스트는 기록상 96/96 통과이며, 테스트 클래스 6종은 AI 도구를 활용해 작성했습니다.</p></div><div><b>담당한 범위</b><p>규칙·요구사항·설정 프로토타입·레드라인·외주 전달 규격을 담당했습니다. 연막탄·섬광탄 구현, 전문가 리뷰 자료, 최종 영상·발표는 팀원 작업입니다.</p></div></div></section><nav class="ed-other-role" aria-label="관련 사례"><span>관련 사례</span><a href="/qa/ssketch/">SSketch · 게임 분석·QA 관점 보기 →</a></nav>
+    <section class="ed-records"><h2>설계 기록</h2><p>항목을 펼치면 세부 판단과 원본 자료를 읽을 수 있습니다.</p><details class="ed-detail-record"><summary><span>01</span>요구사항을 코드 기준으로</summary><div class="ed-record-content"><div>
+          <p>기획서와 패킷 명세를 바탕으로 요구사항 250건을 12개 대분류 ID 체계(SYS · LOB · DRW · EVL 등)로 정리하고, 항목마다 우선순위와 담당을 붙였습니다. 8/31부터 9/26까지 develop 브랜치의 실제 코드를 보며 완료 · 부분 · 미착수를 반복해서 다시 판정했습니다.</p>
+          <p class="ed-muted">확정 전 수치와 문서 간 충돌은 별도 시트에 모아, 결정할 것을 한곳에서 관리했습니다.</p>
+          <div class="ed-gallery">
+            <figure><a href="/assets/img/ss-req.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/img/ss-req.jpg" alt="요구사항 기능명세서 요약 시트" loading="lazy"></a><figcaption>요구사항 요약 시트 — 대분류·담당·우선순위별 진행률 자동 집계</figcaption></figure>
+            <figure><a href="/assets/img/ss-assign.jpg" target="_blank" rel="noopener noreferrer"><img src="/assets/img/ss-assign.jpg" alt="설정 창 4탭 배정 시트" loading="lazy"></a><figcaption>설정 창 항목마다 선행 작업과 착수 차수(1차/2차/보류)</figcaption></figure>
+          </div>
+        </div></div></details><details class="ed-detail-record"><summary><span>02</span>규칙·수치 결정</summary><div class="ed-record-content"><div>
+          <table class="ed-table">
+            <tr><th>결정</th><th>근거</th></tr>
+            <tr><td><b>운반 감속률 10% → 30%</b></td><td>그림을 든 사람은 느려져야 추격이 성립합니다. 10%로는 느려진 것을 알아채지 못했습니다.</td></tr>
+            <tr><td><b>한 방 기절 → 누적 게이지(100)</b></td><td>맨손 10대 · 야구방망이·권총 7대 · 나머지 무기 한 방. 깨어나면 0이 아니라 50에서 시작 — 0으로 돌리면 한 번 도망친 사람을 다시 쓰러뜨리기 너무 어려워집니다. 게이지는 초당 1씩 줄어듭니다.</td></tr>
+            <tr><td><b>C등급 아이템 추가</b></td><td>C등급이 부족하다는 판단으로 연막탄 · 섬광탄 추가를 결정했습니다 (구현은 팀원).</td></tr>
+            <tr><td><b>피드백 대응 4갈래</b></td><td>발표 피드백 30여 건을 빈도순으로 세고, 지적마다 허용 / 장치 / 제작 중 / 미도입으로 답했습니다. <a href="/qa/ssketch/">게임 분석·QA 사례에서 자세히 →</a></td></tr>
+          </table>
+        </div></div></details><details class="ed-detail-record"><summary><span>03</span>소유권을 원장 하나로</summary><div class="ed-record-content"><div>
+          <p>씬 오브젝트 참조로 흩어져 있던 소유권을 정수 ID 기반 원장으로 옮기고, 창작자 · 운반자 · 마지막 확보 집 · 상태를 기록했습니다. 모든 상태 변경이 Commit 한 곳만 지나가게 해서, 서버 동기화를 붙일 때 그 지점 하나만 연결하면 되게 했습니다. 이 구조는 AI 코딩 도구로 구현했습니다.</p>
+        </div></div></details><details class="ed-detail-record"><summary><span>04</span>규칙에서 끌어낸 외주 사양</summary><div class="ed-record-content"><div>
+          <p>밤에는 익명화가 핵심이므로 같은 복장과 복면으로 실루엣을 통일하고 표정은 만들지 않기로 했습니다. 이 사양으로 제안서를 직접 작성해 외부 작업자와 캐릭터 7종의 커미션 계약을 진행하고, Unity 6 · URP 셰이더와 팔레트 UV 색 지정 규칙을 담은 전달 규격을 정리했습니다.</p>
+          <p class="ed-caption">기여 경계 — 연막탄·섬광탄 구현, 전문가 리뷰 자료, 최종 영상·트레일러, 발표는 팀원 작업입니다.</p>
+        </div></div></details></section>
+    <div class="ed-resources"><p><a href="/#/works/ssketch">SSketch 프로젝트 기록 전체 →</a> · <a href="/ssketch/">배포 홈페이지 보관본 →</a></p></div></article><nav class="ed-next-case" aria-label="다른 사례"><a href="/planning/">← 기획 사례 전체</a><a href="/planning/bodybuilder/">다음 사례 · BodyBuilder 창작마당 →</a></nav></main><footer class="ed-footer" id="contact"><span>김시후 · 기획 / 게임 분석·QA<br>결정한 것과 확인한 것을 기록합니다.</span>
+    <div class="ed-footer-links"><a href="mailto:kimshlife@naver.com">kimshlife@naver.com</a><a href="https://github.com/kimshlife" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/#/about">프로필과 이력</a></div></footer></div></body></html>

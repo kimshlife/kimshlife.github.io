@@ -52,41 +52,25 @@ function sechead(icon,title,right,lv){const t=lv===1?'h1':'h2';
   return `<div class="sechead">${ico(icon,20)}<${t} class="d2">${title}</${t}>
   ${right?`<span class="cap">${right}</span>`:''}</div>`}
 
-/* ===== SELECT — 첫 화면, 직군 선택 =====
-   내용은 data.js 의 SELECT 에서 고칩니다. 왼쪽 메뉴 없이 카탈로그 한 장으로 그립니다. */
-function selectCard(m){
-  if(m.soon)return `<div class="model soon" aria-label="준비 중인 직군">
-    <div class="model-top"><span>MODEL ${m.no}</span><span>SOON</span></div>
-    <div class="soon-body">TO BE<br>CONTINUED…</div></div>`;
-  return `<a class="model" href="${m.href}">
-    <div class="model-top"><span>MODEL ${m.no}</span><span>KSH-${m.code}</span></div>
-    <div class="model-ico">${ico(m.icon,40)}</div>
-    <h2 class="model-name">${m.name}</h2>
-    <div class="model-en">${m.en}</div>
-    <figure class="model-fig"><img src="${m.img}" alt="${m.alt||''}" loading="lazy"></figure>
-    <dl class="model-spec">${m.spec.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-    <span class="model-go">설명서 열기 →</span></a>`;
-}
-function viewSelect(){const S=SELECT;return `<div class="catalog">
-  <div class="cat-strip"><span>PORTFOLIO — USER MANUAL</span><span>2026 EDITION</span></div>
-  <section class="cat-hero">
-    <div class="cat-copy">
-      ${S.eyebrow?`<span class="eyebrow cat-eyebrow">${S.eyebrow}</span>`:''}
-      <h1 class="d1">${S.slogan}</h1>
-      <p class="homesub">${S.intro}</p>
-    </div>
-    <img class="cat-mark" src="${S.img}" alt="김시후 로고 — 기획을 쓰는 펜과 그 뒤로 이어지는 흐름">
-  </section>
-  <section class="spec-sheet" aria-labelledby="spec-h">
-    <div class="spec-h"><h2 id="spec-h">SPEC SHEET</h2><span>김시후 · KIM SI HOO</span></div>
-    <table>${S.sheet.map(([k,v,d])=>`<tr><th scope="row">${k}</th><td>${v}${d?`<small>${d}</small>`:''}</td></tr>`).join('')}</table>
-    <div class="spec-foot"><a href="#/about/edu">자세한 이력 →</a></div>
-  </section>
-  <section class="cat-models" aria-labelledby="cat-sel">
-    <div class="cat-sel"><h2 id="cat-sel">MODEL SELECT</h2><span>직군을 고르면 해당 설명서가 열립니다</span></div>
-    <div class="models">${S.models.map(selectCard).join('')}</div>
-  </section>
-  <div class="cat-foot"><span>© 2026 김시후</span><a href="https://github.com/kimshlife" target="_blank" rel="noopener">github.com/kimshlife ↗</a></div>
+/* ===== SELECT — 에디토리얼 첫 화면, 역할별 사례 선택 =====
+   소개와 직군 설명은 아래에서, 이력은 data.js의 SELECT.sheet에서 고칩니다. */
+function viewSelect(){return `<div class="ed-page">
+  <a class="ed-skip" href="#ed-home-content">본문으로 이동</a>
+  <header class="ed-header">
+    <a class="ed-wordmark" href="#/" aria-label="김시후 포트폴리오 홈"><strong>Kim<br>Sihoo</strong><span>PORTFOLIO</span></a>
+    <nav class="ed-role-nav" aria-label="직군별 포트폴리오"><a href="planning/">기획</a><a href="qa/">게임 분석·QA</a></nav>
+    <nav class="ed-secondary-nav" aria-label="프로필과 연락"><a href="#/works">프로젝트 기록</a><a href="#/contact">연락</a></nav>
+  </header>
+  <div class="ed-main" id="ed-home-content">
+    <section class="ed-home-hero"><div><span class="ed-kicker">KIM SIHOO / SELECTED WORK</span><h1>게임을 만든 기준,<br>문제를 읽은 근거.</h1><p>만들 경험과 규칙을 설계하고,<br>실제 플레이에서 발견한 문제를 근거로 설명합니다.</p></div>
+      <figure><img src="assets/img/ss-flow.jpg" alt="SSketch — 낮에 그리고 밤에 훔친 그림을 아침에 평가하는 한 판의 흐름" fetchpriority="high"><figcaption class="ed-caption">SSketch · 본인 작성 기획 발표자료</figcaption></figure></section>
+    <section class="ed-home-roles" aria-label="직군별 사례 선택">
+      <a class="ed-home-role" href="planning/"><span class="ed-kicker">PLANNING</span><h2>기획</h2><p>무엇을 만들지, 어떤 기준으로 동작할지.<br>규칙·정책·수치·명세를 결정한 일입니다.</p><span class="ed-home-role-go">4개 사례 · 설계한 기준 읽기 ↗</span></a>
+      <a class="ed-home-role" href="qa/"><span class="ed-kicker">GAME ANALYSIS / QA</span><h2>게임 분석·QA</h2><p>어떤 문제가 있었고, 무엇으로 확인했는지.<br>피드백·재현·원인·검증을 연결한 일입니다.</p><span class="ed-home-role-go">4개 사례 · 판단의 근거 읽기 ↗</span></a>
+    </section>
+    <section class="ed-profile"><div><span class="ed-kicker">ABOUT KIM SIHOO</span><h2>제약을 읽고,<br>실행할 기준으로 남깁니다.</h2><a href="#/about">프로필과 이력 보기 →</a></div><dl>${SELECT.sheet.map(([k,v,d])=>`<div><dt>${k}</dt><dd>${v}${d?`<small>${d}</small>`:''}</dd></div>`).join('')}</dl></section>
+  </div>
+  <footer class="ed-footer"><span>김시후 · 기획 / 게임 분석·QA<br>결정한 것과 확인한 것을 기록합니다.</span><div class="ed-footer-links"><a href="mailto:kimshlife@naver.com">kimshlife@naver.com</a><a href="https://github.com/kimshlife" target="_blank" rel="noopener">GitHub ↗</a><a href="#/hobby">플레이 기록</a></div></footer>
 </div>`}
 
 const CARD_ROLES={
@@ -107,9 +91,9 @@ function cardMedia(p){
 }
 /* 어느 직군 설명서에 실렸는지 — data.js 의 MANUAL_TAGS */
 function manualBadges(k){const t=(typeof MANUAL_TAGS!=='undefined'&&MANUAL_TAGS[k])||[];
-  return t.length?`<span class="mbadges">${t.map(([n])=>`<span class="mbadge">${n} 설명서</span>`).join('')}</span>`:''}
+  return t.length?`<span class="mbadges">${t.map(([n])=>`<span class="mbadge">${n==='QA'?'게임 분석·QA':n}</span>`).join('')}</span>`:''}
 function manualLinks(k){const t=(typeof MANUAL_TAGS!=='undefined'&&MANUAL_TAGS[k])||[];
-  return t.length?`<p class="manual-links"><span>이 프로젝트가 실린 설명서</span>${t.map(([n,h])=>`<a href="${h}">${n==='QA'?'MODEL 02 · 게임 분석·QA':'MODEL 01 · 기획'} →</a>`).join('')}</p>`:''}
+  return t.length?`<p class="manual-links"><span>역할별 사례</span>${t.map(([n,h])=>`<a href="${h}">${n==='QA'?'게임 분석·QA':'기획'} →</a>`).join('')}</p>`:''}
 function cardHTML(k){const p=P[k];return `<a class="card" href="#/works/${p.slug}">
   ${cardMedia(p)}
   <div class="cardbody">
@@ -576,6 +560,7 @@ function render(){
   s.innerHTML=h;n.innerHTML=nt;
   document.querySelector('.canvas').classList.toggle('has-notes',!!nt);
   document.body.classList.toggle('is-select',state.view==='select');
+  document.body.classList.toggle('editorial-home',state.view==='select');
   s.querySelectorAll('.tri').forEach(grid=>{
     const cells=[...grid.children],labels=cells.slice(0,3).map(el=>el.textContent);
     grid.replaceChildren();
@@ -607,6 +592,8 @@ let lightboxOpener=null;
 function closeLightbox(){ $('lb').close(); }
 $('lb').addEventListener('close',()=>{document.body.classList.remove('modal-open');lightboxOpener?.focus();});
 document.addEventListener('click',async e=>{
+  const skip=e.target.closest('.ed-skip');
+  if(skip){e.preventDefault();const target=$('stage').querySelector('h1');target.setAttribute('tabindex','-1');target.focus();target.scrollIntoView({block:'start'});return;}
   const gf=e.target.closest('[data-gf]');
   if(gf){state.gfilter=gf.dataset.gf;render();return;}
   const c=e.target.closest('[data-cat]');
