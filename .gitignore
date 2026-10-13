@@ -62,7 +62,6 @@ _*.html
 .claude/
 node_modules/
 package-lock.json
-backups/
 
 # ── 운영체제가 자동으로 만드는 파일 ────────────────────────
 Thumbs.db

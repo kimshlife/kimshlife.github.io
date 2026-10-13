@@ -345,10 +345,10 @@ const SELECT={
    Works 카드와 프로젝트 상세에 '어느 설명서에 실렸는지'를 표시합니다.
    [설명서 이름, 주소] — 주소의 #뒤는 설명서 안의 사례 위치입니다. */
 const MANUAL_TAGS={
-  ssketch:[['기획','planning/ssketch/'],['QA','qa/ssketch/']],
-  bodybuilder:[['기획','planning/bodybuilder/'],['QA','qa/bodybuilder/']],
-  projectrg:[['기획','planning/projectrg/']],
-  neontetris:[['기획','planning/neontetris/']],
+  ssketch:[['기획','planning/#ssketch'],['QA','qa/#ssketch']],
+  bodybuilder:[['기획','planning/#workshop'],['QA','qa/#bodybuilder']],
+  projectrg:[['기획','planning/#projectrg']],
+  neontetris:[['기획','planning/#neontetris']],
   sickkick:[['기획','planning/#more']],
   contentops:[['기획','planning/#more']],
   pirukia:[['기획','planning/#more']]
