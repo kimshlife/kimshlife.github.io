@@ -34,10 +34,26 @@
   });
 
   const progress = document.querySelector('.reading-progress span');
+  const links = [...document.querySelectorAll('.site-header nav a')];
+  const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  const updateNavigation = () => {
+    const readingLine = document.querySelector('.site-header').getBoundingClientRect().height + 70;
+    let active = null;
+    sections.forEach(section => {
+      const region = section.closest('.background-grid') || section;
+      const bounds = region.getBoundingClientRect();
+      if (bounds.top <= readingLine && bounds.bottom > readingLine) active = section.id;
+    });
+    links.forEach(link => {
+      if (link.getAttribute('href') === `#${active}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
   let scheduled = false;
   const updateProgress = () => {
     const available = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = `${available > 0 ? Math.min(100, Math.max(0, window.scrollY / available * 100)) : 0}%`;
+    updateNavigation();
     scheduled = false;
   };
   window.addEventListener('scroll', () => {
@@ -45,21 +61,8 @@
   }, { passive: true });
   window.addEventListener('resize', updateProgress);
   window.addEventListener('load', updateProgress);
+  document.addEventListener('toggle', updateProgress, true);
   updateProgress();
-
-  const links = [...document.querySelectorAll('.site-header nav a')];
-  const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-      if (!visible.length) return;
-      links.forEach(link => {
-        if (link.getAttribute('href') === `#${visible[0].target.id}`) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    }, { rootMargin: '-115px 0px -55% 0px', threshold: 0 });
-    sections.forEach(section => observer.observe(section));
-  }
 
   const dialog = document.getElementById('image-dialog');
   const dialogImage = document.getElementById('dialog-image');
