@@ -370,4 +370,10 @@ figcaption { font-size: 14px; margin-top: 11px; }
   .loop-row { font-size: 16px; }
   .hero-facts > div { grid-template-columns: 115px minmax(0,1fr); gap: 4px 13px; }
   .policy-flow strong { font-size: 16px; }
+  .policy-flow { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .policy-flow > div { display: grid; grid-template-columns: 35px 1fr; gap: 2px 12px; align-items: center; }
+  .policy-flow > div > span { grid-row: 1 / span 2; }
+  .policy-flow .icon { margin: 0; }
+  .policy-flow strong, .policy-flow small { grid-column: 2; }
+  .flow-arrow { transform: rotate(90deg); width: 24px; margin-left: 40px; }
 }
