@@ -123,6 +123,7 @@ figcaption { font-size: 14px; margin-top: 11px; }
 .project-row { grid-template-columns: 137px 100px minmax(0,1fr) 195px; gap: 22px; padding: 23px 0; align-items: start; }
 .project-row time { grid-row: 1; font-size: 15px; line-height: 1.7; }
 .project-row > img, .project-symbol { grid-row: 1; width: 100px; height: 78px; margin-top: 3px; }
+.project-row > img[src$="/ss-logo.png"] { object-fit: contain; padding: 6px; background: #f3eddf; }
 .project-row > div:not(.project-output) { grid-column: 3; grid-row: 1; }
 .project-row h3 { font-size: 24px; line-height: 1.4; }
 .project-row h3 a span { font-size: 19px; }
