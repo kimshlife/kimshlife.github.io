@@ -89,6 +89,7 @@ html { scroll-padding-top: 108px; }
 .project-row h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .project-trophy { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 36px; height: 36px; background: #fff1cf; border-radius: 50%; font-size: 21px; line-height: 1; }
 .project-trophy:hover { background: #ffe2a1; }
+.project-row h3 .project-trophy > span { font-size: 21px; }
 .award-list > div:target { background: #fff1cf; box-shadow: inset 3px 0 #b58b35; padding-inline: 12px; }
 
 /* Education and research each have a separate full-width category header. */
