@@ -86,10 +86,9 @@ html { scroll-padding-top: 108px; }
 .project-output { grid-column: 4; grid-row: 1; display: flex; flex-direction: column; gap: 7px; border-left: 1px solid #c7cfdd; padding: 3px 0 0 18px; margin: 0; font-size: 15px; color: var(--muted); }
 .project-output strong { font-size: 17px; color: var(--blue); font-weight: 650; }
 .project-output a { text-decoration: underline; text-underline-offset: 4px; }
-.project-row h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.project-trophy { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 36px; height: 36px; background: #fff1cf; border-radius: 50%; font-size: 21px; line-height: 1; }
-.project-trophy:hover { background: #ffe2a1; }
-.project-row h3 .project-trophy > span { font-size: 21px; }
+.project-output .project-trophy { display: inline-flex; align-items: center; align-self: flex-start; gap: 7px; min-height: 28px; padding: 0; background: transparent; border-radius: 0; color: #73521c; font-size: 16px; font-weight: 650; line-height: 1.5; text-decoration: none; }
+.project-trophy > span:first-child { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 24px; font-size: 20px; line-height: 1; }
+.project-output .project-trophy:hover { text-decoration: underline; }
 .award-list > div:target { background: #fff1cf; box-shadow: inset 3px 0 #b58b35; padding-inline: 12px; }
 
 /* Education and research each have a separate full-width category header. */
