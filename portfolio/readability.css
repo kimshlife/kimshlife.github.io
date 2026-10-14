@@ -86,6 +86,8 @@ html { scroll-padding-top: 108px; }
 .project-output { grid-column: 4; grid-row: 1; display: flex; flex-direction: column; gap: 7px; border-left: 1px solid #c7cfdd; padding: 3px 0 0 18px; margin: 0; font-size: 15px; color: var(--muted); }
 .project-output strong { font-size: 17px; color: var(--blue); font-weight: 650; }
 .project-output a { text-decoration: underline; text-underline-offset: 4px; }
+.project-output .project-award { display: inline-flex; align-items: start; gap: 7px; padding: 6px 9px; background: #fff1cf; color: #73521c; font-size: 16px; font-weight: 650; line-height: 1.55; }
+.project-award > span:first-child { flex-shrink: 0; }
 
 /* Education and research each have a separate full-width category header. */
 .education-list article { display: grid; grid-template-columns: 34px 178px minmax(0,1fr) 70px; gap: 22px; align-items: start; padding: 24px 12px; border-bottom: 1px solid var(--line); }
