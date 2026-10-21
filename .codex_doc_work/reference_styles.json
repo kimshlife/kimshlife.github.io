@@ -1,0 +1,125 @@
+{
+  "input": "C:\\Users\\SSAFY\\Desktop\\\ucc38\uace0\uc790\ub8cc.docx",
+  "fonts_by_char_count": {
+    "\ubc14\ud0d5\uccb4": 458
+  },
+  "direct_run_formatting_runs": 83,
+  "direct_paragraph_formatting_paragraphs": 27,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 1,
+      "text": "\u3010 \ubcc4 \ucca8 \u3011 AI\ud65c\uc6a9 \ucde8\uc5c5\uc900\ube44 \uac00\uc774\ub4dc\ubd81 4\ud3b8 IT\ud3ec\ud2b8\ud3f4\ub9ac\uc624 \ud3b8",
+      "style": "List Paragraph"
+    },
+    {
+      "para_index": 8,
+      "text": "0) \ub098\uc758 \uc815\ubcf4 \uace0\uc815 \ud504\ub85c\ud544 \ub9cc\ub4e4\uae30",
+      "style": "Normal"
+    },
+    {
+      "para_index": 10,
+      "text": "  1) \uc9c0\uc6d0 \uc9c1\ubb34 \ud544\uc694 \uc5ed\ub7c9 \ubd84\uc11d \uc9c0\uce68 \ud504\ub86c\ud504\ud2b8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 13,
+      "text": "  2) \ub098\ub9cc\uc758 \uc9c0\uce68 \ud504\ub86c\ud504\ud2b8\ub97c \ud65c\uc6a9\ud55c \uce90\uce58\ud504\ub808\uc774\uc988 \ub3c4\ucd9c\ud558\uae30",
+      "style": "Normal"
+    },
+    {
+      "para_index": 16,
+      "text": "3) \ub098\uc758 \uae30\uc220 \uc2a4\ud0dd \uc815\ub9ac\ud558\uae30 \uc9c0\uce68 \ud504\ub86c\ud504\ud2b8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 17,
+      "text": "2. \ud504\ub85c\uc81d\ud2b8 \ub514\ubca8\ub86d\ud558\uae30",
+      "style": "Normal"
+    },
+    {
+      "para_index": 18,
+      "text": "1) \ud504\ub85c\uc81d\ud2b8 \ub514\ubca8\ub86d \ub9cc\ub2a5 \ud504\ub86c\ud504\ud2b8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 21,
+      "text": "  2) \ud3ec\ud2b8\ud3f4\ub9ac\uc624 \ud53c\ub4dc\ubc31 \ubc0f \ubcf4\uc644 \ud504\ub86c\ud504\ud2b8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 24,
+      "text": " 3. \ub2e4\uc591\ud55c \ud615\ud0dc\uc758 IT\ud3ec\ud2b8\ud3f4\ub9ac\uc624 \uc81c\uc791",
+      "style": "Normal"
+    },
+    {
+      "para_index": 25,
+      "text": "1) PPT \ud615\uc2dd \ud3ec\ud2b8\ud3f4\ub9ac\uc624 \ucd08\uc548 \ud504\ub86c\ud504\ud2b8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 28,
+      "text": "2) \ub178\uc158 \ud615\uc2dd \ud3ec\ud2b8\ud3f4\ub9ac\uc624 \ucd08\uc548 \ud504\ub86c\ud504\ud2b8",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "\u3010 \ubcc4 \ucca8 \u3011 AI\ud65c\uc6a9 \ucde8\uc5c5\uc900\ube44 \uac00\uc774\ub4dc\ubd81 4\ud3b8 IT\ud3ec\ud2b8\ud3f4\ub9ac\uc624 \ud3b8",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 3,
+        "text": "\u203b \uc0c1\uc138 \ub0b4\uc6a9\uc740 \u201cAI\ud65c\uc6a9 \ucde8\uc5c5\uc900\ube44 \uac00\uc774\ub4dc\ubd81 IT\ud3ec\ud2b8\ud3f4\ub9ac\uc624 \ud3b8\u201d\uc744 \ucc38\uace0\ud574 \uc8fc\uc138\uc694. ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": "- \uacbd\ub85c : JOB SSAFY > \uad50\uc721\ud504\ub85c\uadf8\ub7a8 > \ud559\uc2b5\uc790\ub8cc > [SSAFY AI\ud65c\uc6a9 \ucde8\uc5c5\uc900\ube44 \uac00\uc774\ub4dc\ubd81] 4\ud3b8 IT\ud3ec\ud2b8\ud3f4\ub9ac\uc624\ud3b8",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "text": "        - \ub178\uc158 \ub9c1\ud06c: SSAFY \ucde8\uc5c5 \uc900\ube44 \uce58\ud2b8\ud0a4 \u2018\ub098\ub9cc\uc758 \uc9c0\uce68 \ud504\ub86c\ud504\ud2b8 \uc800\uc7a5\uc18c\u2019| Notion ",
+        "style": "Normal"
+      },
+      {
+        "para_index": 6,
+        "text": "",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "\u3010",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 1,
+        "run_text": " ",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 1,
+        "run_text": "\ubcc4 \ucca8 \u3011",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 1,
+        "run_text": " ",
+        "style": "List Paragraph"
+      },
+      {
+        "para_index": 1,
+        "run_text": "A",
+        "style": "List Paragraph"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

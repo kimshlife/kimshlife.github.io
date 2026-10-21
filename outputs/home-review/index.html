@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>홈페이지 검토와 시안</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--surface)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+header.h{background:var(--navy);color:#fff;padding:48px 0 40px}
+header.h .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--gold)}
+header.h h1{margin-top:10px;font-size:36px;font-weight:800;letter-spacing:-.03em}
+header.h p{margin-top:10px;color:#C5CEDD;font-size:15px}
+.verdict{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.verdict div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px 18px}
+.verdict b{display:block;font-size:13px;color:var(--gold);font-weight:600}
+.verdict span{display:block;margin-top:6px;font-size:15px;line-height:1.5}
+
+section{padding:56px 0;border-bottom:1px solid var(--rule)}
+.sh .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.sh h2{margin-top:6px;font-size:28px;font-weight:800;letter-spacing:-.025em}
+.sh p{margin-top:8px;color:var(--ink-2)}
+
+/* 점수표 */
+.legend{display:flex;gap:16px;margin-top:18px;font-size:13px;color:var(--ink-2)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.g{background:#2E8B57}.m{background:#E3A008}.b{background:#D64545}
+.grp{margin-top:26px}
+.grp h3{font-size:16px;font-weight:700;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:210px 92px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:start}
+.row .c{font-weight:600;font-size:15px}
+.row .r{font-size:13.5px;font-weight:600;white-space:nowrap}
+.row .e{font-size:14.5px;color:var(--ink-2);line-height:1.6}
+.row .e b{color:var(--ink)}
+
+/* 핵심 발견 */
+.find{margin-top:24px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.shot{border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(20,36,61,.08)}
+.shot img{width:100%}
+.cap{font-size:13px;color:var(--ink-3);margin-top:8px}
+.fold{position:relative}
+.fold::after{content:"첫 화면 끝 (1440×900)";position:absolute;left:0;right:0;bottom:0;border-top:2px dashed #D64545;color:#D64545;font-size:12px;font-weight:600;padding:4px 8px;background:linear-gradient(transparent,rgba(255,255,255,.9))}
+.list{display:grid;gap:10px}
+.list div{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:15px;line-height:1.55}
+.list i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:#FDECEC;color:#B83232}
+.list i.ok{background:#E6F4EC;color:#24734A}
+
+/* 우선 과제 */
+.todo-t{margin-top:22px;width:100%;border-collapse:collapse;font-size:14.5px}
+.todo-t th{text-align:left;font-size:12.5px;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:2px solid var(--ink)}
+.todo-t td{padding:12px 10px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+.todo-t td:first-child{font-weight:700;color:var(--accent);width:40px}
+.lv{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.lv.h{background:#FDECEC;color:#B83232}.lv.md{background:#FFF4D6;color:#8A5A00}.lv.l{background:var(--accent-weak);color:var(--accent)}
+code{font-family:var(--f-mono);font-size:.88em;background:var(--paper);padding:1px 5px;border-radius:4px}
+
+/* 시안 */
+.mocks{margin-top:26px;display:grid;gap:36px}
+.mock{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.mock .shot{display:block;transition:transform .15s}
+.mock .shot:hover{transform:translateY(-3px)}
+.mock .t{display:flex;align-items:center;gap:10px}
+.mock .t b{font-size:13px;background:var(--navy);color:var(--gold);padding:3px 10px;border-radius:999px}
+.mock h3{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.mock .one{margin-top:8px;color:var(--ink-2);font-size:15px}
+.mock dl{margin:14px 0 0;display:grid;gap:8px;font-size:14px}
+.mock dl div{display:grid;grid-template-columns:64px 1fr;gap:10px;padding-top:8px;border-top:1px solid var(--rule)}
+.mock dt{color:var(--ink-3);font-weight:600}
+.mock dd{margin:0;line-height:1.55}
+.mock .open{display:inline-block;margin-top:14px;color:var(--accent);font-weight:700}
+.rec{display:inline-block;margin-left:auto;font-size:12px;font-weight:700;color:#24734A;background:#E6F4EC;padding:3px 10px;border-radius:999px}
+
+.cmp{margin-top:22px;width:100%;border-collapse:collapse;font-size:14px}
+.cmp th,.cmp td{padding:11px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.cmp thead th{border-bottom:2px solid var(--ink);font-size:13px}
+.cmp tbody th{color:var(--ink-3);font-weight:600;width:130px}
+
+.note{margin-top:22px;background:var(--paper);border-radius:12px;padding:18px 20px;font-size:14.5px;color:var(--ink-2);line-height:1.65}
+.note b{color:var(--ink)}
+footer{padding:32px 0 60px;color:var(--ink-3);font-size:13px}
+
+@media (max-width:860px){
+  .wrap{padding:0 16px}
+  .verdict,.find,.mock{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr;gap:4px}
+  header.h h1{font-size:28px}
+  .cmp{display:block;overflow-x:auto;white-space:nowrap}
+  .todo-t{display:block;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<header class="h">
+  <div class="wrap">
+    <p class="k">REVIEW · 2026.10.13 · kimshlife.github.io @ b15b362</p>
+    <h1>홈페이지 검토와 시안 3종</h1>
+    <p>1440 · 820 · 375px 화면에서 홈, About, Works, Hobby, Contact, 기획·QA 설명서를 실제로 띄워 보고 4개 영역 12개 기준으로 평가했습니다.</p>
+    <div class="verdict">
+      <div><b>가장 강한 곳</b><span>설명서의 사례 — 문제→제약→결정→문서→결과 구조와 수치 카드</span></div>
+      <div><b>가장 약한 곳</b><span>홈 첫 화면 — 이름·직무·작업물·연락 버튼이 모두 첫 화면 밖</span></div>
+      <div><b>한 줄 처방</b><span>설명서 히어로의 구성을 홈으로 끌어올리고, 연락 동선을 첫 화면에 둔다</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sh"><p class="k">01 · SCORECARD</p><h2>기준별 평가</h2></div>
+  <div class="legend"><span><i class="dot g"></i>좋음</span><span><i class="dot m"></i>보통</span><span><i class="dot b"></i>부족</span></div>
+
+  <div class="grp"><h3>1. 목적성 · 직관성</h3>
+    <div class="row"><span class="c">3초 룰</span><span class="r"><i class="dot b"></i>부족</span>
+      <span class="e">첫 화면에 보이는 건 표어 “즐겁고, 편리하게, 지속가능하도록”과 학력·경력 사양표. <b>직무명과 작업물 이미지는 스크롤해야</b> 나옵니다(1440×900 기준 위에서 약 1,000px 아래). 소개 문장의 “분야를 가리지 않고”는 오히려 전문 분야를 흐립니다.</span></div>
+    <div class="row"><span class="c">명확한 자기소개</span><span class="r"><i class="dot m"></i>보통</span>
+      <span class="e">이름은 왼쪽 메뉴의 17px 글자뿐, 히어로에는 없습니다. 모바일은 사양표 머리의 작은 라벨이 전부. 반면 <b>/planning/, /qa/ 히어로는 이름+한 줄 정의+태그+근거+버튼이 모범적</b> — 하위 페이지가 홈보다 낫습니다.</span></div>
+    <div class="row"><span class="c">핵심 행동 유도 (CTA)</span><span class="r"><i class="dot b"></i>부족</span>
+      <span class="e">홈에 이메일·이력서 버튼이 없습니다. Contact 탭에만 이메일이 있고, 이력서는 “요청 시 전달”(<code>app.js</code>의 <code>RESUME=''</code>). 이미 있는 QA 포트폴리오 PDF도 홈에서는 보이지 않습니다. 링크드인 없음.</span></div>
+  </div>
+
+  <div class="grp"><h3>2. 사용자 경험 · 기술 완성도</h3>
+    <div class="row"><span class="c">반응형</span><span class="r"><i class="dot g"></i>좋음</span>
+      <span class="e">375px에서 가로 넘침 없음(scrollWidth 375), 하단 탭바 정상, 콘솔 오류 없음. 다만 설명서 모바일은 상단 바가 두 줄로 접히고 QA 페이지 길이가 10,583px(약 13화면)로 깁니다.</span></div>
+    <div class="row"><span class="c">로딩 속도</span><span class="r"><i class="dot g"></i>좋음</span>
+      <span class="e">이미지 지연 로딩 적용, 스크린샷 1500px · 200~300KB 수준. 개선 여지: <b><code>bb-sprite.gif</code> 1.2MB</b>(WebP/MP4로 1/5 이하 가능), 웹폰트 3종(Pretendard · IBM Plex Sans KR · Plex Mono) 중 Plex Sans KR은 제목에만 쓰여 생략 가능.</span></div>
+    <div class="row"><span class="c">내비게이션</span><span class="r"><i class="dot m"></i>보통</span>
+      <span class="e">홈(왼쪽 레일: Home/About/Works/Hobby/Contact)과 설명서(상단 네이비 바: 01~04 앵커)가 <b>서로 다른 구조</b>. 설명서에 들어가면 About·Works·Contact 메뉴가 사라지고 “← MANUAL 표지”로만 돌아옵니다. 같은 프로젝트가 Works 카드와 설명서 사례에 다른 모습으로 두 번 존재. Hobby 탭은 카드 1장뿐.</span></div>
+  </div>
+
+  <div class="grp"><h3>3. 시각 · 타이포그래피</h3>
+    <div class="row"><span class="c">디자인 시스템 일관성</span><span class="r"><i class="dot m"></i>보통</span>
+      <span class="e">색 토큰은 <code>site.css</code>와 <code>manual.css</code>가 같은 값(네이비·로열블루) — 좋습니다. 하지만 배경(홈 회색 #F4F7F9 ↔ 설명서 흰색), 레이아웃(레일 ↔ 상단 바), 제목 글꼴(Plex Sans KR ↔ Pretendard)이 달라 넘어갈 때 다른 사이트처럼 느껴집니다. “MODEL 03 · TO BE CONTINUED” 빈 카드가 가로 1/3을 차지.</span></div>
+    <div class="row"><span class="c">가독성</span><span class="r"><i class="dot g"></i>좋음</span>
+      <span class="e">본문 16px · 줄간격 1.7 · <code>keep-all</code>로 안정적. 다만 “PORTFOLIO — USER MANUAL”, “SPEC SHEET”, “MODEL SELECT” 같은 11px 자간 넓은 영문 장식 라벨이 정보보다 먼저 눈에 들어옵니다.</span></div>
+    <div class="row"><span class="c">이미지 · 목업</span><span class="r"><i class="dot m"></i>보통</span>
+      <span class="e">실제 스크린샷이 풍부하고 선명합니다. 그러나 <b>홈 첫 화면의 이미지는 로고 일러스트 1장</b>. 스크린샷은 브라우저 테두리째 들어간 날것이 많고(BodyBuilder), 기기 프레임·배경 연출이 없습니다.</span></div>
+  </div>
+
+  <div class="grp"><h3>4. 콘텐츠 · 문제 해결 스토리</h3>
+    <div class="row"><span class="c">맥락과 기여도</span><span class="r"><i class="dot g"></i>좋음</span>
+      <span class="e">설명서 사례마다 팀 규모·기간·기여 경계(%)·수치 카드가 있습니다. Works 카드는 “핵심 기여” 한 줄뿐이라, 카드에서 바로 역할 비중이 보이지 않습니다.</span></div>
+    <div class="row"><span class="c">문제 해결 과정</span><span class="r"><i class="dot g"></i>좋음</span>
+      <span class="e">기획은 문제→제약→결정→문서→결과, QA는 문제→관찰→판단→행동→검증 5단 카드가 일관됩니다. <b>사이트에서 가장 강한 부분.</b> “검증 — 플레이테스트 수치 검증은 하지 못함”처럼 한계를 적은 점도 신뢰를 줍니다.</span></div>
+    <div class="row"><span class="c">지원 직무 맞춤</span><span class="r"><i class="dot m"></i>보통</span>
+      <span class="e">대표작(SSketch)은 설명서 안에서는 전면이지만, 홈에서는 작은 썸네일입니다. 홈이 작업물보다 <b>학력·경력 스펙을 먼저</b> 보여 줍니다.</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><p class="k">02 · KEY FINDING</p><h2>홈이 하위 페이지보다 약하다</h2>
+    <p>채용 담당자가 링크를 열면 이 화면을 먼저 봅니다.</p></div>
+  <div class="find">
+    <div><div class="shot fold"><img src="img/home-fold.jpg" alt="현재 홈 첫 화면 1440×900"></div><p class="cap">현재 홈 · 1440×900 첫 화면</p></div>
+    <div class="list">
+      <div><i>✕</i><span>히어로에 이름 없음 — 왼쪽 메뉴의 작은 글자뿐</span></div>
+      <div><i>✕</i><span>직무(기획 · 게임 분석/QA)가 첫 화면 밖</span></div>
+      <div><i>✕</i><span>작업물 이미지 0장, 연락·이력서 버튼 0개</span></div>
+      <div><i>✕</i><span>첫 화면의 절반이 학력·경력 표</span></div>
+      <div><i class="ok">✓</i><span>색·여백·글자 크기는 깔끔하고 일관됨</span></div>
+      <div><i class="ok">✓</i><span>근거가 될 수치와 이미지는 이미 충분 — 배치만 바꾸면 됨</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><p class="k">03 · PROPOSALS</p><h2>추천 시안 3종</h2>
+    <p>모두 현재 브랜드 색(네이비 + 로열블루, 골드는 어두운 면에서만)과 사이트에 실린 실제 이미지·수치만 썼습니다. 이미지를 누르면 실제 시안이 열립니다.</p></div>
+  <div class="mocks">
+    <article class="mock">
+      <a class="shot" href="a.html"><img src="img/mock-a.jpg" alt="시안 A 첫 화면"></a>
+      <div>
+        <div class="t"><b>시안 A</b><h3>표지 보강형</h3><span class="rec">1순위 추천</span></div>
+        <p class="one">지금의 왼쪽 레일과 MODEL 콘셉트는 그대로, 첫 화면의 순서만 바꿉니다.</p>
+        <dl>
+          <div><dt>첫 화면</dt><dd>이름 · 직무 · 연락 버튼 4개 · 대표 수치 3개 · 두 설명서 입구(이미지 포함)</dd></div>
+          <div><dt>바뀌는 것</dt><dd>사양표는 한 줄 띠로 축소, MODEL 03 빈 카드 삭제, Hobby는 About으로 합침</dd></div>
+          <div><dt>작업량</dt><dd>작음 — <code>data.js</code>의 <code>SELECT</code>, <code>app.js</code> 표지 함수, <code>site.css</code> 일부</dd></div>
+          <div><dt>주의</dt><dd>홈 ↔ 설명서 내비 차이는 남음 (설명서 상단 바에 메뉴를 추가하면 해결)</dd></div>
+        </dl>
+        <a class="open" href="a.html">시안 A 열기 →</a>
+      </div>
+    </article>
+    <article class="mock">
+      <a class="shot" href="b.html"><img src="img/mock-b.jpg" alt="시안 B 첫 화면"></a>
+      <div>
+        <div class="t"><b>시안 B</b><h3>대표작 전면형</h3></div>
+        <p class="one">네이비 히어로에 SSketch를 크게 걸고, 사이트 전체를 상단 바 하나로 통일합니다.</p>
+        <dl>
+          <div><dt>첫 화면</dt><dd>이름 · 두 직무를 합친 한 줄 · SSketch 대형 목업 + 수치 칩 3개 · CTA</dd></div>
+          <div><dt>아래</dt><dd>대표 사례 4개(기획/QA 필터) → 지나온 길 타임라인 → 연락 띠</dd></div>
+          <div><dt>작업량</dt><dd>중간 — 레일 제거, 홈·About·Works·설명서 공통 상단 바</dd></div>
+          <div><dt>주의</dt><dd>“설명서” 콘셉트가 옅어짐. 게임사처럼 시각 인상이 중요한 곳에 강함</dd></div>
+        </dl>
+        <a class="open" href="b.html">시안 B 열기 →</a>
+      </div>
+    </article>
+    <article class="mock">
+      <a class="shot" href="c.html"><img src="img/mock-c.jpg" alt="시안 C 첫 화면"></a>
+      <div>
+        <div class="t"><b>시안 C</b><h3>한 장 요약형</h3></div>
+        <p class="one">타일(벤토) 한 판에 사람 · 수치 · 작업물 · 입구를 모두 올립니다.</p>
+        <dl>
+          <div><dt>첫 화면</dt><dd>사진 · 이름 · 직무 · 이력 4줄 · CTA, 대표작 이미지, 수치 4개</dd></div>
+          <div><dt>아래</dt><dd>사례 타일 3개, 두 설명서 입구 — 스크롤 1.5화면이면 끝</dd></div>
+          <div><dt>작업량</dt><dd>중간 — 표지 화면만 새로 그림, 나머지 페이지 유지 가능</dd></div>
+          <div><dt>주의</dt><dd>수치 타일은 사례가 바뀌면 같이 고쳐야 함. 사진 노출 여부 결정 필요</dd></div>
+        </dl>
+        <a class="open" href="c.html">시안 C 열기 →</a>
+      </div>
+    </article>
+  </div>
+
+  <table class="cmp">
+    <thead><tr><th></th><th>시안 A · 표지 보강형</th><th>시안 B · 대표작 전면형</th><th>시안 C · 한 장 요약형</th></tr></thead>
+    <tbody>
+      <tr><th>3초 안에 보이는 것</th><td>이름 · 직무 · 수치</td><td>이름 · 대표작 화면</td><td>얼굴 · 이름 · 직무 · 수치</td></tr>
+      <tr><th>작업물 이미지 (첫 화면)</th><td>2장</td><td>1장 (대형)</td><td>1장 + 일부</td></tr>
+      <tr><th>CTA</th><td>히어로 4개 + 레일 이메일</td><td>상단 바 + 히어로 + 하단 띠</td><td>소개 타일 4개</td></tr>
+      <tr><th>현재 콘셉트 유지</th><td>높음</td><td>낮음</td><td>중간</td></tr>
+      <tr><th>내비 통일</th><td>별도 작업</td><td>포함</td><td>포함</td></tr>
+      <tr><th>잘 맞는 상황</th><td>지금 구조를 지키며 빨리 고칠 때</td><td>게임사 지원 · 시각 인상 우선</td><td>짧게 훑는 리크루터 · 모바일</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>추천 순서 —</b> 지금 사이트는 내용이 충분하고 설명서 콘셉트도 일관되므로, <b>A로 첫 화면 문제를 먼저 해결</b>하고 설명서 상단 바에 About · Works · Contact를 더하는 것이 비용 대비 효과가 가장 큽니다. 게임사 지원 비중이 커지면 B의 히어로(대형 목업 + 수치 칩)만 A에 옮겨 와도 됩니다.</div>
+</section>
+
+<section>
+  <div class="sh"><p class="k">04 · FIX LIST</p><h2>시안과 무관하게 고칠 것</h2></div>
+  <table class="todo-t">
+    <thead><tr><th>#</th><th>내용</th><th>근거 · 위치</th><th>중요도</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>홈 첫 화면에 이름 · 직무 · 이메일 버튼</td><td>현재 히어로에 셋 다 없음</td><td><span class="lv h">높음</span></td></tr>
+      <tr><td>2</td><td>이력서 PDF 연결, 홈에서 포트폴리오 PDF 노출</td><td><code>app.js</code> <code>RESUME=''</code> · <code>qa/kimsihoo-qa-portfolio.pdf</code></td><td><span class="lv h">높음</span></td></tr>
+      <tr><td>3</td><td>설명서 상단 바에 About · Works · Contact 추가</td><td>설명서에서 다른 메뉴로 갈 길이 없음</td><td><span class="lv md">중간</span></td></tr>
+      <tr><td>4</td><td>MODEL 03 빈 카드 삭제, Hobby 탭을 About ‘그 외 활동’으로</td><td>빈 카드 가로 1/3 · Hobby 카드 1장</td><td><span class="lv md">중간</span></td></tr>
+      <tr><td>5</td><td><code>bb-sprite.gif</code>(1.2MB)를 WebP 또는 MP4로</td><td><code>assets/img/</code></td><td><span class="lv l">낮음</span></td></tr>
+      <tr><td>6</td><td>제목 글꼴 IBM Plex Sans KR 제거 검토 (Pretendard로 통일)</td><td><code>index.html</code> 글꼴 링크 · <code>site.css</code> <code>--f-display</code></td><td><span class="lv l">낮음</span></td></tr>
+      <tr><td>7</td><td>README 첫 문단 정정 — 되돌린 에디토리얼 디자인 기준으로 적혀 있음</td><td><code>README.md</code> 3행</td><td><span class="lv l">낮음</span></td></tr>
+      <tr><td>8</td><td><code>outputs/</code> · <code>backups/</code>를 <code>.gitignore</code>에 추가 — README대로 <code>git add .</code> 하면 공개 저장소에 올라감</td><td><code>git check-ignore</code> 결과 미포함</td><td><span class="lv md">중간</span></td></tr>
+      <tr><td>9</td><td><code>noindex</code> 유지 여부 확인 — 이름 검색으로는 사이트가 나오지 않음</td><td><code>index.html</code> · <code>robots.txt</code></td><td><span class="lv l">확인</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>검토 · 시안 파일: <code>outputs/home-review/</code> (사이트에는 반영하지 않음)</footer>
+</main>
+</body>
+</html>

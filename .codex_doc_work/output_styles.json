@@ -1,0 +1,170 @@
+{
+  "input": "C:\\Users\\SSAFY\\Desktop\\sihoo\\kimshlife.github.io\\.codex_doc_work\\\uae40\uc2dc\ud6c4_IT\ud3ec\ud2b8\ud3f4\ub9ac\uc624_\ucf58\ud150\uce20_\uc791\uc131\ubcf8.docx",
+  "fonts_by_char_count": {
+    "Malgun Gothic": 11973
+  },
+  "direct_run_formatting_runs": 535,
+  "direct_paragraph_formatting_paragraphs": 458,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 2,
+      "text": "\uae40\uc2dc\ud6c4 \uac8c\uc784 \ubc0f IT \uc11c\ube44\uc2a4 \uae30\ud68d \ud3ec\ud2b8\ud3f4\ub9ac\uc624",
+      "style": "Title"
+    },
+    {
+      "para_index": 3,
+      "text": "\uc9c0\uc6d0 \uc9c1\ubb34\uc6a9 \ucf58\ud150\uce20 \uc791\uc131\ubcf8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 4,
+      "text": "\uaddc\uce59\uacfc \uc608\uc678\ub97c \uba85\uc138\ud558\uace0 \uad6c\ud604\uc73c\ub85c \uac80\uc99d\ud558\ub294 \uae30\ud68d\uc790",
+      "style": "Normal"
+    },
+    {
+      "para_index": 193,
+      "text": "\uad6c\uc131",
+      "style": "Normal"
+    },
+    {
+      "para_index": 194,
+      "text": "\uc0ac\uc6a9 \ubaa9\uc801",
+      "style": "Normal"
+    },
+    {
+      "para_index": 205,
+      "text": "\ud56d\ubaa9",
+      "style": "Normal"
+    },
+    {
+      "para_index": 206,
+      "text": "\ub0b4\uc6a9",
+      "style": "Normal"
+    },
+    {
+      "para_index": 225,
+      "text": "\uc6b0\uc120",
+      "style": "Normal"
+    },
+    {
+      "para_index": 226,
+      "text": "\ud575\uc2ec \uc5ed\ub7c9",
+      "style": "Normal"
+    },
+    {
+      "para_index": 227,
+      "text": "\ud3ec\ud2b8\ud3f4\ub9ac\uc624 \uc99d\uac70",
+      "style": "Normal"
+    },
+    {
+      "para_index": 228,
+      "text": "\ub300\ud45c \ud504\ub85c\uc81d\ud2b8",
+      "style": "Normal"
+    },
+    {
+      "para_index": 241,
+      "text": "\uc720\ud615",
+      "style": "Normal"
+    },
+    {
+      "para_index": 242,
+      "text": "\ubb38\uad6c",
+      "style": "Normal"
+    },
+    {
+      "para_index": 243,
+      "text": "\ucd94\ucc9c \uc774\uc720",
+      "style": "Normal"
+    },
+    {
+      "para_index": 253,
+      "text": "\uc5ed\ub7c9\uacfc \ub3c4\uad6c",
+      "style": "Normal"
+    },
+    {
+      "para_index": 254,
+      "text": "\uc219\ub828\ub3c4",
+      "style": "Normal"
+    },
+    {
+      "para_index": 255,
+      "text": "\uc911\uc694\ub3c4",
+      "style": "Normal"
+    },
+    {
+      "para_index": 256,
+      "text": "\ud310\ub2e8 \uadfc\uac70",
+      "style": "Normal"
+    },
+    {
+      "para_index": 301,
+      "text": "\ud56d\ubaa9",
+      "style": "Normal"
+    },
+    {
+      "para_index": 302,
+      "text": "\ub0b4\uc6a9",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": "\uc9c0\uc6d0 \uc9c1\ubb34\uc6a9 \ucf58\ud150\uce20 \uc791\uc131\ubcf8",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "text": "\uaddc\uce59\uacfc \uc608\uc678\ub97c \uba85\uc138\ud558\uace0 \uad6c\ud604\uc73c\ub85c \uac80\uc99d\ud558\ub294 \uae30\ud68d\uc790",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "text": "\uac8c\uc784\uc758 \uc7ac\ubbf8\ub97c \uaddc\uce59\uacfc \uc218\uce58\ub85c \uad6c\uccb4\ud654\ud558\uace0, \uc11c\ube44\uc2a4\uc758 \uc694\uad6c\uc0ac\ud56d\uacfc \uc608\uc678 \uc815\ucc45\uc744 \ubb38\uc11c\ub85c \ub0a8\uae41\ub2c8\ub2e4. \uc2dc\uc7a5\uacfc \uae30\uc220 \uc81c\uc57d\uc744 \uba3c\uc800 \ud655\uc778\ud55c \ub4a4 \uad6c\ud604 \uacfc\uc815\uc5d0\uc11c \ubc1c\uacac\ud55c \ubb38\uc81c\ub97c \ub2e4\uc2dc \uba85\uc138\uc5d0 \ubc18\uc601\ud569\ub2c8\ub2e4.",
+        "style": "Normal"
+      },
+      {
+        "para_index": 11,
+        "text": "",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 2,
+        "run_text": "\uae40\uc2dc\ud6c4 \uac8c\uc784 \ubc0f IT \uc11c\ube44\uc2a4 \uae30\ud68d \ud3ec\ud2b8\ud3f4\ub9ac\uc624",
+        "style": "Title"
+      },
+      {
+        "para_index": 3,
+        "run_text": "\uc9c0\uc6d0 \uc9c1\ubb34\uc6a9 \ucf58\ud150\uce20 \uc791\uc131\ubcf8",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "run_text": "\uaddc\uce59\uacfc \uc608\uc678\ub97c \uba85\uc138\ud558\uace0 \uad6c\ud604\uc73c\ub85c \uac80\uc99d\ud558\ub294 \uae30\ud68d\uc790",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "run_text": "\uac8c\uc784\uc758 \uc7ac\ubbf8\ub97c \uaddc\uce59\uacfc \uc218\uce58\ub85c \uad6c\uccb4\ud654\ud558\uace0, \uc11c\ube44\uc2a4\uc758 \uc694\uad6c\uc0ac\ud56d\uacfc \uc608\uc678 \uc815\ucc45\uc744 \ubb38\uc11c\ub85c \ub0a8\uae41\ub2c8\ub2e4. \uc2dc\uc7a5\uacfc \uae30\uc220 \uc81c\uc57d\uc744 \uba3c\uc800 \ud655\uc778\ud55c \ub4a4 \uad6c\ud604 \uacfc\uc815\uc5d0\uc11c \ubc1c",
+        "style": "Normal"
+      },
+      {
+        "para_index": 6,
+        "run_text": "\uae40\uc2dc\ud6c4  |  2026\ub144 9\uc6d4 11\uc77c",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

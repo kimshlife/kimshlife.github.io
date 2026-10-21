@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시안 A · 표지 보강형</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="base.css">
+<style>
+/* 레일 — 현재 사이트와 같은 구조 */
+.rail{position:fixed;inset:0 auto 0 0;width:236px;background:var(--surface);border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;padding:28px 0 24px}
+.rail-id{display:flex;gap:10px;align-items:center;padding:0 24px 28px}
+.rail-id img{width:34px;height:34px;border-radius:8px}
+.rail-id .nm{font-weight:700;font-size:17px;line-height:1.2}
+.rail-id .rl{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.09em}
+.rail nav a{display:flex;gap:12px;align-items:center;height:46px;padding:0 24px;color:var(--ink-2);font-size:15px;border-left:3px solid transparent}
+.rail nav a[aria-current]{background:var(--accent-weak);color:var(--accent);font-weight:600;border-left-color:var(--accent)}
+.rail nav svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6}
+.rail-cta{margin:auto 20px 0;padding:16px;border:1px solid var(--rule);border-radius:10px;font-size:13px;color:var(--ink-2)}
+.rail-cta a{display:block;margin-top:8px;color:var(--accent);font-weight:600;font-size:14px}
+
+.main{margin-left:236px;padding:44px 56px 64px;max-width:1240px}
+
+/* 히어로 */
+.hero{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:end;padding-bottom:28px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--accent);margin-bottom:14px}
+.name{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.name h1{font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.name .en{font-size:18px;color:var(--ink-3)}
+.role{margin-top:10px;font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.role em{font-style:normal;color:var(--accent)}
+.line{margin-top:12px;font-size:17px;color:var(--ink-2)}
+.cta{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
+.proof{display:grid;gap:10px}
+.proof div{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:2px 14px;align-items:center}
+.proof b{grid-row:span 2;font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--accent);min-width:104px}
+.proof span{font-size:14px;font-weight:600}
+.proof small{font-size:12.5px;color:var(--ink-3)}
+
+/* 직군 카드 — 첫 화면 안으로 */
+.models{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.model{background:var(--surface);border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;transition:border-color .15s, transform .15s}
+.model:hover{border-color:var(--accent);transform:translateY(-2px)}
+.model .pic{background:#E9EEF3;overflow:hidden;min-height:260px}
+.model .pic img{width:100%;height:100%;object-fit:cover;object-position:left center}
+.model .body{padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.model .top{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.08em}
+.model h2{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.model .q{font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-weak);color:var(--accent);font-weight:600}
+.model .go{margin-top:auto;font-weight:600;color:var(--accent);font-size:15px}
+.model .cases{font-size:13px;color:var(--ink-3)}
+
+/* 사양 띠 */
+.spec{margin-top:28px;display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--rule);border-radius:12px;background:var(--surface)}
+.spec div{padding:16px 18px;border-left:1px solid var(--rule)}
+.spec div:first-child{border-left:0}
+.spec dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3)}
+.spec dd{margin:6px 0 0;font-size:14px;font-weight:600;line-height:1.45}
+.spec dd small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:2px}
+.foot{margin-top:18px;display:flex;justify-content:space-between;font-size:13px;color:var(--ink-3)}
+.foot a{color:var(--accent)}
+
+/* 모바일 */
+.tabbar{display:none}
+@media (max-width:1100px){
+  .hero{grid-template-columns:1fr}
+  .proof{grid-template-columns:repeat(3,1fr)}
+  .proof div{grid-template-columns:1fr}.proof b{grid-row:auto}
+  .model{grid-template-columns:1fr}.model .pic{aspect-ratio:16/8;min-height:0}
+  .spec{grid-template-columns:repeat(2,1fr)}.spec div{border-left:0;border-top:1px solid var(--rule)}
+}
+@media (max-width:760px){
+  .rail{display:none}
+  .main{margin:0;padding:24px 16px 96px}
+  .name h1{font-size:40px}.role{font-size:23px}
+  .proof{grid-template-columns:1fr}
+  .proof div{grid-template-columns:auto 1fr}.proof b{grid-row:span 2;font-size:20px}
+  .models{grid-template-columns:1fr}
+  .cta .btn{flex:1 1 calc(50% - 10px);justify-content:center}
+  .spec{grid-template-columns:1fr}
+  .tabbar{display:flex;position:fixed;inset:auto 0 0 0;height:62px;background:var(--surface);border-top:1px solid var(--rule)}
+  .tabbar a{flex:1;display:grid;place-items:center;font-size:12px;color:var(--ink-3)}
+  .tabbar a[aria-current]{color:var(--accent);font-weight:600}
+}
+</style>
+</head>
+<body>
+<aside class="rail">
+  <a class="rail-id" href="#"><img src="../../assets/brand/app-icon.svg" alt=""><div><div class="nm">김시후</div><div class="rl">SUNSHINEKIM</div></div></a>
+  <nav>
+    <a href="#" aria-current="page"><svg viewBox="0 0 24 24"><path d="M12 3 3 8v8l9 5 9-5V8z"/></svg>Home</a>
+    <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>About</a>
+    <a href="#"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg>Works</a>
+    <a href="#"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Contact</a>
+  </nav>
+  <div class="rail-cta">연락은 이메일로 받습니다<a href="mailto:kimshlife@naver.com">kimshlife@naver.com</a></div>
+</aside>
+
+<main class="main">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">PORTFOLIO · 2026</p>
+      <div class="name"><h1>김시후</h1><span class="en">Kim Si Hoo</span></div>
+      <p class="role"><em>게임 기획</em> · <em>게임 분석 / QA</em></p>
+      <p class="line">즐겁고, 편리하게, 지속가능하도록 — 제약을 읽고, 판단의 근거를 문서로 남깁니다.</p>
+      <div class="cta">
+        <a class="btn pri" href="mailto:kimshlife@naver.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>이메일 보내기</a>
+        <a class="btn" href="../../qa/kimsihoo-qa-portfolio.pdf"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>포트폴리오 PDF</a>
+        <a class="btn" href="#"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></svg>이력서 <span class="todo">연결 필요</span></a>
+        <a class="btn" href="https://github.com/kimshlife">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="proof" aria-label="대표 수치">
+      <div><b>250건</b><span>요구사항 명세</span><small>SSketch · 12개 대분류 · 코드 기준 재점검</small></div>
+      <div><b>96/96</b><span>EditMode 테스트 통과</span><small>SSketch 담당 규칙 코드</small></div>
+      <div><b>2년 2개월</b><span>제조업 품질보증 (IQC)</span><small>수입검사 · 2020.06 – 2022.07</small></div>
+    </div>
+  </section>
+
+  <section class="models" aria-label="직군별 설명서">
+    <a class="model" href="#">
+      <div class="pic"><img src="../../assets/img/ss-flow.jpg" alt="SSketch 한 판의 흐름 — 낮·밤·아침"></div>
+      <div class="body">
+        <div class="top"><span>MODEL 01</span><span>KSH-PL</span></div>
+        <h2>기획</h2>
+        <p class="q">재미보다 먼저 제약을 읽고, 판단의 근거를 문서로 남깁니다.</p>
+        <div class="tags"><span>규칙·수치 설계</span><span>요구사항 명세</span><span>UI/UX</span></div>
+        <p class="cases">SSketch · 창작마당 · ProjectRG · NeonTetris</p>
+        <span class="go">설명서 열기 →</span>
+      </div>
+    </a>
+    <a class="model" href="#">
+      <div class="pic"><img src="../../qa/img/bb-slope.jpg" alt="BodyBuilder 경사면 판정 그래프"></div>
+      <div class="body">
+        <div class="top"><span>MODEL 02</span><span>KSH-QA</span></div>
+        <h2>게임 분석 · QA</h2>
+        <p class="q">이용자가 느끼는 ‘이상함’을 재현 조건과 검증 기준으로 바꿉니다.</p>
+        <div class="tags"><span>피드백 분류</span><span>재현 조건</span><span>레퍼런스 분석</span></div>
+        <p class="cases">SSketch · BodyBuilder · PEAK · 카운터사이드</p>
+        <span class="go">설명서 열기 →</span>
+      </div>
+    </a>
+  </section>
+
+  <dl class="spec" aria-label="이력 요약">
+    <div><dt>EDU</dt><dd>금오공대 경영학과<small>2018.03 – 2025.08</small></dd></div>
+    <div><dt>WORK</dt><dd>품질보증부 수입검사<small>2020.06 – 2022.07</small></dd></div>
+    <div><dt>TRAINING</dt><dd>삼성 청년 SW·AI 아카데미 15기<small>2026.12 수료 예정</small></dd></div>
+    <div><dt>RESEARCH</dt><dd>LNCS 특별호 게재<small>제2저자 · 학부연구생</small></dd></div>
+    <div><dt>AWARDS</dt><dd>수상 9건 · 자격 4종<small>특화 프로젝트 우수상 외</small></dd></div>
+  </dl>
+  <div class="foot"><span>© 2026 김시후</span><a href="#">자세한 이력 →</a></div>
+</main>
+
+<nav class="tabbar"><a href="#" aria-current="page">Home</a><a href="#">About</a><a href="#">Works</a><a href="#">Contact</a></nav>
+<div class="mock-tag"><b>시안 A</b> 표지 보강형 <a href="index.html">검토로</a></div>
+</body>
+</html>

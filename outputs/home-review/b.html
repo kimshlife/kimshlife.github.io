@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시안 B · 대표작 전면형</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--surface)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* 상단 바 — 설명서 페이지와 같은 구조로 통일 */
+.top{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
+.top .wrap{display:flex;align-items:center;height:64px;gap:28px}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:17px}
+.brand img{width:30px;height:30px;border-radius:7px}
+.top nav{display:flex;gap:24px;margin-left:auto;font-size:15px;color:#C5CEDD}
+.top nav a:hover{color:#fff}
+.top nav .on{color:#fff;font-weight:600}
+.top .btn{height:38px;padding:0 16px;font-size:14px}
+
+/* 히어로 */
+.hero{background:var(--navy);color:#fff;padding:56px 0 0;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:520px 1fr;gap:48px;align-items:center}
+.kicker{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.14em;color:var(--gold)}
+.hero h1{margin-top:14px;font-size:58px;font-weight:800;letter-spacing:-.035em;line-height:1.05}
+.hero h1 small{display:block;margin-top:10px;font-size:15px;font-weight:400;color:#9DAAC2;letter-spacing:.02em}
+.hero .role{margin-top:22px;font-size:26px;font-weight:700;line-height:1.35;letter-spacing:-.02em}
+.hero .line{margin-top:12px;color:#C5CEDD;font-size:16px}
+.hero .cta{margin-top:28px;display:flex;gap:8px;flex-wrap:wrap}
+.hero .cta .btn{padding:0 15px}
+
+.stage{position:relative;padding-bottom:56px}
+.browser{background:#0F1729;border-radius:14px 14px 10px 10px;box-shadow:0 30px 70px rgba(0,0,0,.45);overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.browser .bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 12px;background:#172238}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#3A4A6B}
+.browser .bar span{margin-left:12px;font-family:var(--f-mono);font-size:11px;color:#7F8DA8}
+.browser img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.chip{position:absolute;background:#fff;color:var(--ink);border-radius:12px;padding:12px 16px;box-shadow:0 14px 30px rgba(0,0,0,.28);min-width:150px}
+.chip b{display:block;font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--accent)}
+.chip span{font-size:13px;color:var(--ink-2)}
+.chip.c1{left:-28px;bottom:120px}
+.chip.c2{right:-18px;top:46px}
+.chip.c3{right:40px;bottom:28px;background:var(--gold);color:var(--navy)}
+.chip.c3 b{color:var(--navy)}
+.chip.c3 span{color:var(--navy)}
+
+/* 대표 사례 */
+.sec{padding:72px 0}
+.sec-h{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}
+.sec-h p.k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;color:var(--accent)}
+.sec-h h2{margin-top:8px;font-size:32px;font-weight:800;letter-spacing:-.025em}
+.filter{display:flex;gap:6px}
+.filter span{padding:7px 14px;border-radius:999px;border:1px solid var(--rule-strong);font-size:14px;color:var(--ink-2)}
+.filter span.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.case{border:1px solid var(--rule);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,transform .15s;background:var(--surface)}
+.case:hover{border-color:var(--accent);transform:translateY(-3px)}
+.case .pic{aspect-ratio:16/10;background:#E9EEF3;overflow:hidden}
+.case .pic img{width:100%;height:100%;object-fit:cover}
+.case .b{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.case .t{display:flex;gap:6px}
+.case .t span{font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--accent-weak);color:var(--accent)}
+.case .t span.qa{background:#FFF0CF;color:#7A5300}
+.case h3{font-size:19px;font-weight:700;letter-spacing:-.015em}
+.case p{font-size:14px;color:var(--ink-2);line-height:1.5}
+.case .m{margin-top:auto;padding-top:10px;border-top:1px solid var(--rule);display:flex;gap:16px}
+.case .m b{display:block;font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--ink)}
+.case .m small{font-size:12px;color:var(--ink-3)}
+
+/* 경로 */
+.path{background:var(--paper);padding:56px 0}
+.tl{display:grid;grid-template-columns:repeat(5,1fr);position:relative;margin-top:8px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--rule-strong)}
+.tl div{position:relative;padding-right:16px}
+.tl i{display:block;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.tl div.now i{background:var(--accent)}
+.tl .y{margin-top:14px;font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tl .w{margin-top:4px;font-weight:700;font-size:15.5px;line-height:1.4}
+.tl .s{font-size:13px;color:var(--ink-2)}
+
+/* 연락 띠 */
+.contact{background:var(--navy);color:#fff;padding:48px 0}
+.contact .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.contact h2{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.contact p{color:#9DAAC2;margin-top:6px;font-size:14.5px}
+.contact .cta{display:flex;gap:10px;flex-wrap:wrap}
+
+@media (max-width:1100px){
+  .hero .wrap{grid-template-columns:1fr}
+  .cases{grid-template-columns:repeat(2,1fr)}
+  .chip.c1{left:8px}.chip.c2{right:8px}
+}
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .top nav{display:none}.top .btn{margin-left:auto}
+  .hero{padding-top:32px}
+  .hero h1{font-size:42px}.hero .role{font-size:21px}
+  .hero .cta .btn{flex:1 1 calc(50% - 10px);justify-content:center}
+  .chip{min-width:0;padding:8px 12px}.chip b{font-size:16px}.chip span{font-size:11.5px}
+  .chip.c1{bottom:90px}.chip.c2{top:36px}.chip.c3{right:16px;bottom:16px}
+  .sec{padding:48px 0}.sec-h{flex-direction:column;align-items:start}.sec-h h2{font-size:25px}
+  .cases{grid-template-columns:1fr}
+  .tl{grid-template-columns:1fr;gap:18px}.tl::before{left:9px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .tl div{padding-left:34px}.tl i{position:absolute;left:0;top:2px}.tl .y{margin-top:0}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="../../assets/brand/app-icon.svg" alt="">김시후</a>
+    <nav><a class="on" href="#">홈</a><a href="#">기획</a><a href="#">게임 분석·QA</a><a href="#">전체 프로젝트</a><a href="#">소개</a></nav>
+    <a class="btn gold" href="mailto:kimshlife@naver.com">연락하기</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">GAME PLANNING · GAME ANALYSIS / QA</p>
+      <h1>김시후<small>Kim Si Hoo · SunsHineKim</small></h1>
+      <p class="role">규칙을 설계하고,<br>이상함을 조건으로 바꿉니다.</p>
+      <p class="line">즐겁고, 편리하게, 지속가능하도록.</p>
+      <div class="cta">
+        <a class="btn gold" href="#cases">대표 사례 보기 ↓</a>
+        <a class="btn ghost-d" href="../../qa/kimsihoo-qa-portfolio.pdf">포트폴리오 PDF</a>
+        <a class="btn ghost-d" href="#">이력서 <span class="todo">연결 필요</span></a>
+        <a class="btn ghost-d" href="https://github.com/kimshlife">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>SSketch — Draw Together, Play Together</span></div>
+        <img src="../../assets/img/ss-site.jpg" alt="SSketch 소개 사이트 첫 화면">
+      </div>
+      <div class="chip c2"><b>250건</b><span>요구사항 명세</span></div>
+      <div class="chip c1"><b>96 / 96</b><span>EditMode 테스트</span></div>
+      <div class="chip c3"><b>우수상</b><span>특화 프로젝트 · 반 3등</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cases">
+  <div class="wrap">
+    <div class="sec-h">
+      <div><p class="k">SELECTED WORK</p><h2>대표 사례</h2></div>
+      <div class="filter"><span class="on">전체</span><span>기획</span><span>분석·QA</span></div>
+    </div>
+    <div class="cases">
+      <a class="case" href="#">
+        <div class="pic"><img src="../../assets/img/ss-owner.jpg" alt="SSketch 그림 소유권 규칙"></div>
+        <div class="b"><div class="t"><span>기획</span><span class="qa">QA</span></div>
+          <h3>SSketch</h3><p>문서와 코드가 같은 말을 하게 — 소유권 규칙과 명세 관리</p>
+          <div class="m"><div><b>250건</b><small>요구사항</small></div><div><b>6인</b><small>2026.08–09</small></div></div></div>
+      </a>
+      <a class="case" href="#">
+        <div class="pic"><img src="../../assets/img/ws-editor.jpg" alt="BodyBuilder 맵 에디터"></div>
+        <div class="b"><div class="t"><span>기획</span><span class="qa">QA</span></div>
+          <h3>BodyBuilder 창작마당</h3><p>공식 맵 실측으로 유저 맵 상한을 정한 UGC 정책</p>
+          <div class="m"><div><b>≤ 8</b><small>폴리곤 상한</small></div><div><b>6인</b><small>2026.07–08</small></div></div></div>
+      </a>
+      <a class="case" href="#">
+        <div class="pic"><img src="../../assets/img/rg-demo.jpg" alt="ProjectRG 성향 테스트"></div>
+        <div class="b"><div class="t"><span>기획</span></div>
+          <h3>ProjectRG</h3><p>플레이 성향 5축 진단과 보충 질문 규칙</p>
+          <div class="m"><div><b>12 + 3</b><small>문항</small></div><div><b>2인</b><small>2026.05–06</small></div></div></div>
+      </a>
+      <a class="case" href="#">
+        <div class="pic"><img src="../../qa/img/bb-slope.jpg" alt="경사면 판정 그래프"></div>
+        <div class="b"><div class="t"><span class="qa">QA</span></div>
+          <h3>경사면 판정</h3><p>환경마다 100배 다른 값 — 재현 조건부터 좁힌 원인 추적</p>
+          <div class="m"><div><b>100배</b><small>환경 간 값 차이</small></div><div><b>BodyBuilder</b><small>2026.07–08</small></div></div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="path">
+  <div class="wrap">
+    <div class="sec-h"><div><p class="k">PATH</p><h2>지나온 길</h2></div></div>
+    <div class="tl">
+      <div><i></i><p class="y">2018 – 2025</p><p class="w">금오공대 경영학과</p><p class="s">학사</p></div>
+      <div><i></i><p class="y">2020 – 2022</p><p class="w">품질보증 · 수입검사</p><p class="s">제조업 2년 2개월</p></div>
+      <div><i></i><p class="y">2023 – 2025</p><p class="w">마케팅컨설팅연구실</p><p class="s">LNCS 특별호 제2저자</p></div>
+      <div class="now"><i></i><p class="y">2026</p><p class="w">삼성 청년 SW·AI 아카데미</p><p class="s">15기 · 특화 프로젝트 우수상</p></div>
+      <div><i></i><p class="y">취미 · 6년</p><p class="w">카운터사이드 길드 운영</p><p class="s">게임 기록 74개</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <div><h2>kimshlife@naver.com</h2><p>프로젝트와 경험에 대해 궁금한 점이 있다면 연락해 주세요.</p></div>
+    <div class="cta"><a class="btn gold" href="mailto:kimshlife@naver.com">이메일 보내기</a><a class="btn ghost-d" href="../../qa/kimsihoo-qa-portfolio.pdf">포트폴리오 PDF</a></div>
+  </div>
+</section>
+<div class="mock-tag"><b>시안 B</b> 대표작 전면형 <a href="index.html">검토로</a></div>
+</body>
+</html>
