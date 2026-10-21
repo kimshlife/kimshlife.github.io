@@ -1,41 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="referrer" content="strict-origin-when-cross-origin"><!-- 유튜브 임베드는 Referer 가 있어야 재생됩니다 (없으면 오류 153) -->
-<title>SunsHineKim, Kim Si Hoo</title>
-<meta name="description" content="즐겁고, 편리하게, 지속가능하도록 — 김시후 포트폴리오 (기획 · 게임 분석·QA)">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SunsHineKim, Kim Si Hoo">
-<meta property="og:description" content="이해관계자 모두가 오랫동안 만족할 수 있는 결과를 위해 움직입니다 — 김시후의 포트폴리오입니다.">
-<meta property="og:url" content="https://kimshlife.github.io/">
-<meta property="og:image" content="https://kimshlife.github.io/assets/img/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
-<link rel="alternate icon" href="favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon-180.png">
-<link rel="manifest" href="site.webmanifest">
-<meta name="theme-color" content="#1D2A44">
-<meta name="robots" content="noindex, nofollow"><!-- 검색 노출을 원하면 이 줄과 robots.txt 를 함께 고치세요 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/css/site.css?v=20261013privacy2">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>김시후 — 해온 일과 만든 것들</title>
+  <meta name="description" content="김시후의 프로젝트와 지나온 과정. 경영학, 품질보증, 연구실에서의 경험과 게임·웹 서비스를 만든 기록을 모았습니다.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#faf9f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="김시후 — 해온 일과 만든 것들">
+  <meta property="og:description" content="공부하고, 일하고, 함께 만든 것들을 모았습니다. 김시후의 포트폴리오입니다.">
+  <meta property="og:url" content="https://kimshlife.github.io/">
+  <meta property="og:image" content="https://kimshlife.github.io/assets/img/og-journal.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://kimshlife.github.io/">
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon-180.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" crossorigin>
+  <link rel="stylesheet" href="assets/css/journal.css?v=20261021c">
+  <script src="assets/js/data.js?v=20261013privacy2" defer></script>
+  <script src="assets/js/journal-data.js?v=20261021" defer></script>
+  <script src="assets/js/journal.js?v=20261021" defer></script>
 </head>
 <body>
-<aside class="rail">
-  <a class="rail-id" href="#/" title="직군 선택으로"><img class="mono-mark" src="assets/brand/app-icon.svg" alt="" width="34" height="34"><div><div class="nm">김시후</div><div class="rl">SUNSHINEKIM</div></div></a>
-  <nav id="nav-rail" aria-label="주요"></nav>
-  <div class="rail-foot"><span>PORTFOLIO 2026</span></div>
-</aside>
-<header class="topbar"><img class="mono-mark" src="assets/brand/app-icon.svg" alt="" width="28" height="28" style="width:28px;height:28px"><a class="nm" href="#/" title="직군 선택으로">김시후</a><nav id="nav-top" aria-label="주요" style="display:flex"></nav></header>
-<main class="main"><div class="canvas"><div class="wrap" id="stage"></div><div class="notes" id="notes"></div></div></main>
-<nav class="tabbar" id="nav-tab" aria-label="주요"></nav>
-<dialog class="lb" id="lb" aria-label="이미지 확대"><button type="button" class="x" id="lbx" autofocus>닫기 Esc</button><img alt="" id="lbi"></dialog>
-<script src="assets/js/icons.js?v=20261007c"></script>
-<script src="assets/js/data.js?v=20261013privacy2"></script>
-<script src="assets/js/app.js?v=20261013privacy2"></script>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header shell">
+    <a class="identity" href="#top" aria-label="김시후, 처음으로"><img src="assets/brand/glyph-navy.svg" width="24" height="24" alt=""><span>김시후</span></a>
+    <nav aria-label="주요 메뉴"><a href="#projects">프로젝트</a><a href="#journey">지나온 과정</a><a href="#about">소개</a></nav>
+    <a class="header-contact" href="#contact">연락 <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main" tabindex="-1">
+    <div id="home-page">
+      <section class="intro shell" id="top" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <p class="eyebrow">해온 일과 만든 것들</p>
+          <h1 id="intro-title">안녕하세요,<br>김시후입니다.</h1>
+          <p class="intro-description">경영학을 공부하고, 품질보증부와 대학 연구실을 거쳤습니다.<br class="desktop-break"> 지금은 소프트웨어를 배우며 게임과 웹 서비스를 만들고 있습니다.</p>
+          <div class="intro-links"><a href="mailto:kimshlife@naver.com">이메일 <span aria-hidden="true">↗</span></a><a href="https://github.com/kimshlife" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <figure class="intro-logo"><img src="assets/brand/mark-full-color.svg" width="645" height="570" alt="김시후 로고" fetchpriority="high"></figure>
+      </section>
+      <section class="working-style section shell" id="working-style" aria-labelledby="working-style-title">
+        <div class="section-heading"><h2 id="working-style-title">작업하는 방식</h2></div>
+        <div class="style-grid">
+          <article class="style-item">
+            <span class="style-emoji" aria-hidden="true">📝</span><h3>기록하고 함께 나눕니다</h3><p>기획과 결정 사항을 문서로 남기고, 진행 상황과 변경 이력을 함께 확인합니다.</p>
+            <div class="style-tools"><span class="style-tools-label">기록·협업</span><ul class="style-tool-list" aria-label="기록과 협업에 사용한 도구"><li><span class="tool-letter tool-powerpoint" aria-hidden="true">P</span>PowerPoint</li><li><span class="tool-letter tool-excel" aria-hidden="true">X</span>Excel</li><li><span class="tool-letter tool-word" aria-hidden="true">W</span>Word·한글</li><li><img src="portfolio/assets/jira.svg" width="18" height="18" alt="">Jira</li><li><img src="portfolio/assets/git.svg" width="18" height="18" alt="">Git·GitLab</li></ul></div>
+          </article>
+          <article class="style-item">
+            <span class="style-emoji" aria-hidden="true">🛠️</span><h3>만들어 보며 확인합니다</h3><p>화면이나 기능을 먼저 만들어 보고, 실제로 쓰면서 부족한 부분을 고칩니다.</p>
+            <div class="style-tools"><span class="style-tools-label">구현·검증</span><ul class="style-tool-list" aria-label="구현과 검증에 사용한 도구"><li><img src="portfolio/assets/react.svg" width="18" height="18" alt="">React</li><li><img src="portfolio/assets/vue.svg" width="18" height="18" alt="">Vue</li><li><img src="portfolio/assets/typescript.svg" width="18" height="18" alt="">TypeScript</li><li><img src="portfolio/assets/unity.svg" width="18" height="18" alt="">Unity</li><li><img src="portfolio/assets/python.svg" width="18" height="18" alt="">Python</li></ul></div>
+          </article>
+          <article class="style-item">
+            <span class="style-emoji" aria-hidden="true">🧩</span><h3>화면으로 생각을 나눕니다</h3><p>설명만으로 애매한 부분은 화면과 시안으로 만들어, 함께 보고 방향을 정합니다.</p>
+            <div class="style-tools"><span class="style-tools-label">설계·보조</span><ul class="style-tool-list" aria-label="설계와 보조 작업에 사용한 도구"><li><img src="portfolio/assets/figma.svg" width="18" height="18" alt="">Figma</li><li><span class="tool-symbol" aria-hidden="true">&lt;/&gt;</span>HTML 프로토타입</li><li><span class="tool-symbol" aria-hidden="true">✧</span>Codex · Claude</li></ul></div>
+          </article>
+        </div>
+        <p class="tool-note">Figma·Unity는 기초 활용 경험입니다. AI 도구를 활용한 구현은 각 프로젝트에 표시했습니다.</p>
+      </section>
+      <section class="projects section shell" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading"><h2 id="projects-title">참여한 프로젝트</h2><span class="muted">2026</span></div>
+        <div class="project-grid">
+          <article class="project-card" id="project-ssketch"><a href="#/works/ssketch" aria-labelledby="title-ssketch">
+            <div class="project-image"><img src="assets/img/ss-draw.jpg" width="1500" height="1188" alt="SSketch의 그림 그리기 화면. 캔버스 옆에 주제 카드와 그림 도구가 있습니다." loading="lazy"></div>
+            <div class="project-caption"><h3 id="title-ssketch">SSketch <span aria-hidden="true">↗</span></h3><span class="project-date">2026.08–09</span></div>
+            <p class="project-description">낮에는 그리고, 밤에는 훔치는 4인 파티 게임.</p><p class="project-contribution">요구사항 정리, 설정 화면, 게임 규칙 일부를 맡았습니다.</p>
+          </a></article>
+          <article class="project-card" id="project-bodybuilder"><a href="#/works/bodybuilder" aria-labelledby="title-bodybuilder">
+            <div class="project-image"><img src="qa/img/bb-slope.jpg" width="1200" height="870" alt="BodyBuilder에서 팔 관절을 이은 경사면 위를 걷는 오리 캐릭터" loading="lazy"></div>
+            <div class="project-caption"><h3 id="title-bodybuilder">BodyBuilder <span aria-hidden="true">↗</span></h3><span class="project-date">2026.07–08</span></div>
+            <p class="project-description">팔을 움직여 길을 만드는 웹캠 협동 게임.</p><p class="project-contribution">유저 맵 제작·공유 기능과 캐릭터 상태 표현을 맡았습니다.</p>
+          </a></article>
+          <article class="project-card" id="project-projectrg"><a href="#/works/projectrg" aria-labelledby="title-projectrg">
+            <div class="project-image"><img src="assets/img/rg-demo.jpg" width="1280" height="720" alt="ProjectRG 게임 성향 테스트 소개 화면" loading="lazy"></div>
+            <div class="project-caption"><h3 id="title-projectrg">ProjectRG <span aria-hidden="true">↗</span></h3><span class="project-date">2026.05–06</span></div>
+            <p class="project-description">플레이 성향을 알아보고 게임을 찾는 서비스.</p><p class="project-contribution">아이디어를 제안하고 진단 문항과 프론트엔드를 만들었습니다.</p>
+          </a></article>
+          <article class="project-card" id="project-neontetris"><a href="#/works/neontetris" aria-labelledby="title-neontetris">
+            <div class="project-image"><img src="assets/img/nt-versus.jpg" width="1500" height="830" alt="NeonTetrisWars에서 두 사람이 나란히 대전하는 화면" loading="lazy"></div>
+            <div class="project-caption"><h3 id="title-neontetris">NeonTetrisWars <span aria-hidden="true">↗</span></h3><span class="project-date">2026.04–06</span></div>
+            <p class="project-description">웹에서 함께 겨루는 대전 테트리스.</p><p class="project-contribution">게임 규칙을 정리하고 조작과 화면을 구현했습니다.</p>
+          </a></article>
+        </div>
+        <div class="earlier-work" id="earlier"><div class="section-heading"><h2>그 전에 참여한 작업</h2><span class="muted">2022–2024</span></div>
+          <a class="work-row" href="#/works/florabot" id="project-florabot"><span class="work-year">2024</span><h3>플로라봇</h3><p>반려 식물로봇 · 시장 조사와 사업 방향 정리에 참여</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/solarbeam" id="project-solarbeam"><span class="work-year">2023–24</span><h3>SolarBeam</h3><p>태양광 킥보드 거치소 · 창업동아리 팀장·총무</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/sickkick" id="project-sickkick"><span class="work-year">2023</span><h3>SICK KICK</h3><p>소아청소년 진료 연계 서비스 · 조사와 사업 기획</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/contentops" id="project-contentops"><span class="work-year">2023</span><h3>콘텐츠 운영 컨설턴트</h3><p>콘텐츠 산업의 새로운 직업을 제안한 공모전</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/pirukia" id="project-pirukia"><span class="work-year">2022–23</span><h3>Pirukia</h3><p>종교 경영 시뮬레이션 · 세계관과 교리 선택지 기획</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <section class="journey section shell" id="journey" aria-labelledby="journey-title">
+        <div class="section-heading"><h2 id="journey-title">지나온 과정</h2><p class="muted">공부하고, 일하고, 참여한 곳.</p></div>
+        <div class="timeline">
+          <article class="timeline-row" id="education"><p class="timeline-period">2026.01–현재</p><div><h3>삼성 청년 SW·AI 아카데미 15기</h3><p>Python과 웹 개발을 배우고, 팀으로 게임과 서비스를 만들고 있습니다.</p><p class="note">2026.12 수료 예정</p></div></article>
+          <article class="timeline-row" id="research"><p class="timeline-period">2023.09–2025.02</p><div><h3>마케팅컨설팅연구실</h3><p>학부연구생으로 기업 컨설팅과 연구 용역의 자료를 정리하고, 창업 프로젝트에 참여했습니다. 생성형 AI 지속 사용 의도 연구에 제2저자로 이름을 올렸습니다.</p><a class="inline-link" href="https://doi.org/10.1007/978-3-031-75599-6_7" target="_blank" rel="noopener">논문 보기 <span aria-hidden="true">↗</span></a></div></article>
+          <article class="timeline-row"><p class="timeline-period">2020.06–2022.07</p><div><h3>제조업 품질보증부</h3><p>수입검사 담당으로 품목별 검사 기준에 따라 제품을 확인하고, 검사 결과를 기록했습니다.</p><p class="note">산업기능요원 복무 · 2년 2개월</p></div></article>
+          <article class="timeline-row"><p class="timeline-period">2018.03–2025.08</p><div><h3>국립금오공과대학교 경영학과</h3><p>경영학을 전공했습니다. 발명동아리 「거북선신화」에서 공모전에 참여하고, 학생 대상 발명 교육 활동도 했습니다.</p><p class="note">경영학 학사 · 동아리 활동 2018.03–2025.02</p></div></article>
+        </div>
+      </section>
+      <section class="about section shell" id="about" aria-labelledby="about-title">
+        <div class="about-copy"><p class="eyebrow">조금 더 소개하면</p><h2 id="about-title">게임을 오래 좋아했습니다.</h2><p>게임을 만드는 프로젝트에 참여하기 전부터 여러 게임을 해왔습니다. 카운터사이드에서는 2020년부터 2026년까지 길드 「Time」을 운영하며 참여 규칙을 정하고, 운영진과 역할을 나누고, 다른 길드와 합병도 진행했습니다.</p><p>대학에서는 발명과 창업 아이디어를 구체화하는 활동을 했고, 지금은 직접 화면과 기능을 만드는 경험을 쌓고 있습니다.</p><a class="inline-link" href="#/works/guild">길드 운영 기록 <span aria-hidden="true">↗</span></a></div>
+        <div class="personal-notes">
+          <details id="recognition"><summary>수상 기록 <span aria-hidden="true">＋</span></summary><div class="fold-content"><ul class="plain-list" id="award-list"></ul></div></details>
+          <details id="qualifications"><summary>교육·자격 <span aria-hidden="true">＋</span></summary><div class="fold-content"><ul class="plain-list"><li><span>2025</span><p>컴퓨터활용능력 2급 · 1종 보통 운전면허</p></li><li><span>2023</span><p>데이터분석 준전문가 ADsP · FAT 1급</p></li><li><span>2023</span><p>Python 기반 사무행정 CBDS 양성 과정 수료</p></li><li><span>2019</span><p>프로그래밍기능사</p></li><li><span>2018</span><p>거제옥포고등학교 졸업</p></li></ul></div></details>
+          <details id="other-activities"><summary>그 밖의 활동 <span aria-hidden="true">＋</span></summary><div class="fold-content"><ul class="plain-list"><li><span>2024</span><p>산학협력 기술지원 패키지·구미시 청년근로자 코리빙 하우스 기본계획 연구 참여. 데이터 정리와 과제 코딩을 맡았습니다.</p></li><li><span>2019</span><p>3D 푸드 프린터 익스트루더 특허 출원에 참여했습니다.<small>출원번호 10-2019-0017015 · 출원 이력</small></p></li><li><span>2019</span><p>AR 기반 보드게임 플랫폼 「보드모아」의 팀장과 가치 분석을 맡았습니다.<small>당시 원본 자료는 보유하고 있지 않습니다.</small></p></li></ul></div></details>
+          <details id="games"><summary>플레이한 게임 <span aria-hidden="true">＋</span></summary><div class="fold-content"><p class="note">기억에 남은 게임들을 처음 접한 시기와 함께 적었습니다.</p><ul class="game-list" id="game-list"></ul><p class="note">시기는 유년·초등·중등·고등·대학으로 나눴습니다.</p></div></details>
+        </div>
+      </section>
+    </div>
+    <article id="detail-page" class="detail-page shell" hidden></article>
+  </main>
+  <footer class="site-footer shell" id="contact"><div><p class="eyebrow">연락</p><a class="email" href="mailto:kimshlife@naver.com">kimshlife@naver.com <span aria-hidden="true">↗</span></a></div><div class="footer-bottom"><span>© 2026 김시후</span><a href="https://github.com/kimshlife" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><a href="#top">맨 위로 ↑</a></div></footer>
+  <dialog id="image-dialog" class="image-dialog" aria-labelledby="image-caption"><div class="image-toolbar"><p id="image-caption"></p><button type="button" id="close-image" autofocus>닫기 <span aria-hidden="true">×</span></button></div><div class="image-scroll"><img id="expanded-image" alt=""></div></dialog>
 </body>
 </html>
