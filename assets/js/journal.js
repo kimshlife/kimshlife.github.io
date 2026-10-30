@@ -22,18 +22,20 @@
   function renderProject(key) {
     const project = projectFor(key);
     if (!project) return false;
-    const source = own(P, key) ? P[key] : null;
+    const source = own(P, key) ? project : null;
     const notes = source ? `<details class="extra-notes"><summary>전체 작업 메모 <span aria-hidden="true">＋</span></summary><div class="fold-content"><h3>담당 범위</h3><ul>${source.scope.map(item => `<li>${escape(item)}</li>`).join('')}</ul>${source.decisions.map(item => `<h3>${escape(item.h)}</h3><p>${escape(item.b)}</p>`).join('')}${(source.notes || []).map(item => `<h3>${escape(item.t)}</h3><p>${escape(item.b)}</p>`).join('')}</div></details>` : '';
     const links = (project.links || []).filter(link => link.href && !link.off);
     const index = JOURNAL_ORDER.indexOf(key);
     const nextKey = JOURNAL_ORDER[(index + 1) % JOURNAL_ORDER.length];
     const next = projectFor(nextKey);
-    detail.innerHTML = `<a class="back-link" href="#${key === 'guild' ? 'about' : 'projects'}">← ${key === 'guild' ? '소개로 돌아가기' : '프로젝트 목록'}</a>
+    const backTarget = project.backTarget || (key === 'guild' ? 'about' : 'projects');
+    const backLabel = backTarget === 'journey' ? '지나온 과정으로 돌아가기' : backTarget === 'about' ? '소개로 돌아가기' : '프로젝트 목록';
+    detail.innerHTML = `<a class="back-link" href="#${escape(backTarget)}">← ${escape(backLabel)}</a>
       <header class="detail-header"><p class="eyebrow">${escape(project.period)}</p><h1>${escape(project.title)}</h1><p class="detail-subtitle">${escape(project.subtitle)}</p><dl class="project-meta"><div><dt>참여</dt><dd>${escape(project.team)}</dd></div></dl></header>
       <div class="detail-body"><section class="detail-section"><h2>작업 소개</h2><p>${escape(project.intro)}</p></section><section class="detail-section"><h2>제가 맡은 일</h2><ul>${project.tasks.map(task => `<li>${escape(task)}</li>`).join('')}</ul>${project.disclosure ? `<p class="note">${escape(project.disclosure)}</p>` : ''}</section>
       ${project.cover ? `<figure class="detail-cover"><img src="${escape(project.cover)}" alt="${escape(project.coverAlt)}" fetchpriority="high"></figure>` : ''}
       ${project.stories.map(storyHTML).join('')}${notes}${links.length ? `<div class="detail-links">${links.map(linkHTML).join('')}</div>` : ''}
-      <nav class="detail-navigation" aria-label="다른 작업"><a href="#projects">← 프로젝트 목록</a>${key === 'workshop' ? '<a href="#/works/bodybuilder">BodyBuilder →</a>' : `<a href="${routeFor(nextKey)}">${escape(next.title)} →</a>`}</nav></div>`;
+      <nav class="detail-navigation" aria-label="다른 작업"><a href="#${escape(backTarget)}">← ${escape(backLabel)}</a>${key === 'workshop' ? '<a href="#/works/bodybuilder">BodyBuilder →</a>' : `<a href="${routeFor(nextKey)}">${escape(next.title)} →</a>`}</nav></div>`;
     document.title = `${project.title} — 김시후`;
     return true;
   }
