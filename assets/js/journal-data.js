@@ -102,7 +102,7 @@ const JOURNAL = {
     links: [{ t: '길드 운영 기록 PDF', href: 'assets/docs/guild-ops-case.pdf' }, { t: '게임 분석 기록 PDF', href: 'assets/docs/game-analysis.pdf' }]
   },
   quality: {
-    title: '품질보증과 업무 개선', period: '2020.06.17 – 2022.07.11', team: '㈜테크노전자 품질보증부 · 사원', backTarget: 'journey',
+    title: '품질보증과 업무 개선', period: '2020.06.17 – 2022.07.11', team: '제조업 품질보증부 · 사원', backTarget: 'journey',
     subtitle: '검사 기준에 따른 판정, 재고 관리와 Excel 문서 대조 개선',
     intro: '품질보증부에서 수입검사(IQC)와 검사 데이터·재고 관리를 맡고 품질관리 업무를 지원했습니다. 반복해서 대조해야 하는 정보를 Excel 양식으로 정리하고, 기록과 실제 현황이 다른 경우 담당자에게 확인해 처리했습니다.',
     tasks: ['입고 자재 10~20종의 전수·샘플링 검사와 합격·불합격 판정', '검사 결과 Excel 기록, 월별 협력업체 검사기록서 관리와 보고서 작성 보조', 'Excel 재고관리대장 제작, 월말 실재고 대조와 부서 간 확인', 'VLOOKUP·조건부 서식 기반 BOM 비교 양식 제작', '불량 발생 시 보고, 협력사 대책서 요청과 공정·초품 검사 등 품질관리 지원'],

@@ -52,6 +52,10 @@ _raw/
 # 개인정보가 포함된 이미지의 로컬 보관본
 outputs/privacy-originals/
 
+# 회사명이 포함된 이력서·지원서 작업 자료는 로컬에만 보관합니다.
+outputs/01a0ec40-70c3-7b72-91e4-6a67eeb7809b/
+outputs/kog-funqa/
+
 # ── 작업 중 만든 임시 파일 ─────────────────────────────────
 _*.html
 *.bak
