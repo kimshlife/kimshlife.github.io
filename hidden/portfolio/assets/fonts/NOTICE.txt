@@ -1,0 +1,4 @@
+Journal Sans is a character subset of Pretendard Variable, generated for this portfolio.
+Original: Copyright (c) 2021, Kil Hyung-jin. Licensed under SIL OFL 1.1; see OFL.txt.
+The derived family is renamed Journal Sans to respect the Reserved Font Name.
+Regenerate with outputs/redesign-font.py after adding copy.

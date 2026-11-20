@@ -1,0 +1,27 @@
+{
+  "name": "김시후 — 기획 · 구현 포트폴리오",
+  "short_name": "김시후",
+  "start_url": "/hidden/portfolio/",
+  "scope": "/hidden/portfolio/",
+  "display": "standalone",
+  "background_color": "#faf9f6",
+  "theme_color": "#faf9f6",
+  "icons": [
+    {
+      "src": "/assets/brand/apple-touch-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
