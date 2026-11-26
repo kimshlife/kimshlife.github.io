@@ -30,10 +30,12 @@
     const next = projectFor(nextKey);
     const backTarget = project.backTarget || (key === 'guild' ? 'about' : 'projects');
     const backLabel = backTarget === 'journey' ? '지나온 과정으로 돌아가기' : backTarget === 'about' ? '소개로 돌아가기' : '프로젝트 목록';
+    const cardImage = document.getElementById(`project-${key}`)?.querySelector('.project-image img');
+    const hero = cardImage ? `<figure class="detail-cover"><img src="${escape(cardImage.getAttribute('src'))}" alt="${escape(cardImage.alt)}" width="${cardImage.getAttribute('width')}" height="${cardImage.getAttribute('height')}" fetchpriority="high"></figure>` : '';
     detail.innerHTML = `<a class="back-link" href="#${escape(backTarget)}">← ${escape(backLabel)}</a>
       <header class="detail-header"><p class="eyebrow">${escape(project.period)}</p><h1>${escape(project.title)}</h1><p class="detail-subtitle">${escape(project.subtitle)}</p><dl class="project-meta"><div><dt>참여</dt><dd>${escape(project.team)}</dd></div></dl></header>
-      <div class="detail-body"><section class="detail-section"><h2>작업 소개</h2><p>${escape(project.intro)}</p></section><section class="detail-section"><h2>제가 맡은 일</h2><ul>${project.tasks.map(task => `<li>${escape(task)}</li>`).join('')}</ul>${project.disclosure ? `<p class="note">${escape(project.disclosure)}</p>` : ''}</section>
-      ${project.cover ? `<figure class="detail-cover"><img src="${escape(project.cover)}" alt="${escape(project.coverAlt)}" fetchpriority="high"></figure>` : ''}
+      <div class="detail-body">${hero}<section class="detail-section"><h2>작업 소개</h2><p>${escape(project.intro)}</p></section><section class="detail-section"><h2>제가 맡은 일</h2><ul>${project.tasks.map(task => `<li>${escape(task)}</li>`).join('')}</ul>${project.disclosure ? `<p class="note">${escape(project.disclosure)}</p>` : ''}</section>
+      ${project.cover ? `<figure class="detail-cover"><img src="${escape(project.cover)}" alt="${escape(project.coverAlt)}" loading="lazy"></figure>` : ''}
       ${project.stories.map(storyHTML).join('')}${notes}${links.length ? `<div class="detail-links">${links.map(linkHTML).join('')}</div>` : ''}
       <nav class="detail-navigation" aria-label="다른 작업"><a href="#${escape(backTarget)}">← ${escape(backLabel)}</a>${key === 'workshop' ? '<a href="#/works/bodybuilder">BodyBuilder →</a>' : `<a href="${routeFor(nextKey)}">${escape(next.title)} →</a>`}</nav></div>`;
     document.title = `${project.title} — 김시후`;
