@@ -24,7 +24,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" crossorigin>
-  <link rel="stylesheet" href="assets/css/journal.css?v=20261126">
+  <link rel="stylesheet" href="assets/css/journal.css?v=20261127c">
   <script src="assets/js/data.js?v=20261013privacy2" defer></script>
   <script src="assets/js/journal-data.js?v=20261030privacy1" defer></script>
   <script src="assets/js/journal.js?v=20261126" defer></script>
@@ -41,29 +41,42 @@
       <section class="intro shell" id="top" aria-labelledby="intro-title">
         <div class="intro-copy">
           <p class="eyebrow">Portfolio's</p>
-          <h1 id="intro-title">윤활유같은 사람,<br>김시후입니다.</h1>
+          <h1 id="intro-title">영감을 실감나게 구현하는 기획자,<br>김시후입니다.</h1>
           <p class="intro-description">경영학을 전공하고, 제조업 품질보증과 발명·창업동아리 운영, 학부연구생 활동을 경험했습니다.<br class="desktop-break"> 지금은 소프트웨어를 배우며 게임과 웹 서비스를 기획·구현하고 있습니다.</p>
           <div class="intro-links"><a href="mailto:kimshlife@naver.com">이메일 <span aria-hidden="true">↗</span></a><a href="https://github.com/kimshlife" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div>
         </div>
         <figure class="intro-logo"><img src="assets/brand/mark-full-color.svg" width="645" height="570" alt="김시후 로고" fetchpriority="high"></figure>
       </section>
       <section class="working-style section shell" id="working-style" aria-labelledby="working-style-title">
-        <div class="section-heading"><h2 id="working-style-title">작업하는 방식</h2></div>
+        <div class="section-heading"><h2 id="working-style-title">기술과 활용 경험</h2></div>
         <div class="style-grid">
-          <article class="style-item">
-            <span class="style-emoji" aria-hidden="true">📝</span><h3>기록하고 함께 나눕니다</h3><p>기획과 결정 사항을 문서로 남기고, 진행 상황과 변경 이력을 함께 확인합니다.</p>
-            <div class="style-tools"><span class="style-tools-label">기록·협업</span><ul class="style-tool-list" aria-label="기록과 협업에 사용한 도구"><li><span class="tool-letter tool-powerpoint" aria-hidden="true">P</span>PowerPoint</li><li><span class="tool-letter tool-excel" aria-hidden="true">X</span>Excel</li><li><span class="tool-letter tool-word" aria-hidden="true">W</span>Word·한글</li><li><img src="portfolio/assets/jira.svg" width="18" height="18" alt="">Jira</li><li><img src="portfolio/assets/git.svg" width="18" height="18" alt="">Git·GitLab</li></ul></div>
+          <article class="style-item"><h3>문서와 협업</h3>
+            <dl class="skill-evidence">
+              <dt>Excel <span class="skill-level" role="img" aria-label="숙련도 중상, 5칸 중 4칸">■■■■□</span></dt><dd>VLOOKUP과 조건부 서식으로 부품표 대조 시간을 2시간 이상에서 30분~1시간으로 줄였습니다.</dd>
+              <dt>Jira <span class="skill-level" role="img" aria-label="숙련도 중상, 5칸 중 4칸">■■■■□</span></dt><dd>냠냠취미의 이슈 상태를 실제 구현과 대조해 미완료 작업을 추적했습니다.</dd>
+              <dt>Git·GitLab <span class="skill-level" role="img" aria-label="숙련도 중, 5칸 중 3칸">■■■□□</span></dt><dd>냠냠취미에서 화면 수정과 미니게임 기능을 브랜치별로 작업하고 병합했습니다.</dd>
+              <dt>PowerPoint <span class="skill-level" role="img" aria-label="숙련도 중상, 5칸 중 4칸">■■■■□</span></dt><dd>플로라봇의 시장 조사와 사업 계획을 모의 투자 발표 자료로 만들었습니다.</dd>
+              <dt>Word·한글 <span class="skill-level" role="img" aria-label="숙련도 중, 5칸 중 3칸">■■■□□</span></dt><dd>창업동아리 활동 보고서와 지원금 집행 서류를 작성했습니다.</dd>
+            </dl>
           </article>
-          <article class="style-item">
-            <span class="style-emoji" aria-hidden="true">🛠️</span><h3>만들어 보며 확인합니다</h3><p>화면이나 기능을 먼저 만들어 보고, 실제로 쓰면서 부족한 부분을 고칩니다.</p>
-            <div class="style-tools"><span class="style-tools-label">구현·검증</span><ul class="style-tool-list" aria-label="구현과 검증에 사용한 도구"><li><img src="portfolio/assets/react.svg" width="18" height="18" alt="">React</li><li><img src="portfolio/assets/vue.svg" width="18" height="18" alt="">Vue</li><li><img src="portfolio/assets/typescript.svg" width="18" height="18" alt="">TypeScript</li><li><img src="portfolio/assets/unity.svg" width="18" height="18" alt="">Unity</li><li><img src="portfolio/assets/python.svg" width="18" height="18" alt="">Python</li></ul></div>
+          <article class="style-item"><h3>화면과 기능 구현</h3>
+            <dl class="skill-evidence">
+              <dt>React·TypeScript <span class="skill-level" role="img" aria-label="숙련도 중, 5칸 중 3칸">■■■□□</span></dt><dd>AI의 도움을 받아 BodyBuilder의 맵 에디터와 공개 목록을 구현했습니다.</dd>
+              <dt>Vue <span class="skill-level" role="img" aria-label="숙련도 중, 5칸 중 3칸">■■■□□</span></dt><dd>ProjectRG의 성향 진단과 결과 공유 화면을 AI의 도움을 받아 구현했습니다.</dd>
+              <dt>Python <span class="skill-level" role="img" aria-label="숙련도 중하, 5칸 중 2칸">■■□□□</span></dt><dd>데이터 분석·시각화를 실습하고 알고리즘 문제를 풀었습니다.</dd>
+            </dl>
           </article>
-          <article class="style-item">
-            <span class="style-emoji" aria-hidden="true">🧩</span><h3>화면으로 생각을 나눕니다</h3><p>설명만으로 애매한 부분은 화면과 시안으로 만들어, 함께 보고 방향을 정합니다.</p>
-            <div class="style-tools"><span class="style-tools-label">설계·보조</span><ul class="style-tool-list" aria-label="설계와 보조 작업에 사용한 도구"><li><img src="portfolio/assets/figma.svg" width="18" height="18" alt="">Figma</li><li><span class="tool-symbol" aria-hidden="true">&lt;/&gt;</span>HTML 프로토타입</li><li><span class="tool-symbol" aria-hidden="true">✧</span>Codex · Claude</li></ul></div>
+          <article class="style-item"><h3>설계와 시제품</h3>
+            <dl class="skill-evidence">
+              <dt>HTML <span class="skill-level" role="img" aria-label="숙련도 중상, 5칸 중 4칸">■■■■□</span></dt><dd>SSketch의 키 설정 화면을 프로토타입으로 만들어 변경·적용 동작을 설명했습니다.</dd>
+              <dt>Figma <span class="skill-level" role="img" aria-label="숙련도 중하, 5칸 중 2칸">■■□□□</span></dt><dd>냠냠취미 와이어프레임에 화면 번호를 붙여 기능 명세와 연결했습니다.</dd>
+              <dt>Unity <span class="skill-level" role="img" aria-label="숙련도 하, 5칸 중 1칸">■□□□□</span></dt><dd>SSketch의 설정 화면과 일부 게임 규칙을 AI의 도움을 받아 구현했습니다.</dd>
+            </dl>
           </article>
         </div>
-        <p class="tool-note">Figma·Unity는 기초 활용 경험입니다. AI 도구를 활용한 구현은 각 프로젝트에 표시했습니다.</p>
+        <article class="ai-example"><h3>Codex·Claude <span class="skill-level" role="img" aria-label="숙련도 중상, 5칸 중 4칸">■■■■□</span></h3>
+          <p>SSketch 요구사항 250건과 코드의 대조를 AI에 맡기고, 결과를 검토해 구현 상태를 분류했습니다. 설정 오류는 제가 재현 조건을 정리하고, AI가 작성한 수정 코드와 테스트가 개발 브랜치에 반영됐는지 확인했습니다. <a href="#/works/ssketch">작업 기록</a></p>
+        </article>
       </section>
       <section class="projects section shell" id="projects" aria-labelledby="projects-title">
         <div class="section-heading"><h2 id="projects-title">참여한 프로젝트</h2><span class="muted">2026</span></div>
@@ -71,35 +84,35 @@
           <article class="project-card" id="project-nyamnyam"><a href="#/works/nyamnyam" aria-labelledby="title-nyamnyam">
             <div class="project-image"><img src="assets/img/nyamnyam-card.webp" width="1264" height="790" alt="냠냠취미 로고와 숏폼 탐색 안내, 맞춤 취미 카드가 보이는 회원 홈" loading="lazy"></div>
             <div class="project-caption"><h3 id="title-nyamnyam">냠냠취미 <span aria-hidden="true">↗</span></h3><span class="project-date">2026.10–11</span></div>
-            <p class="project-description">숏폼으로 취미를 찾고, 첫 활동까지 이어 가는 서비스.</p><p class="project-contribution">PM으로 요구사항·디자인 문서와 진척 현황을 정리하고, 화면 개선과 일부 기능 구현에 참여했습니다.</p>
+            <p class="project-description">숏폼으로 취미를 찾고, 첫 활동까지 이어 가는 서비스.</p><p class="project-contribution">PM으로 기능 우선순위를 정하고 Jira와 구현 상태를 대조했습니다. 내 취미 화면을 개편하고 숏폼 분류 게임을 추가했습니다.</p>
           </a></article>
           <article class="project-card" id="project-ssketch"><a href="#/works/ssketch" aria-labelledby="title-ssketch">
             <div class="project-image"><img src="assets/img/ssketch-card.webp" width="1280" height="720" alt="숲속 마을을 배경으로 한 SSketch 타이틀과 게임 메뉴" loading="lazy"></div>
             <div class="project-caption"><h3 id="title-ssketch">SSketch <span aria-hidden="true">↗</span></h3><span class="project-date">2026.08–09</span></div>
-            <p class="project-description">낮에는 그리고, 밤에는 훔치는 4인 파티 게임.</p><p class="project-contribution">요구사항 250건의 현황 점검, 설정 화면, 외주 협업과 내부 테스트 배포를 맡았습니다.</p>
+            <p class="project-description">낮에는 그리고, 밤에는 훔치는 4인 파티 게임.</p><p class="project-contribution">요구사항 250건의 구현 상태를 집계하고 캐릭터 7종을 검수했습니다. 내부 테스트를 제안하고 버그 제보 양식을 만들었습니다.</p>
           </a></article>
           <article class="project-card" id="project-bodybuilder"><a href="#/works/bodybuilder" aria-labelledby="title-bodybuilder">
             <div class="project-image"><img src="assets/img/bodybuilder-card.webp" width="1280" height="720" alt="오리 캐릭터와 모험의 배경을 담은 BodyBuilder 발표 표지" loading="lazy"></div>
             <div class="project-caption"><h3 id="title-bodybuilder">BodyBuilder <span aria-hidden="true">↗</span></h3><span class="project-date">2026.07–08</span></div>
-            <p class="project-description">팔을 움직여 길을 만드는 웹캠 협동 게임.</p><p class="project-contribution">유저 맵 제작·공유 기능과 캐릭터 상태 표현을 맡았습니다.</p>
+            <p class="project-description">팔을 움직여 길을 만드는 웹캠 협동 게임.</p><p class="project-contribution">맵 에디터를 만들고 제작자가 클리어한 맵만 공개하도록 했습니다. 도형을 옮긴 뒤에도 이전 클리어 기록이 남던 오류를 수정했습니다.</p>
           </a></article>
           <article class="project-card" id="project-projectrg"><a href="#/works/projectrg" aria-labelledby="title-projectrg">
             <div class="project-image"><img src="assets/img/projectrg-card.webp" width="960" height="600" alt="보라색 번개 모양의 ProjectRG 앱 아이콘" loading="lazy"></div>
             <div class="project-caption"><h3 id="title-projectrg">ProjectRG <span aria-hidden="true">↗</span></h3><span class="project-date">2026.05–06</span></div>
-            <p class="project-description">플레이 성향을 알아보고 게임을 찾는 서비스.</p><p class="project-contribution">아이디어를 제안하고 진단 문항과 프론트엔드를 만들었습니다.</p>
+            <p class="project-description">플레이 성향을 알아보고 게임을 찾는 서비스.</p><p class="project-contribution">플레이 성향을 다섯 축으로 나누고, 기본 12문항으로 판별하기 어려울 때 보충 질문 3개를 띄우도록 설계했습니다.</p>
           </a></article>
           <article class="project-card" id="project-neontetris"><a href="#/works/neontetris" aria-labelledby="title-neontetris">
             <div class="project-image"><img src="assets/img/neontetris-card.webp" width="1280" height="853" alt="두 플레이어의 블록과 다음 조각이 나란히 보이는 대전 화면" loading="lazy"></div>
             <div class="project-caption"><h3 id="title-neontetris">NeonTetrisWars <span aria-hidden="true">↗</span></h3><span class="project-date">2026.04–06</span></div>
-            <p class="project-description">웹에서 함께 겨루는 대전 테트리스.</p><p class="project-contribution">게임 규칙을 정리하고 조작과 화면을 구현했습니다.</p>
+            <p class="project-description">웹에서 함께 겨루는 대전 테트리스.</p><p class="project-contribution">블록이 고정될 때까지 남은 시간을 게이지로 표시하고, 회전만으로 고정을 미룰 수 없도록 횟수를 제한했습니다.</p>
           </a></article>
         </div>
         <div class="earlier-work" id="earlier"><div class="section-heading"><h2>그 전에 참여한 작업</h2><span class="muted">2022–2024</span></div>
-          <a class="work-row" href="#/works/florabot" id="project-florabot"><span class="work-year">2024</span><h3>플로라봇</h3><p>반려 식물로봇 · 시장 조사와 사업 방향 정리에 참여</p><span class="row-arrow" aria-hidden="true">↗</span></a>
-          <a class="work-row" href="#/works/solarbeam" id="project-solarbeam"><span class="work-year">2023–24</span><h3>SolarBeam</h3><p>태양광 킥보드 거치소 · 창업동아리 팀장·총무</p><span class="row-arrow" aria-hidden="true">↗</span></a>
-          <a class="work-row" href="#/works/sickkick" id="project-sickkick"><span class="work-year">2023</span><h3>SICK KICK</h3><p>소아청소년 진료 연계 서비스 · 조사와 사업 기획</p><span class="row-arrow" aria-hidden="true">↗</span></a>
-          <a class="work-row" href="#/works/contentops" id="project-contentops"><span class="work-year">2023</span><h3>콘텐츠 운영 컨설턴트</h3><p>콘텐츠 산업의 새로운 직업을 제안한 공모전</p><span class="row-arrow" aria-hidden="true">↗</span></a>
-          <a class="work-row" href="#/works/pirukia" id="project-pirukia"><span class="work-year">2022–23</span><h3>Pirukia</h3><p>종교 경영 시뮬레이션 · 세계관과 교리 선택지 기획</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/florabot" id="project-florabot"><span class="work-year">2024</span><h3>플로라봇</h3><p>반려 식물로봇의 시장 조사를 보조하고, 팀이 정한 사업 방향을 모의 투자 발표 자료로 구성했습니다.</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/solarbeam" id="project-solarbeam"><span class="work-year">2023–24</span><h3>SolarBeam</h3><p>선행 특허를 조사하고 팀 일정을 조율했습니다. 지원금 80만 원의 구매·증빙과 결과 보고를 맡았습니다.</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/sickkick" id="project-sickkick"><span class="work-year">2023</span><h3>SICK KICK</h3><p>소아청소년 진료 연계에 필요한 제도와 유사 서비스를 조사하고, 제휴 구조와 수익 모델을 발표했습니다.</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/contentops" id="project-contentops"><span class="work-year">2023</span><h3>콘텐츠 운영 컨설턴트</h3><p>팀장으로 현직자 인터뷰를 기획에 반영하고, 이용자 의견을 수집·분류하는 직무와 육성 제도를 제안했습니다.</p><span class="row-arrow" aria-hidden="true">↗</span></a>
+          <a class="work-row" href="#/works/pirukia" id="project-pirukia"><span class="work-year">2022–23</span><h3>Pirukia</h3><p>아홉 신의 설정을 여섯 항목으로 정리하고, 각 신의 이념이 경영 판단에 드러나도록 교리 선택지를 작성했습니다.</p><span class="row-arrow" aria-hidden="true">↗</span></a>
         </div>
       </section>
       <section class="journey section shell" id="journey" aria-labelledby="journey-title">
